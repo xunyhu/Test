@@ -25,7 +25,7 @@ td, th { padding: 0; }
 
 h1, h2, h3, h4, h5, h6, p, figure, form, blockquote { margin: 0; }
 
-ul, ol, li, dl, dd { margin: 0; padding: 0; }
+ul, ol, li, dl, dd, span { margin: 0; padding: 0; }
 
 ul, ol { list-style: none; }
 
@@ -55,7 +55,7 @@ header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 
 
 .headpic .touX { width: 4rem; height: 4rem; border-radius: 50%; background: yellowgreen; background-size: 100% 100%; border: 2px solid #d6cbbf; position: relative; margin: 3.9rem auto 0.6rem; }
 
-.headpic .touX span { position: absolute; right: 0; bottom: 0; display: inline-block; width: 1rem; height: 1rem; border: 1px solid #d6cbbf; border-radius: 50%; background: url(../icon/personal_center_crown@2x.png); background-size: 100% 100%; }
+.headpic .touX span { position: absolute; right: 0; bottom: 0; display: inline-block; width: 1rem; height: 1rem; border: 1px solid #d6cbbf; border-radius: 50%; background: url(../icon/personal_center_crown@2x.png) no-repeat; background-size: 100% 100%; }
 
 .headpic p { text-align: center; line-height: 1.5rem; height: 1.5rem; color: #fff; font-size: 0.8rem; }
 
@@ -65,7 +65,9 @@ header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 
 
 .headpic .sex { display: inline-block; width: 1rem; height: 1rem; position: relative; top: 0.25rem; margin: 0 0.15rem 0 0.25rem; border-radius: 50%; }
 
-.headpic .grade { display: inline-block; position: relative; border-radius: 3px; width: 1.8rem; height: 1rem; line-height: 1rem; color: #fff; background: #eed819; }
+.headpic .grade { display: inline-block; position: relative; border-radius: 3px; width: 1.8rem; height: 1rem; line-height: 1rem; color: #fff; background: #eed819; padding-right: 0.2rem; }
+
+.headpic .grade img { display: inline-block; width: 0.8rem; position: relative; top: -0.1rem; }
 
 /*billborad*/
 .billborad { height: 3.3rem; line-height: 3.3rem; }
@@ -76,7 +78,7 @@ header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 
 
 .billborad .guard span { position: relative; top: 0.2rem; }
 
-.billborad .guards li { float: left; width: 2rem; height: 2rem; border-radius: 50%; background: yellowgreen; margin: 0.8rem 0.5rem 0 0; position: relative; }
+.billborad .guards li { float: left; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: url("http://image.tudouni.doubozhibo.com/common/default/header.png") no-repeat; background-size: 100%; margin: 0.8rem 0.5rem 0 0; position: relative; }
 
 .billborad .guards li:nth-child(1) { border: 1.5px solid #ffbd00; }
 
@@ -109,11 +111,15 @@ header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 
 
 .play .fr { font-size: 0.8rem; color: #ccc; margin: 0.8rem 0.7rem 0 0; }
 
-.play .fr span { color: #ffa201; font-size: 1rem; padding-right: 0.5rem; }
+.play .fr span { color: #ffa201; display: inline-block; float: left; font-size: 1rem; font-family: "Times New Roman",Georgia,Serif; }
 
-.play .livebroad { width: 100%; height: 20rem; background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 100%; position: relative; overflow: hidden; }
+.play .fr span:nth-child(even) { padding-top: 0.2rem; }
 
-.play .livebroad p { float: right; margin: 0.7rem 0.7rem 0 0; width: 4.8rem; height: 1.5rem; line-height: 1.5rem; border: 1px solid #fff; border-radius: 1rem; background: #4d5f72; overflow: hidden; }
+.play .fr span:last-child { padding-right: 0.2rem; }
+
+.play .livebroad { width: 100%; height: 22rem; background: url(../images/bg1@2x.png) no-repeat; background-size: 100%; position: relative; overflow: hidden; }
+
+.play .livebroad p { float: right; margin: 0.7rem 0.7rem 0 0; width: 4.8rem; height: 1.5rem; line-height: 1.5rem; border: 1px solid #fff; border-radius: 1rem; background: #4d5f72; opacity: 0.8; overflow: hidden; }
 
 .play .livebroad p span { float: left; display: inline-block; width: 1rem; height: 1rem; margin: 0.2rem 0 0 0.5rem; background: url(../icon/icon_play_yellow_normal@2x.png) no-repeat; background-size: 100%; overflow: hidden; }
 
