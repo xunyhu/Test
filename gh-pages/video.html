@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title></title>
+	</head>
+		<style>
+			.active {
+				z-index: 99;
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			.wrap button:nth-child(2) {
+				display: none;
+			}
+			.active button:nth-child(1) {
+				display: none;
+			}
+			.active button:nth-child(2) {
+				display: block;
+				z-index: 100;
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+			}
+		</style>
+	<body>
+		<div class="wrap">
+			<button>播放</button>
+			<button class="close">关闭</button>
+			<video style="display: none;" width=100% height=100%  autoplay="autoplay">
+				<source src="http://video.tudouni.doubozhibo.com/cycle/13ece94841c545ef8c1833ee07bcbcd0.mp4" type="video/mp4" />
+			</video>
+		</div>
+		
+		<script src='js/jquery-3.1.1.js'></script>
+		<script type="text/javascript">
+			$(function(){
+				$('button').eq(0).click(function(){
+					$('.wrap video').show();
+					$('.wrap').addClass('active');
+				});
+				$('.close').click(function(e){
+					$('.wrap video').hide();
+					$('.wrap').removeClass('active');
+				})
+			})
+		</script>
+	</body>
+</html>

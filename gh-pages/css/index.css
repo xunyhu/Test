@@ -51,7 +51,7 @@ ul, ol { list-style: none; }
 /*header*/
 header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 100%; }
 
-.headpic { width: 60%; margin: 0 auto; padding-bottom: 1.8rem; overflow: hidden; }
+.headpic { margin: 0 auto; padding-bottom: 1.8rem; overflow: hidden; }
 
 .headpic .touX { width: 4rem; height: 4rem; border-radius: 50%; background: yellowgreen; background-size: 100% 100%; border: 2px solid #d6cbbf; position: relative; margin: 3.9rem auto 0.6rem; }
 
@@ -101,15 +101,15 @@ header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 
 
 .play li:nth-child(1) { width: 2rem; height: 2rem; border-radius: 50%; background: yellowgreen; background-size: 100% 100%; margin: 0.5rem 0.6rem 0.6rem 0.7rem; position: relative; }
 
-.play li:nth-child(1) span { position: absolute; bottom: 0; right: 0; display: inline-block; width: 0.8rem; height: 0.8rem; border: 1px solid #d6cbbf; border-radius: 50%; background: url(../icon/personal_center_crown@2x.png); background-size: contain; }
+.play li:nth-child(1) span { position: absolute; bottom: 0; right: -0.17rem; display: inline-block; width: 0.8rem; height: 0.8rem; border: 1px solid #d6cbbf; border-radius: 50%; background: url(../icon/personal_center_crown@2x.png); background-size: contain; }
 
 .play li:nth-child(2) { margin-top: 0.5rem; }
 
-.play li > p { font-size: 0.8rem; }
+.play li > p { font-size: 0.7rem; }
 
-.play li > p:nth-child(2) { font-size: 0.7rem; color: #ccc; }
+.play li > p:nth-child(2) { font-size: 0.6rem; color: #ccc; padding-top: 0.2rem; }
 
-.play .fr { font-size: 0.8rem; color: #ccc; margin: 0.8rem 0.7rem 0 0; }
+.play .fr { font-size: 0.8rem; margin: 0.8rem 0.7rem 0 0; }
 
 .play .fr span { color: #ffa201; display: inline-block; float: left; font-size: 1rem; font-family: "Times New Roman",Georgia,Serif; }
 
@@ -117,7 +117,7 @@ header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 
 
 .play .fr span:last-child { padding-right: 0.2rem; }
 
-.play .livebroad { width: 100%; height: 22rem; background: url(../images/bg1@2x.png) no-repeat; background-size: 100%; position: relative; overflow: hidden; }
+.play .livebroad { width: 100%; height: 22rem; background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 100%; position: relative; overflow: hidden; }
 
 .play .livebroad p { float: right; margin: 0.7rem 0.7rem 0 0; width: 4.8rem; height: 1.5rem; line-height: 1.5rem; border: 1px solid #fff; border-radius: 1rem; background: #4d5f72; opacity: 0.8; overflow: hidden; }
 
@@ -125,22 +125,18 @@ header { background: url(../images/bg1@2x.png) no-repeat; background-size: 100% 
 
 .play .livebroad p a { float: left; font-size: 0.7rem; color: #fff; display: inline-block; margin: -0.1rem 0 0 0.3rem; }
 
+.play .signature { height: 2.5rem; line-height: 2.5rem; padding-left: 0.7rem; font-size: 0.8rem; }
+
+.play .option { border-top: 2px solid #fbfbfb; }
+
+.play .option a { display: inline-block; width: 32%; height: 2.3rem; line-height: 2.3rem; text-align: center; color: #ccc; }
+
+.play .option a img { width: 1.5rem; }
+
 .pback { margin-bottom: 0.6rem; }
 
-.pback .livebroad p { width: 2.8rem; }
-
-.pback .livebroad p a { margin-left: 0.7rem; }
-
-.pback .signature { height: 2.5rem; line-height: 2.5rem; padding-left: 0.7rem; font-size: 0.8rem; }
-
-.pback .option { border-top: 2px solid #fbfbfb; }
-
-.pback .option a { display: inline-block; width: 32%; height: 2.3rem; line-height: 2.3rem; text-align: center; color: #ccc; }
-
-.pback .option a img { width: 1.5rem; }
-
 /* footer */
-footer li { float: left; height: 3rem; line-height: 3rem; width: 32%; text-align: center; font-size: 0.9rem; }
+footer li { float: left; height: 3rem; line-height: 3rem; width: 32%; text-align: center; font-size: 0.7rem; }
 
 footer li img { width: 1.8rem; margin-left: 0.2rem; }
 
