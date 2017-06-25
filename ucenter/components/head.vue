@@ -2,7 +2,7 @@
 	<div>
 		<div class="tips">
 			<div class="fl logo">
-				<img src="../images/logo@2x.png"/>
+				<img src="http://image.tudouni.doubozhibo.com/common/h5/logo@2x.png"/>
 				<p><span>|</span>打开查看更多内容</p>
 			</div>
 			<div class="fr download">
@@ -13,14 +13,14 @@
 			<div class="headpic">
 				<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
 					<div class="touX">
-						<img :src='headpic' v-if='headpic' />
+						<!--<img :src='headpic' v-if='headpic' />-->
 						<span></span>
 					</div>
 				</a>
 				<p>
 					<span class="name">{{info.uname}}</span>
 					<span class="sex"></span>
-					<a class="grade"><img src="../images/icon/grade-1.png"/><span>{{info.grade}}</span></a>
+					<a class="grade"><img src="http://image.tudouni.doubozhibo.com/common/h5/grade-1.png"/><span>{{info.grade}}</span></a>
 					<span class="identity">{{info.gradeName}}</span>
 				</p>
 				<p> ID:{{info.unumber}} </p>
@@ -68,7 +68,7 @@
 	export default {
 		data() {
 			return {
-				msg: "我是头部",
+				msg: "head",
 				headpic:'',
 				info: {
 					uname: '',
@@ -90,6 +90,9 @@
 				success: function(data) {
 					var data = data.data;
 					//console.log(data);
+                    if(data == undefined) {
+                        return false;
+                    }
 					var signature = data.signature;
 					if(signature) {
 						$('.headpic').find('p:eq(2)').text(signature);
@@ -108,6 +111,10 @@
 					}
 					if (data.photo) {
 						this.headpic = data.photo;
+						$('.touX').css({
+							'background': 'url('+ data.photo +')',
+							'background-size': ' 100% 100%'
+						})
 					} else {
 						this.headpic = false;
 					}					
@@ -161,7 +168,7 @@ a {text-decoration: none;}
 }
 /*head用户信息*/
 header {
-    background: url(../images/bg1@2x.png) no-repeat;
+    background: url(http://image.tudouni.doubozhibo.com/common/h5/bg1@2x.png) no-repeat;
     background-size:100% 100%;
 }
 .headpic {
@@ -220,7 +227,8 @@ header {
     background: url("http://image.tudouni.doubozhibo.com/common/default/header.png") no-repeat center center;
     background-size:100%;
     img {
-    	width: 100%;
+    	width: 4rem;
+    	height: 4rem;
     	border-radius: 50%;
     }
     span {
@@ -232,7 +240,7 @@ header {
         height: 1rem;
         border: 1px solid #d6cbbf;
         border-radius: 50%;
-        background: url(../images/icon/personal_center_crown@2x.png) no-repeat;
+        background: url(http://image.tudouni.doubozhibo.com/common/h5/personal_center_crown@2x.png) no-repeat;
         background-size: 100% 100%;
     }
 }

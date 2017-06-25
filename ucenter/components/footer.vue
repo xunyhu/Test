@@ -49,7 +49,7 @@
 	            margin: 0.8rem 0 0 1rem;
 	        }
 	        p {
-	        	line-height: 3rem;font-size: 0.7rem;
+	        	line-height: 3rem;font-size: 0.7rem;color: black;
 	        }
 	    }
 	    .talk span {

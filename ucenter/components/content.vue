@@ -4,10 +4,10 @@
 			<img src="../images/tudouni.png"/>
 			<p>Ta很懒，没有发表动态喔~</p>
 		</div>
-		<div class="play" v-for="(i,index) in itmes">
+		<div class="play"  v-for="(i,index) in itmes">
 			<ul class="fl">
-				<li class="headimg">
-					<img :src="i.photo" />
+				<li class="headimg" v-bind:style="{background:'url('+i.photo+')', backgroundSize:'100% 100%'}">
+					<!--<img :src="i.photo" />-->
 					<span></span>
 				</li>
 				<li>
@@ -19,8 +19,8 @@
 				<p><span>{{i.topRight}}</span> 人已观看</p>
 			</div>			
 			<div class="liveborad" v-bind:style="{background:'url('+i.images[0].image+') no-repeat center center', backgroundSize:'100%'}">
-				<p v-if="i.type == 0"><span></span>直播中</p>
-				<p v-if="i.type == 2" class="playback" v-on:click="play(index)" >回放</p>
+				<p v-if="i.type == 0" class="playnow" v-on:click="pynow($event,index)"><span></span>直播中</p>
+				<p v-if="i.type == 2" class="playback" v-on:click="play($event,index)" >回放</p>
 			</div>
 			<div class="wrap-video" style="display: none;">
 				<span class="close" v-on:click="close(index)"><img src="../images/close.jpg" alt="" /></span>
@@ -31,7 +31,7 @@
 			<div class="wrap-signature" v-if="i.content ? true : false">
 				<div v-bind:class="{ signature: i.content ? true : false }">{{i.content}}</div>
 			</div>
-			<p class="option">
+			<p class="option" v-if='i.type !== 0'>
 				<a href="" class="likes">
 					<img src="../images/icon/icon_like_gray_normal@2x.png" />
 					<span>{{i.bottom1}}</span>
@@ -66,6 +66,13 @@ function getDid(url,did) {
 	}
 	return obj.did;
 }
+import $ from 'jquery'
+$.fn.exist = function(){
+	if($(this).length>=1) {
+		return true;
+	}
+	return false;
+}
 	export default {
 		data() {
 			return {
@@ -77,8 +84,8 @@ function getDid(url,did) {
 				nowShow: "",
 				videos: "",
 				vslist:[],
-				picture: "",
-				datatype: false,
+				picture: [],
+				datatype: true,
 				dataplay: false,
 				dataimg: false,
 			}
@@ -91,40 +98,46 @@ function getDid(url,did) {
 				async: true,
 				dataType: 'json',
 				success: function(data) {
+					//console.log(data);
+					if (data.code == -99) {
+						return false;
+					}
 					var newdate = data;
+					var self = this;// 指向VueComponent
 					if (data.data.length == 0) {
 						this.isShow = true;
 					} 
+					if (data.data.length == 1) {
+						self.itmes = data.data;	
+					}
+					if (data.data.length == 2) {						
+						$.each(data.data, function() {
+							if( this.type == 0 ) { //将直播数据显示在第一条
+								self.itmes.unshift(this);
+							} else {
+								self.itmes.push(this);
+							}
+						});
+					}
 					if (data.data.length > 2) {
 						var data = data.data.slice(0,2);
-						this.itmes = data;	
-					} else {
-						this.itmes = data.data;	
-					}
+						self.itmes = data;	
+					} 
 					//判断数据类型
-					var videolist = [];
-					var types = {};
 					$.each(newdate.data,function(idx,ele){		
 						if (ele.type == 0) {//直播
-							this.nowShow = ele;
-							this.datatype = true;
+							self.nowShow = getDid(ele.url,'did');//获取直播数据的did
+							self.itmes.unshift(ele);
 						}					
 						if (ele.type == 2) {//视屏
-							this.videos = ele;
-							types.dataplay = true;
-							videolist.push(getDid(ele.url,'did'));
+							self.vslist.push(getDid(ele.url,'did'));//存回放视屏did
 						}
 						if (ele.type == 1) {//图片
-							this.picture = ele;
-							types.dataimg = true;
+							self.picture.push(ele);
 						}
 					})
-					this.vslist = videolist;
-					this.dataplay = types.dataplay;
 				}.bind(this)
-			})
-			
-			
+			})						
 		},
 		filters: {
 			strTime(time,ele) {
@@ -141,29 +154,81 @@ function getDid(url,did) {
 			}
 		},
 		methods: {
-			play(idx) {
-				var did = this.vslist[idx];
-				$.ajax({
-					type:"get",
-					url:"http://api.tudouni.doubozhibo.com/h5/dynamic/desc?did="+did,
-					async:true,
-					dataType: 'jsonp',
-					success: function(data){
-						console.log(data);						
-						if (data.code == 0) {	
-							var src = data.data.videoURL;
-							$('.wrap-video').eq(idx).show().addClass('vactive');
-							$('.liveborad').eq(idx).hide();
-							var $video = $('<source src="'+ src +'" type="video/mp4"/>');
-							$('.wrap-video').eq(idx).find('video').append($video);
-							$('.wrap-video').eq(idx).find('video').prop('height',$('.liveborad').eq(idx).height());
-						}						
+			play(e,idx) {
+				var classname ='.' + e.currentTarget.className;
+				for (var i=0;i<$(classname).length;i++) {
+					if ($(classname)[i] === e.currentTarget) {
+						var did = this.vslist[i];
 					}
-				});
+				}
+				//判断当前节点是否存在source标签
+				var $exist = $('.wrap-video').eq(idx).find('source').exist();
+				if ($exist) {
+					//显示video界面，隐藏回放界面
+					$('.liveborad').eq(idx).hide();
+					$('.wrap-video').eq(idx).show();
+					$('.wrap-video').eq(idx).find('video')[0].play();
+				} else {
+					$.ajax({
+						type: "get",
+						url:"http://api.tudouni.doubozhibo.com/h5/dynamic/desc?did="+did,
+						async:true,
+						dataType: 'jsonp',
+						success: function(data){
+							if (data.code == 0) {
+								var src = data.data.videoURL;
+								//显示video界面，隐藏回放界面
+								$('.wrap-video').eq(idx).show().addClass('vactive');
+								$('.liveborad').eq(idx).hide();
+								//添加source到viedeo标签内
+								var $video = $('<source src="'+ src +'" type="video/mp4"/>');
+								$('.wrap-video').eq(idx).find('video').append($video);
+								$('.wrap-video').eq(idx).find('video').prop('height',$('.liveborad').eq(idx).height());
+								//播放
+								$('.wrap-video').eq(idx).find('video')[0].play();
+							}
+						}
+					})
+				}
 			},
 			close(idx) {
+				//停止播放
+				$('.wrap-video').eq(idx).find('video')[0].pause();
+				//隐藏video界面，显示回放界面
 				$('.liveborad').eq(idx).show();
-				$('.wrap-video').eq(idx).hide().find('video source').remove();
+				$('.wrap-video').eq(idx).hide();
+			},
+			pynow(e,idx) {
+				var did = this.nowShow;
+				//判断当前节点是否存在source标签
+				var $exist = $('.wrap-video').eq(idx).find('source').exist();
+				if ($exist) {
+					//显示video界面，隐藏回放界面
+					$('.liveborad').eq(idx).hide();
+					$('.wrap-video').eq(idx).show();
+					$('.wrap-video').eq(idx).find('video')[0].play();
+				} else {
+					$.ajax({
+						type: "get",
+						url:"http://api.tudouni.doubozhibo.com/h5/dynamic/desc?did="+did,
+						async:true,
+						dataType: 'jsonp',
+						success: function(data){
+							if (data.code == 0) {
+								var src = data.data.videoURL;
+								//显示video界面，隐藏回放界面
+								$('.wrap-video').eq(idx).show().addClass('vactive');
+								$('.liveborad').eq(idx).hide();
+								//添加source到viedeo标签内
+								var $video = $('<source src="'+ src +'" type="video/mp4"/>');
+								$('.wrap-video').eq(idx).find('video').append($video);
+								$('.wrap-video').eq(idx).find('video').prop('height',$('.liveborad').eq(idx).height());
+								//播放
+								$('.wrap-video').eq(idx).find('video')[0].play();
+							}
+						}
+					})
+				}
 			}
 		}
 	}
@@ -208,15 +273,15 @@ function getDid(url,did) {
 	}
 	.headimg {
 		position: relative;
-		img {
-			width: 2rem;
-    		border-radius: 50%;
-    		margin: 0.5rem 0.6rem 0.6rem 0.7rem;
-		}
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		margin: 0.5rem 0.6rem 0.6rem 0.7rem;
+		border: 1px solid #d6cbbf;
 		span {
 			position: absolute;
-	        right: 0.45rem;
-	        bottom: 0.8rem;
+	        right: -0.2rem;
+	        bottom: 0rem;
 	        display: inline-block;
 	        width: 0.8rem;
 	        height: 0.8rem;

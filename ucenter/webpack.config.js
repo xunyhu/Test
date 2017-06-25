@@ -37,7 +37,5 @@ module.exports = {
 		contentBase:"dist",
 		inline:true
 	},
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin()
-	]
+	plugins: []
 }
