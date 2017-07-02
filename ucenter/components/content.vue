@@ -7,7 +7,6 @@
 		<div class="play"  v-for="(i,index) in itmes">
 			<ul class="fl">
 				<li class="headimg" v-bind:style="{background:'url('+i.photo+')', backgroundSize:'100% 100%'}">
-					<!--<img :src="i.photo" />-->
 					<span></span>
 				</li>
 				<li>
@@ -98,7 +97,7 @@ $.fn.exist = function(){
 				async: true,
 				dataType: 'json',
 				success: function(data) {
-					//console.log(data);
+					console.log(data);
 					if (data.code == -99) {
 						return false;
 					}
@@ -118,6 +117,7 @@ $.fn.exist = function(){
 								self.itmes.push(this);
 							}
 						});
+						//console.log(self.itmes);
 					}
 					if (data.data.length > 2) {
 						var data = data.data.slice(0,2);
@@ -126,8 +126,9 @@ $.fn.exist = function(){
 					//判断数据类型
 					$.each(newdate.data,function(idx,ele){		
 						if (ele.type == 0) {//直播
-							self.nowShow = getDid(ele.url,'did');//获取直播数据的did
-							self.itmes.unshift(ele);
+							self.nowShow = getDid(ele.url,'lid');//获取直播数据的lid
+							//self.itmes.unshift(ele);
+							self.itmes.splice($.inArray(ele,self.itmes),1);
 						}					
 						if (ele.type == 2) {//视屏
 							self.vslist.push(getDid(ele.url,'did'));//存回放视屏did
@@ -255,13 +256,9 @@ $.fn.exist = function(){
 	    }
 	    .fr p {
 	    	font-size: 0.8rem;
-    		margin: 0.9rem 0.7rem 0 0;
+    		padding: 0.9rem 0.7rem 0 0;
     		span{
-    			color: rgb(255,162,1);
-	            display:inline-block;  
-	            float: left;    
-	            font-size: 1rem;
-	            font-family:"Times New Roman",Georgia,Serif                 
+    			color: rgb(255,162,1);                
 	        }
 	        span:nth-child(even){
 	            padding-top: 0.2rem;
@@ -306,7 +303,6 @@ $.fn.exist = function(){
 			float: right;
             margin: 0.7rem 0.7rem 0 0;
             width: 4.5rem;
-            height: 1.5rem;
             line-height: 1.5rem;
             border: 1px solid #fff;
             border-radius: 1rem; 

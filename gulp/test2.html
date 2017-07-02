@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- <video src="tudouni://tudouni/DnyDesc?did=720&type=2"></video> -->
+	<!-- <iframe src="tudouni://tudouni/DnyDesc?did=720&type=2" frameborder="0"></iframe>
+	<a  href="weixin://" >微信</a>  -->
+	<a href="tudouni://tudouni/DnyDesc?did=877&type=0">土豆泥直播</a>
+	<script>
+		var u = navigator.userAgent;
+		var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+		var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+		var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		// console.log(u);
+		// console.log(isAndroid);
+		// console.log(isiOS);
+
+
+		//tudouni://tudouni/DnyDesc?did=877&type=0
+
+		function createScheme(url) {
+			var urlScheme = "tudouni://";
+			for (var item in url) {
+				urlScheme = urlScheme + item + '=' + encodeURIComponent(url[item]) + '&';
+			}
+			urlScheme = urlScheme.substring(0,urlScheme.length-1);
+			console.log(urlScheme);
+			return encodeURIComponent(urlScheme);
+		}
+
+		var str = 'tudouni://tudouni/DnyDesc?did=877&type=0';
+		var s = createScheme(str);
+		console.log(s);
+	</script>
+</body>
+</html>

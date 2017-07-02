@@ -1,25 +1,23 @@
 <template>
 	<footer>
-			<ul>
-				<li>
-					<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
-						<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_menu_follow_normal@2x.png" alt="">
-						<p class="fl">关注</p>
-					</a>					
-				</li>
-				<li class="talk">
-					<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
-						<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_chat_gray_normal@2x.png" alt="">
-						<p class="fl">聊天</p>
-					</a>
-				</li>
-				<li>
-					<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
-						<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_menu_data_press@2x.png" alt="">
-						<p class="fl">资料</p>
-					</a>
-				</li>
-			</ul>
+		<a class="follow" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
+			<div>
+				<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_menu_follow_normal@2x.png" alt="">
+				<span class="fr">关注</span>
+			</div>
+		</a>
+		<a class="chat"  href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
+			<div>
+				<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_chat_gray_normal@2x.png" alt="">
+				<span class="fr">聊天</span>
+			</div>
+		</a>
+		<a class="data"  href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
+			<div>
+				<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_menu_data_press@2x.png" alt="">
+				<span class="fr">资料</span>
+			</div>
+		</a>
 	</footer>
 </template>
 <script>
@@ -33,27 +31,26 @@
 </script>
 <style scoped lang="scss">
 	footer  {
-		background: rgb(244,245,249);;
+		width:100%;
 	    overflow: hidden;
-	    ul {
-	    	height: 3rem;
-	    	line-height: 3rem;
-	    	background: #fff;
-	    	margin-top:0.6rem ;
+	    position:fixed;
+    	bottom:0;
+	    a {
+	    	font-size:0.7rem;
+	    	display:inline-block;
+	    	width:32%;
+	    	height:2rem;
+	    	position:relative;
+	    	div {
+	    		position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				overflow:hidden;
+	    	}
 	    }
-	    li {
-	        float: left;	       
-	        width: 32%;
-	        img {
-	            width: 1.6rem;
-	            margin: 0.8rem 0 0 1rem;
-	        }
-	        p {
-	        	line-height: 3rem;font-size: 0.7rem;color: black;
-	        }
-	    }
-	    .talk span {
-	    	width: 1.8rem;
+	    img {
+	    	width:1.7rem;
 	    }
 	}
 </style>

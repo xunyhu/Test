@@ -76,8 +76,9 @@
 					gradeName: '',
 					sex: '',
 					grade: '',
-					follows: '',
-				}
+					follows: '',                    
+				},
+                sid: '',
 			}
 		},
 		mounted() {			
@@ -125,8 +126,30 @@
 					this.info.follows = data.follows;
 					this.info.unumber = data.unumber;
 					this.info.fans = data.fans;
+                    //粮票排行sid
+                    this.sid = data.uid;
 				}.bind(this)
-			})
+			});
+            //请求粮票贡献榜头像
+            $.ajax({
+                type: "get",
+                url: "http://api.tudouni.doubozhibo.com/fans/order?sid="+ getUrlParam('uid') + "&type=3&page=1&pageSize=3",
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    if (data.code !== 0) {
+                        return null;
+                    }
+                    // console.log(data.data);
+                    var data = data.data;
+                    $.each(data,function(index, el) {
+                        $('.guards li').eq(index).css({
+                            'background': 'url('+ el.photo +')',
+                            'background-size': ' 100% 100%'
+                        })
+                    });
+                }
+            })
 		}
 	}
 </script>

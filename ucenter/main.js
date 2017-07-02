@@ -23,7 +23,7 @@ import $ from 'jquery'
 window.$ = $
 
 import hhead from './components/head.vue'
-import hcontent from './components/content.vue'
+import hcontent from './components/center.vue'
 import hfooter from './components/footer.vue'
 
 new Vue({
