@@ -2,8 +2,10 @@
 	<div>
 		<div class="tips">
 			<div class="fl logo">
-				<img src="http://image.tudouni.doubozhibo.com/common/h5/logo@2x.png"/>
-				<p><span>|</span>打开查看更多内容</p>
+                <div class="fl"></div>
+                <a class="fl" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
+                    <span>|</span>打开查看更多内容
+                </a>
 			</div>
 			<div class="fr download">
 				<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">免费下载</a>
@@ -154,27 +156,37 @@
 	}
 </script>
 <style lang="scss">
-body {margin: 0;padding: 0;}
+body {margin: 0;padding: 0;font-family:"微软雅黑", "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;}
 img {margin: 0;padding: 0; }
 h1, h2, h3, h4, h5, h6, p, figure, form, blockquote { margin: 0; }
 ul, ol, li, dl, dd ,span{ margin: 0; padding: 0; }
 ul, ol { list-style: none; }
-a {text-decoration: none;}
+a {text-decoration: none;color:black;}
 .fl {float: left;}
 .fr {float: right;}
 /*tips提醒*/
 .tips {
-    overflow: hidden;
-    .logo img,.logo p {float: left;}
-    .logo img {
-        width: 5rem;
-        padding: 0.5rem 0.3rem 0.5rem 0.7rem;
-    }
-    .logo p {
-        font-size:0.6rem;
-        padding-top: 0.9rem;
-        color: rgb(51,51,51); 
-        span {padding-right:0.3rem;color: rgb(238,238,238);}       
+    width:100%;
+    height:2.6rem;
+    .logo {
+        overflow:hidden;
+        div {
+            margin:0.4rem 0 0 0.7rem;
+            width:5rem;
+            height:1.7rem;
+            background:url(http://image.tudouni.doubozhibo.com/common/h5/logo@2x.png) no-repeat center center;
+            background-size:100%;
+        }
+        a {
+            font-size:0.7rem;
+            text-decoration:none;
+            line-height:2.6rem;
+            span {
+                color:#eee;
+                font-weight:200;
+                padding:0 0.3rem;
+            }
+        }
     }
     .download {
         text-align: center;
@@ -207,7 +219,9 @@ header {
     }
     p:nth-child(3),p:nth-child(4) {
         color: #c9c8c8;
-        font-size: 0.6rem;
+        font-size: 0.7rem;
+        line-height:1.2rem;
+        height:1.2rem;
     }
     p:nth-child(5) span:nth-child(2) {
         margin: 0 0.7rem;

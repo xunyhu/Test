@@ -18,7 +18,7 @@
 			<div class="liveborad" v-bind:style="{background:'url('+ i.sourceCover +') no-repeat center center', backgroundSize:'100% 100%'}">
 				<!-- <div class="cover" ></div> -->
 				<div class="fr" v-on:click="openApp(i.url)">
-					<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">查看</a>
+					<a href="">查看</a>
 				</div>
 			</div>
 			<div class="wrap-signature" v-if="i.content ? true : false">
@@ -42,7 +42,7 @@
 			<div class="liveborad" >
 				<div class="cover" v-bind:style="{background:'url('+i.images[0].image+') no-repeat', backgroundSize:'100%'}"></div>
 				<div class="fr" v-on:click="openApp(i.url)">
-					<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">回放</a>
+					<a href="">回放</a>
 				</div>
 			</div>
 			<div class="wrap-signature" v-if="i.content ? true : false">
@@ -107,15 +107,22 @@ function getUrlParam(name) {
 	if(r != null) return unescape(r[2]);
 	return null;
 }
-function isIos() {
-	var u = navigator.userAgent;
-	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-	return isiOS;
-}
-function isAndroid() {
-	var u = navigator.userAgent;
-	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-	return isAndroid;
+function android(url){
+	window.location.href = url;
+	window.setTimeout(function(){
+		window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
+	},2000);
+};
+
+function ios(url) {
+	var ifr = document.createElement("iframe");
+	ifr.src = url;
+	ifr.style.display = "none";
+	document.body.appendChild(ifr);
+	window.setTimeout(function(){
+		document.body.removeChild(ifr);
+		window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
+	},2000);
 }
 import $ from 'jquery'
 	export default {
@@ -161,9 +168,6 @@ import $ from 'jquery'
 							self.videolist.push(ele);
 						}
 					});
-					// console.log(self.playnow)
-					// console.log(self.imglist)
-					// console.log(self.videolist)
 				}.bind(this)
 			})						
 		},
@@ -176,24 +180,15 @@ import $ from 'jquery'
 		},
 		methods: {
 			openApp(url) {
-				console.log(url)
-				if (isIos()) {
-			        var ifr = document.createElement('iframe');  
-			        ifr.src = url;  
-			        ifr.style.display = 'none';  
-			        document.body.appendChild(ifr);  
-			        window.setTimeout(function(){  
-			            document.body.removeChild(ifr);  
-			        },3000)  
+				console.log(url);
+				var u = navigator.userAgent;
+				var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+				if (isAndroid) {
+					android(url);
 				}
-				if (isAndroid()) {
-					var ifr = document.createElement('iframe');  
-			        ifr.src = url;  
-			        ifr.style.display = 'none';  
-			        document.body.appendChild(ifr);  
-			        window.setTimeout(function(){  
-			            document.body.removeChild(ifr);  
-			        },3000)  
+				if (isiOS) {				
+					ios(url);
 				}
 			}
 		}
@@ -204,7 +199,7 @@ import $ from 'jquery'
 	.content {
 	    background: rgb(244,245,249);
 	    overflow: hidden;
-	    margin-bottom:3rem;
+	    margin-bottom:2.4rem;
 	    padding-bottom:0.6rem;
 	}
 	.play {

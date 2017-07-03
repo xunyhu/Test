@@ -1,22 +1,22 @@
 <template>
 	<footer>
-		<a class="follow" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
+		<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
 			<div>
-				<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_menu_follow_normal@2x.png" alt="">
-				<span class="fr">关注</span>
-			</div>
+				<span class="follow fl" ></span>
+				<span class="fl">关注</span>
+			</div>			
 		</a>
-		<a class="chat"  href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
+		<a class="wrap-chat" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
 			<div>
-				<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_chat_gray_normal@2x.png" alt="">
-				<span class="fr">聊天</span>
-			</div>
+				<span class="chat fl"></span>
+				<span class="fl">聊天</span>
+			</div>	
 		</a>
-		<a class="data"  href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
+		<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
 			<div>
-				<img class="fl" src="http://image.tudouni.doubozhibo.com/common/h5/icon_menu_data_press@2x.png" alt="">
-				<span class="fr">资料</span>
-			</div>
+				<span class="data fl" ></span>
+				<span class="fl">资料</span>
+			</div>	
 		</a>
 	</footer>
 </template>
@@ -32,25 +32,48 @@
 <style scoped lang="scss">
 	footer  {
 		width:100%;
-	    overflow: hidden;
+	    height:2.4rem;
 	    position:fixed;
     	bottom:0;
+    	display:flex;
 	    a {
 	    	font-size:0.7rem;
-	    	display:inline-block;
-	    	width:32%;
-	    	height:2rem;
-	    	position:relative;
+	    	flex:1;
+	    	margin:0.6rem 0;
+	    	line-height:1.2rem;
 	    	div {
-	    		position: absolute;
-				left: 50%;
-				top: 50%;
-				transform: translate(-50%,-50%);
-				overflow:hidden;
+	    		width:49%;
+	    		overflow:hidden;
+	    		margin:0 auto;
 	    	}
 	    }
-	    img {
-	    	width:1.7rem;
+	    .follow {
+			display:inline-block;
+			width:1.2rem;
+			height:1.2rem;
+			margin-right:0.3rem;
+			background:url(http://image.tudouni.doubozhibo.com/common/h5/icon_menu_follow_normal@2x.png) no-repeat center center;
+			background-size:100%;
+	    }
+		.wrap-chat {
+			border-left:1px solid #eee;
+	    	border-right:1px solid #eee;
+		}
+	    .chat {
+	    	display:inline-block;
+			width:1.2rem;
+			height:1.2rem;
+			margin-right:0.3rem;
+			background:url(http://image.tudouni.doubozhibo.com/common/h5/icon_chat_gray_normal@2x.png) no-repeat center center;
+			background-size:100%;
+	    }
+	    .data {
+	    	display:inline-block;
+			width:1.2rem;
+			height:1.2rem;
+			margin-right:0.3rem;
+			background:url(http://image.tudouni.doubozhibo.com/common/h5/icon_menu_data_press@2x.png) no-repeat center center;
+			background-size:100%;
 	    }
 	}
 </style>
