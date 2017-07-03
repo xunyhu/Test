@@ -10,7 +10,7 @@
 	<script>
 		var btn = document.getElementById('btn');
 		btn.onclick = function() {
-			testApp();
+			window.location = "tudouni://tudouni/DnyDesc?did=877&type=0";
 		}
 
 		function testApp() { 
@@ -19,7 +19,7 @@
 			  window.setTimeout(function() {
 			  	 var timeOutDateTime = new Date();
 			  	 if (timeOutDateTime - loadDateTime < 5000) {
-			   	 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
+			   	 	window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
 			  	 } else {
 			    	window.close();
 			  	 }
