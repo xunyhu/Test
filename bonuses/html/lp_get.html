@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="keywords" content="土豆,土豆泥直播,土豆泥">
+    <title>粮票领取记录</title>
+    <style type="text/css">
+        body {
+            font:normal normal 14px Arial,Helvetica,'微软雅黑','黑体';
+            background-color: #F1F3F7;
+            color: #333333;
+            font-size: 0.7rem;
+            min-width:320px;
+            max-width: 640px;
+            _width:640px !important;
+            margin:0 ;
+            padding: 0;
+        }
+        div,p {margin: 0;padding:0;}
+        .receive{
+            background-color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+        .receive p {
+            padding:0.3rem 0;
+            vertical-align: center;
+        }
+        .receive .withdrawals_time{
+            padding-left: 0.7rem;
+            color: #999999;
+            font-size: 0.7rem;
+        }
+        .sum {
+            padding:0 0.7rem;
+            overflow: hidden;
+        }
+        .sum .fr {
+        	color: #53e099;
+        }
+        .fl { float: left; }
+        .fr { float: right; }
+        [v-cloak] {
+            display: none;
+        }
+        .nothing .img {
+            width: 100%;
+            height: 10rem;
+            background: url(http://image.tudouni.doubozhibo.com/common/h5/no-content-prompt@2x.png) no-repeat center center;
+            background-size: 100% 100%;
+        }
+        .nothing p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="receive" v-for='i in item'>
+            <p class="withdrawals_time" v-if='i.type == 1' v-cloak>兑换土豆泥{{ i.status | strType }}</p>
+            <p class="withdrawals_time" v-if='i.type == 0' v-cloak>{{ i.payType | strPay(i.status) }}</p>
+            <div class="sum">
+                <p class="fl" v-cloak>{{ i.date | strTime }}</p> 
+                <p class="fr" v-cloak>{{ i.money | strMoney }}</p>
+            </div>
+        </div>
+        <div class="nothing" v-if='isshow'>
+            <div :class='{ img : isshow }'></div>
+            <p v-text='msg'></p>
+        </div>
+    </div>
+<script src='../js/vue.js'></script>
+<script src='../js/jquery.js'></script>
+<script>
+    function initFontSize(size, width) {
+        var size = size || 20, width = width || 375,
+            clientWidth = document.documentElement.clientWidth <= 480 ? document.documentElement.clientWidth : 480;
+        document.getElementsByTagName('html')[0].style.fontSize = clientWidth * size / width + 'px'
+    }
+
+    window.addEventListener("resize", function () {
+        setTimeout(function () {
+            initFontSize();
+        }, 200)
+    });
+    initFontSize();
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    };
+
+    var uid = getUrlParam('uid');
+    var token = getUrlParam('token');
+    var page = 1;
+    var size = 10;
+    new Vue({
+        el: '#app',
+        data: {
+            msg: '没有记录',
+            txt: '兑换土豆泥',
+            isshow: false,
+            item: [],
+        },
+        mounted: function() {
+            //粮票领取记录
+            $.ajax({
+                type: 'get',
+                url: "http://api.tudouni.doubozhibo.com/auth/income/history?uid="+ uid +"&token="+ token +"&page="+ page +"&pageSize="+size,
+                //url: "../data/ip_get.json",
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data.code !== 0) {
+                        this.isshow = true;
+                        return;
+                    }
+                    if (data.data == null || data.data.length == 0) {
+                        this.isshow = true;
+                        return;
+                    }
+                    if (data.data.length > 0) {
+                        this.item = data.data;
+                    }
+                }.bind(this)
+            })
+        },
+        filters: {
+            strTime(time) {
+                var newtime = time.split(' ')[0];
+                return newtime;
+            },
+            strType(type) {
+                if (type == 0) {
+                    return "处理中";
+                }
+                if (type == 2) {
+                    return "失败";
+                }
+                if (type == 1) {
+                    return "成功";
+                }
+            },
+            strPay(x,y) {
+            	var a = x+y;
+            	var pay;
+            	switch (a) {
+            		case 'weixin0': pay = "粮票提现处理中 (微信)";
+            		break;
+            		case 'weixin1': pay = "粮票提现成功 (微信)";
+            		break;
+            		case 'weixin2': pay = "粮票提现失败 (微信)";
+            		break;
+            		case 'zfb0': pay = "粮票提现处理中 (支付宝)";
+            		break;
+            		case 'zfb1': pay = "粮票提现成功 (支付宝)";
+            		break;
+            		case 'zfb2': pay = "粮票提现失败 (支付宝)";
+            		break;
+            	}
+            	return pay;
+            },
+            strMoney(money) {
+            	return parseInt(money)  + ".00";
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

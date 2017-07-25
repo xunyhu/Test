@@ -1,0 +1,12 @@
+html,body {
+	margin: 0;padding:0;
+}
+body {
+	background:red;
+}
+header img {
+	width: 100%;vertical-align:top;
+}
+section img {
+	width: 100%;vertical-align:top;
+}

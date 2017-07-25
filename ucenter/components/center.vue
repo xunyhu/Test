@@ -15,11 +15,8 @@
 					<p class="time">{{i.topSubTitle | strTime}}</p>
 				</li>
 			</ul>
-			<div class="liveborad" v-bind:style="{background:'url('+ i.sourceCover +') no-repeat center center', backgroundSize:'100% 100%'}">
-				<!-- <div class="cover" ></div> -->
-				<div class="fr" v-on:click="openApp(i.url)">
-					<a href="">查看</a>
-				</div>
+			<div class="liveborad" v-bind:style="{background:'url('+ i.sourceCover +') no-repeat center center', backgroundSize:'cover'}">
+				<div class="fr" v-on:click="openApp(i.url)">查看</div>
 			</div>
 			<div class="wrap-signature" v-if="i.content ? true : false">
 				<div v-bind:class="{ signature: i.content ? true : false }">{{i.content}}</div>
@@ -39,11 +36,8 @@
 			<div class="fr">
 				<p><span>{{i.topRight}}</span> 人已观看</p>
 			</div>
-			<div class="liveborad" >
-				<div class="cover" v-bind:style="{background:'url('+i.images[0].image+') no-repeat', backgroundSize:'100%'}"></div>
-				<div class="fr" v-on:click="openApp(i.url)">
-					<a href="">回放</a>
-				</div>
+			<div class="liveborad"  v-bind:style="{background:'url('+ i.images[0].image +') no-repeat center center', backgroundSize:'cover'}">
+				<div class="fr" v-on:click="openApp(i.url)">回放</div>
 			</div>
 			<div class="wrap-signature" v-if="i.content ? true : false">
 				<div v-bind:class="{ signature: i.content ? true : false }">{{i.content}}</div>
@@ -77,8 +71,8 @@
 			<div class="fr">
 				<p><span>{{i.topRight}}</span> 人已观看</p>
 			</div>
-			<div class="liveborad" v-bind:style="{background:'url('+ i.images[0].image +') no-repeat center center', backgroundSize:'100%'}">
-				 <div class="fr" v-on:click="openApp(i.url)"><a>{{i.images.length}} 张</a></div>
+			<div class="liveborad" v-bind:style="{background:'url('+ i.images[0].image +') no-repeat center center', backgroundSize:'cover'}">
+				 <div class="fr" v-on:click="openApp(i.url)">{{i.images.length}} 张</div>
 			</div>
 			<div class="wrap-signature" v-if="i.content ? true : false">
 				<div v-bind:class="{ signature: i.content ? true : false }">{{i.content}}</div>
@@ -106,23 +100,6 @@ function getUrlParam(name) {
 	var r = window.location.search.substr(1).match(reg);
 	if(r != null) return unescape(r[2]);
 	return null;
-}
-function android(url){
-	window.location.href = url;
-	window.setTimeout(function(){
-		window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
-	},2000);
-};
-
-function ios(url) {
-	var ifr = document.createElement("iframe");
-	ifr.src = url;
-	ifr.style.display = "none";
-	document.body.appendChild(ifr);
-	window.setTimeout(function(){
-		document.body.removeChild(ifr);
-		window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
-	},2000);
 }
 import $ from 'jquery'
 	export default {
@@ -181,25 +158,24 @@ import $ from 'jquery'
 		methods: {
 			openApp(url) {
 				console.log(url);
-				var u = navigator.userAgent;
-				var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-				if (isAndroid) {
-					android(url);
-				}
-				if (isiOS) {				
-					ios(url);
-				}
+				window.location.href= url;
+				setTimeout(function(){
+					window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
+				},3000);	
 			}
 		}
 	}
 </script>
 <style scoped lang="scss">
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	tap-highlight-color: rgba(0, 0, 0, 0);
+}
 /*头部信息*/
 	.content {
 	    background: rgb(244,245,249);
 	    overflow: hidden;
-	    margin-bottom:2.4rem;
 	    padding-bottom:0.6rem;
 	}
 	.play {
@@ -262,23 +238,17 @@ import $ from 'jquery'
 		height: 20rem;
 		overflow: hidden;
 		background:#ccc;
-		// .cover {
-		// 	width: 100%;
-		// 	overflow:hidden;
-		// }
 		.fr {			
-            a {
-            	display: inline-block;
-            	margin: 0.7rem 0.7rem 0 0;
-            	border: 1px solid #fff;
-            	border-radius: 1rem; 
-            	background: #4d5f72;
-            	opacity: 0.8;
-            	text-align: center;
-	            color: #fff;
-	            font-size: 0.6rem;
-	            padding: 0.15rem 1rem;
-            }
+        	display: inline-block;
+        	margin: 0.7rem 0.7rem 0 0;
+        	border: 1px solid #fff;
+        	border-radius: 1rem; 
+        	background: #4d5f72;
+        	opacity: 0.8;
+        	text-align: center;
+            color: #fff;
+            font-size: 0.6rem;
+            padding: 0.15rem 1rem;
 		}
 	}
 	.wrap-signature {

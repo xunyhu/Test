@@ -164,6 +164,11 @@ ul, ol { list-style: none; }
 a {text-decoration: none;color:black;}
 .fl {float: left;}
 .fr {float: right;}
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: rgba(0, 0, 0, 0);
+}
 /*tips提醒*/
 .tips {
     width:100%;
@@ -191,7 +196,7 @@ a {text-decoration: none;color:black;}
     .download {
         text-align: center;
         border-radius: 5px;
-        background: -webkit-linear-gradient(left, rgb(243,169,17) , rgb(245,119,49)); 
+        background: -webkit-linear-gradient(left, #F3A910 , #F57730); 
         margin: 0.5rem 0.7rem 0 0;
         a {
             display: inline-block;
@@ -240,7 +245,6 @@ header {
         display: inline-block;
         position: relative;
         border-radius: 3px;
-        width: 1.8rem;
         height: 1rem;
         line-height: 1rem;
         color: #fff;

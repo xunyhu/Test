@@ -1,5 +1,5 @@
 <template>
-	<footer>
+	<!--<footer>
 		<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni">
 			<div>
 				<span class="follow fl" ></span>
@@ -18,7 +18,12 @@
 				<span class="fl">资料</span>
 			</div>	
 		</a>
-	</footer>
+	</footer>-->
+	<div class="foot_d" v-on:click="openApp" >
+        <a href='http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni' >
+            <div>打开土豆泥直播查看更多吧 →</div>
+        </a>
+    </div>
 </template>
 <script>
 	export default {
@@ -26,16 +31,25 @@
 			return {
 				msg: "我是底部"
 			}
+		},
+		methods: {
+			openApp() {
+				window.location.href= "tudouni://tudouni/DnyDesc";
+				setTimeout(function(){
+					window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.doubozhibo.tudouni";
+				},2000);	
+			}
 		}
 	}
 </script>
 <style scoped lang="scss">
-	footer  {
+	/*footer  {
 		width:100%;
 	    height:2.4rem;
 	    position:fixed;
     	bottom:0;
     	display:flex;
+    	background:#fff;
 	    a {
 	    	font-size:0.7rem;
 	    	flex:1;
@@ -75,5 +89,24 @@
 			background:url(http://image.tudouni.doubozhibo.com/common/h5/icon_menu_data_press@2x.png) no-repeat center center;
 			background-size:100%;
 	    }
-	}
+	}*/
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.foot_d {
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    background-color: #efab28;
+}
+
+.foot_d a {
+    color: #FFFFFF;
+    text-align: center;
+    background: #efab28;
+    font-size: 0.7rem;
+    line-height: 2.8rem;
+}
 </style>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="土豆,土豆泥直播,土豆泥">
+    <meta name="description" content="土豆泥直播,最高端的手机视频直播">
+    <meta name="msapplication-tap-highlight" content="no">
+	<title>佣金明细</title>
+	<link rel="stylesheet" href="../css/bonuses.css">
+</head>
+<body>
+	<div id="bonuses">
+		<div class="top">
+			<div><a href="#" :class='{ active : tab == 1 ? true : false}' v-on:click="changes(1)">已到账</a></div>
+			<div><a href="#" :class='{ active : tab == 2 ? true : false}' v-on:click='changes(2)'>未到账</a></div>
+			<div><a href="#" :class='{ active : tab == 3 ? true : false}' v-on:click='changes(3)'>不结算</a></div>
+		</div>
+		<div v-show="tab == 1" v-cloak>
+			<div class="onaccount">
+				<ul class="list">
+					<li v-if="item.length > 0" v-for="i in item">
+						<p class="title">订单号：{{ i.orderNo }}</p>
+						<p class="buytime">下单时间：{{ i.createTime }}<span class="fr noprice">￥{{ i.brokerage }}</span></p>
+					</li>
+				</ul>
+			</div>	
+			<div class="nothing" :class='{ show : account }'>
+				<div></div>
+				<p>没有记录</p>
+			</div>		
+		</div>
+		<div class="tab2" v-show="tab == 2" v-cloak>
+			<ul class="list">
+			<!-- 未到账 -->
+				<li v-if="item2.length > 0" v-for="i in item2">
+					<p class="title">订单号：{{ i.orderNo }}</p>
+					<p class="buytime">下单时间：{{ i.createTime | time }}<span class="fr noprice">￥{{ i.brokerage }}</span></p>
+				</li>
+			</ul>
+			<div class="nothing" :class='{ show : incount }'>
+				<div></div>
+				<p>没有记录</p>
+			</div>	
+		</div>
+		<div class="tab3" v-show="tab == 3" v-cloak>
+			<ul class="list">
+			<!-- 不结算 -->
+				<li v-if="item3.length > 0" v-for='i in item3'>
+					<p class="title">订单号：{{ i.orderNo }}</p>
+					<p class="buytime">下单时间：{{ i.createTime }}<span class="fr noprice">￥{{ i.brokerage }}</span></p>
+				</li>
+			</ul>
+			<div class="nothing" :class='{ show : nocount }'>
+				<div></div>
+				<p>没有记录</p>
+			</div>	
+		</div>
+	</div>	
+</body>
+	<script src='../js/vue.js'></script>
+	<script src='../js/jquery.js'></script>
+	<script src='../js/bonuses.js'></script>
+</html>
