@@ -3,7 +3,9 @@ app.js ->命令行输入 node app 命令就能运行该js
 
 ## express框架
 > 安装
+
 npm init -y
+
 npm install express --save
 
 > 使用
@@ -41,11 +43,12 @@ const server = http.createServer( (request,response) => {
 ```
 
 ## process.env
-process其实相当于是node.js中的一个api。process.env是调用了其中一个属性。
-process对象是一个全局对象，控制着当前node.js整个进程。作为一个对象它对于node.js始终可用，不需要require()。
+process其实相当于是node.js中的一个api。process.env是调用了其中一个属性。  
+process对象是一个全局对象，控制着当前node.js整个进程。作为一个对象它对于node.js始终可用，不需要require()。  
 process.env 属性返回一个包含用户环境变量的对象。
 
 >process.env.NODE_ENV
+
 window下设置环境变量用set命令  set NOOE_ENV=production
 
 
