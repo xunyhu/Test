@@ -10,3 +10,7 @@ webpack --config webpack.config.xxx.js  编译指定打包文件
 ```
 添加这个对象的作用：npm run build 等价于执行 webpack 这个命令
 
+## git 
+解决git pull 冲突
+git reset --hard FETCH_HEAD  FETCH_HEAD表示上一次成功git pull之后形成的commit点。
+
