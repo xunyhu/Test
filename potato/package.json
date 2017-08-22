@@ -1,0 +1,26 @@
+{
+  "name": "potato",
+  "version": "1.0.0",
+  "description": "重写商城",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "react": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.1.2",
+    "react-router-redux": "^4.0.8"
+  },
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
