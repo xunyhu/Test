@@ -1,7 +1,7 @@
 
 var request = require('request');
 var lib = require('./service');
-var formidable = require('formidable'); //?
+var formidable = require('formidable'); //?文件上传相关的包
 formidable.encoding = 'utf-8';
 
 module.exports = function(app) {

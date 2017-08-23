@@ -60,5 +60,13 @@
              }
          }
          request(options,callback);
-     })
+     });
+
+     app.get('/',function (req, res) {
+        res.send('666');
+     });
+
+     app.get('/home',function (req, res) {
+        res.send('你好！');
+     });
  }

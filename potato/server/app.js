@@ -15,7 +15,7 @@ app.use(bodyParser());
 app.use(cookieParser());
 
 
-app.require('./config')(app);
+require('./config')(app);
 
 server.listen(port,function(){
     console.log('Express server listening on %d, in %s mode',port,app.get('env'));
