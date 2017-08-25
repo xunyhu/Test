@@ -16,6 +16,10 @@ module.exports = {
         filename: '[name].js'
     },
     module: modules,
+    // devServer : {
+	// 	contentBase : './src',
+	// 	inline : true
+	// },
     plugins: [
         plugins.buildCss('app.css'),
         plugins.getHtml('../src/index.html','../src/dll-index.html',{

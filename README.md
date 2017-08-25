@@ -13,4 +13,6 @@ webpack --config webpack.config.xxx.js  编译指定打包文件
 ## git 
 解决git pull 冲突
 git reset --hard FETCH_HEAD  FETCH_HEAD表示上一次成功git pull之后形成的commit点。
+git stash  拉取有冲突的文件之前先暂存你本地更改的代码
+git stash pop 合并本地和拉去的代码有冲突的部分
 

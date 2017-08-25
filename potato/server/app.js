@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');         //parser  解析器
 var cookieParser = require('cookie-parser');     
 var path = require('path');
 var env = process.env.NODE_ENV;
-var port = 666;      
+var port = 86;      
 
 app.use(compression());
 app.use(bodyParser());
