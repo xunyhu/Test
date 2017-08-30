@@ -6,6 +6,7 @@ import { Router, useRouterHistory, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import { createHashHistory ,createHistory} from 'history'
+import configureStore from './store/configureStore'
 import routes from './routes'
 
 
