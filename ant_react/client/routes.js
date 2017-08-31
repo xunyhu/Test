@@ -5,7 +5,9 @@ import { Route } from 'react-router'
 import NoticeMain from './containers/notice'
 
 export default (
-    <Route path='/*' component={NoticeMain}></Route>
+    <Route>
+        <Route path='/*' component={NoticeMain}></Route>
+    </Route>
 )
 
 

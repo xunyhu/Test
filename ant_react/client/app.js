@@ -13,7 +13,7 @@ import routes from './routes'
 const store = configureStore()
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 const history = syncHistoryWithStore(appHistory, store)
-// const history = useRouterHistory(createHistory)({ basename: '/' })
+
 
 class Root extends Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class Root extends Component {
     history: PropTypes.object.isRequired
   }
   componentDidMount(){
-
+    
   }
   render() {
     const { store, history } = this.props
