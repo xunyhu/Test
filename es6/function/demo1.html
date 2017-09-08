@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>es6函数(一)</title>
+</head>
+<body>
+	
+</body>
+	<script>
+		(() => {
+			console.log('es6匿名函数')
+		})();
+
+		(function() {
+			console.log('es5匿名函数')
+		})();
+
+
+		var a = function () {
+			console.log('es5具名函数a')
+		}
+		a();
+
+		let b = () => {
+			console.log('es6具名函数b')
+		}
+		b();
+
+
+		//可以设置参数值
+		let c = (a=1,b=2) => {
+			console.log(a,b);
+		}
+		c();
+
+		((a='测试自执行') => {
+			console.log(a);
+		})()
+
+
+
+	</script>
+</html>
