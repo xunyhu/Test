@@ -199,3 +199,13 @@ getOrderCount函数    执行了一个fetch请求    "orderCount":path+"/sellerOrder/orde
 		
 11:01 2017/9/8       网红店商品详情页分享到朋友圈
 如果小黄有安装土豆泥APP，则直接进入该商品详情，如果小黄没有安装土豆泥APP，则跳转到土豆泥APP下载提示页面。
+用户小店 ：   index.html#/shop/seller/9648
+路由组件：   <Route path="shop/seller/:shopId" components={AnchorShopMain}></Route>
+用户商品详情：index.html#/shop/detail/21644/9627
+路由组件：    <Route path="shop/detail/:id/:shopId(/:uid)" components={ShopDetail}></Route>
+
+
+11:16 2017/9/8       iphone5s适配问题
+
+
+18:32 2017/9/8     push页面切换账号问题
