@@ -39,7 +39,11 @@ window.onload = function(){
     var second2 = document.querySelector('.body-wrap .secondr :nth-child(3)');
 
     var three1 = document.querySelector('.body-wrap .three :nth-child(1)');    
-    var three2 = document.querySelector('.body-wrap .three :nth-child(2)');    
+    var three2 = document.querySelector('.body-wrap .three :nth-child(2)');   
+    
+    var four = document.querySelector('.body-wrap .fourr');    
+
+    var five = document.querySelector('.body-wrap .five');    
     function showAnimation(x) {
         switch (x) {
             case 1:
@@ -48,29 +52,47 @@ window.onload = function(){
                 second2.className = 'active';
                 three1.className = ' ';
                 three2.className = ' ';
+                four.className = 'fr fourr';
+                five.className = 'fl five';
                 break;
             case 2:
+                three1.className = 'active';
+                three2.className = 'active';
                 second.className = ' ';            
                 second1.className = ' ';
                 second2.className = ' ';
-                three1.className = 'active';
-                three2.className = 'active';
+                four.className = 'fr fourr';
+                five.className = 'fl five';
                 break;
-            // case 3:
-            //     alert('第四屏');
-            //     break;
-            // case 4:
-            //     alert('第五屏');
-            //     break;
-            // case 5:
-            //     alert('最后一屏');
-            //     break;
-            default:
-                second.className = ' '; 
+            case 3:
+                four.className += ' active';
+                second.className = ' ';            
                 second1.className = ' ';
                 second2.className = ' ';
                 three1.className = ' ';
                 three2.className = ' ';
+                five.className = 'fl five';
+                break;
+            case 4:
+                five.className += ' active';
+                second.className = ' ';            
+                second1.className = ' ';
+                second2.className = ' ';
+                three1.className = ' ';
+                three2.className = ' ';
+                four.className = 'fr fourr';
+                break;
+            // case 5:
+            //     alert('最后一屏');
+            //     break;
+            default:
+                three1.className = ' ';
+                three2.className = ' ';
+                second.className = ' '; 
+                second1.className = ' ';
+                second2.className = ' ';
+                four.className = 'fr fourr';
+                five.className = 'fl five';
                 return;
         }
     }
