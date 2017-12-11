@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>土豆泥 - 你想看的，我们豆有</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://image.tudouni.doubozhibo.com/common/h5/icon/logo@0.5x.png"
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="https://image.tudouni.doubozhibo.com/common/h5/icon/logo@1.5x.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://image.tudouni.doubozhibo.com/common/h5/icon/logo@1x.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="https://image.tudouni.doubozhibo.com/common/h5/icon/logo@2x.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="https://image.tudouni.doubozhibo.com/common/h5/icon/logo@3x.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="https://image.tudouni.doubozhibo.com/common/h5/icon/logo@4x.png"
+    />
+    <meta name="keywords" content="土豆,土豆泥直播,土豆泥" />
+    <meta name="description" content="土豆泥直播,最高端的手机视频直播" />
+    <link type="text/css" rel="stylesheet" href="https://h5.tudouni.doubozhibo.com/tudouni/css/index/header.css" />
+    <link type="text/css" rel="stylesheet" href="https://h5.tudouni.doubozhibo.com/tudouni/css/index/pcPay.css" />
+    <script type="text/javascript" src="https://h5.tudouni.doubozhibo.com/tudouni/js/cookie.js"></script>
+    <script type="text/javascript" src="https://h5.tudouni.doubozhibo.com/tudouni/js/Public/browser.js"></script>
+    <script type="text/javascript" src="https://h5.tudouni.doubozhibo.com/tudouni/js/qrcode.js"></script>
+    <script type="text/javascript" src="https://h5.tudouni.doubozhibo.com/tudouni/js/parseGet.js"></script>
+    <script type="text/javascript" src="https://h5.tudouni.doubozhibo.com/tudouni/js/Public/scDataStatistics.js"></script>
+    <script type="text/javascript" src="https://h5.tudouni.doubozhibo.com/tudouni/js/pcPay.js"></script>
+    <style>
+        #m-header .header-wrap {
+            overflow: hidden;
+            width: 60%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #m-header .header-log {
+            left: 0;
+        }
+
+        #m-header ul {
+            right: 0;
+        }
+
+        #m-header a:hover {
+            color: #fd9332;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="m-header">
+        <div class="header-wrap">
+            <div class="header-log"></div>
+            <ul>
+                <li>
+                    <a href="index.html">首页</a>
+                </li>
+                <li>
+                    <a href="pay.html" style="color: #fd9332;">充值</a>
+                </li>
+                <li>
+                    <a href="notice.html">资讯</a>
+                </li>
+                <li>
+                    <a href="about.html">关于</a>
+                </li>
+                <li>
+                    <a href="contact_us.html">联系</a>
+                </li>
+                <li>
+                    <a href="help.html">帮助</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section>
+        <div class="ppanel">
+            <div class="panelTitle">
+                <!-- <ul>
+                    <li>充值</li>
+                </ul> -->
+            </div>
+            <div class="b1">
+                <div id="usr_info">
+                </div>
+            </div>
+            <div class="b2">
+                <p class="b2a">充值金额</p>
+                <ul class="b2_list"></ul>
+                <p class="b2_cuz1">自定义金额
+                    <span>（自定义金额数为6~50000元）</span>
+                </p>
+                <p class="b2_cuz2">
+                    <input id="num" type="text" value="" />元&nbsp;&nbsp;&nbsp;
+                    <span class="get">将获得
+                        <span class="tdb"></span>土豆币</span>
+                </p>
+            </div>
+            <div class="b3">
+                <p>选择支付方式</p>
+                <div class="b3_payM">
+                    <ul>
+                        <li>
+                            <button>微信支付</button>
+                        </li>
+                        <li>
+                            <button>支付宝钱包支付</button>
+                        </li>
+                        <li style="display:none;">
+                            <button>网银支付</button>
+                        </li>
+                    </ul>
+                    <div class="payOpts" style="border:none;">
+                        <div class="wy_pay">
+                            <ul>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_01.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_02.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_03.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_04.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_05.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_06.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_07.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_08.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_09.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_10.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_11.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_12.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_13.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_14.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_15.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_16.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_17.jpg" />
+                                </li>
+                                <li>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/bank_18.jpg" />
+                                </li>
+                                <li class="cuz">
+                                    <button>收起更多</button>
+                                    <img src="https://image.tudouni.doubozhibo.com/common/h5/newOffical/more.png" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="b4">
+                <div class="b4_re">
+                    <div class="br1">
+                        <p>支付金额：
+                            <span id="bill"></span>元</p>
+                        <p>我阅读并同意
+                            <a href="https://h5.tudouni.doubozhibo.com/tudouni/html/ppay.html" target="_blank">《用户充值协议》</a>
+                        </p>
+                    </div>
+                    <div class="br2">
+                        <button id="startPay">确认支付</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="m-footer">
+        <p>Copyright © 2017 广州豆播信息科技有限公司 粤ICP备170322679号</p>
+    </div>
+    <script>
+        var url = window.location.href;
+        var p = parseGet(url, "paySuccess");
+        if (p == "true") {
+            paySuccess();
+        }
+        if (getBrowser().devices.windows || getBrowser().devices.linux || getBrowser().devices.mac) {
+            console.log("PC客户端");
+        } else {
+            window.location.href = "https://h5.tudouni.doubozhibo.com/tudouni/html/douPay.html";
+        }
+        /*
+         setTimeout(function(){
+         var img = document.getElementsByTagName("img");
+         for(var i=0;i<img.length;i++){
+         img[i].removeAttribute("width");
+         img[i].removeAttribute("height");
+         }
+         },1000)
+         */
+    </script>
+    <script>
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+</body>
+
+</html>

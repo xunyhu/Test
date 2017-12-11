@@ -43,7 +43,10 @@ window.onload = function(){
     
     var four = document.querySelector('.body-wrap .fourr');    
 
-    var five = document.querySelector('.body-wrap .five');    
+    var five = document.querySelector('.body-wrap .five');   
+
+    var six = document.querySelector('.body-wrap .sixr') ;
+    
     function showAnimation(x) {
         switch (x) {
             case 1:
@@ -54,6 +57,7 @@ window.onload = function(){
                 three2.className = ' ';
                 four.className = 'fr fourr';
                 five.className = 'fl five';
+                six.className = 'fr sixr';
                 break;
             case 2:
                 three1.className = 'active';
@@ -63,6 +67,7 @@ window.onload = function(){
                 second2.className = ' ';
                 four.className = 'fr fourr';
                 five.className = 'fl five';
+                six.className = 'fr sixr';
                 break;
             case 3:
                 four.className += ' active';
@@ -72,6 +77,7 @@ window.onload = function(){
                 three1.className = ' ';
                 three2.className = ' ';
                 five.className = 'fl five';
+                six.className = 'fr sixr';
                 break;
             case 4:
                 five.className += ' active';
@@ -81,10 +87,18 @@ window.onload = function(){
                 three1.className = ' ';
                 three2.className = ' ';
                 four.className = 'fr fourr';
+                six.className = 'fr sixr';
                 break;
-            // case 5:
-            //     alert('最后一屏');
-            //     break;
+            case 5:
+                six.className += ' active';
+                second.className = ' '; 
+                second1.className = ' ';
+                second2.className = ' ';
+                three1.className = ' ';
+                three2.className = ' ';
+                four.className = 'fr fourr';
+                five.className = 'fl five';
+                break;
             default:
                 three1.className = ' ';
                 three2.className = ' ';
@@ -93,6 +107,7 @@ window.onload = function(){
                 second2.className = ' ';
                 four.className = 'fr fourr';
                 five.className = 'fl five';
+                six.className = 'fr sixr';
                 return;
         }
     }
