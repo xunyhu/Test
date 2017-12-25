@@ -1,10 +1,13 @@
 window.onload = function(){
     var $index = 0;
     var swiper = new Swiper('.swiper-container', {
-        direction: 'vertical',
+        //direction: 'vertical',
         slidesPerView: 1,
         spaceBetween: 0,
-        mousewheelControl: true,
+        //mousewheelControl: true,
+        mousewheelControl : true,
+        mode:'vertical',
+        mousewheelControlForceToAxis : true,
         pagination: '.swiper-pagination',
         paginationClickable: true,
         onSetTransition: function(swiper, transiton){
@@ -20,10 +23,15 @@ window.onload = function(){
     }
 
     //鼠标滚轮事件
+    if (window.addEventListener) {
+        window.addEventListener('DOMMouseScroll',test($index),false);
+    }
     window.onmousewheel = function(event) {
         event = event || window.event;
         showAnimation($index);
     };
+
+    function test(a) {console.log(a)}
     
     //点击分页
     var $btn = document.getElementById('button');
