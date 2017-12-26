@@ -485,11 +485,19 @@ body {
 /* 15.6寸笔记本 
     打印 高: 734   宽:1536
 */
+<<<<<<< HEAD
 /* @media screen and (min-width: 1440px) and (max-width: 1919px) */
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
     .body-wrap .fl img{
         margin-left: 16%;
         width: 62%;
+=======
+@media screen and (min-width: 1440px) and (max-width: 1919px){
+    .body-wrap .fl.one img{
+        width: 52%;
+        margin-left: 5%;
+        margin-top: 12%;
+>>>>>>> b8f7deed941019f162accb2f48846824a3a7b264
     }
     .body-wrap .second img {
         margin-left: 0;
@@ -497,17 +505,23 @@ body {
         margin-top: 15%;
     }
     .body-wrap .secondr :nth-child(1) {
-        width: 62%;
-        bottom: 2%;
+        width: 56%;
+        bottom: 12%;
         position: absolute;
+<<<<<<< HEAD
         margin-left: 22%;
         z-index: 1;+
+=======
+        margin-left: 30%;
+        z-index: 1;
+>>>>>>> b8f7deed941019f162accb2f48846824a3a7b264
     }
     .body-wrap .secondr :nth-child(2) {
         position: absolute;
         bottom: 3%;
         -webkit-transition: left 0.5s ease;
         left: 40%;
+        width: 37%;
     }
     .body-wrap .secondr :nth-child(2).active {
         left: 80%;
@@ -517,9 +531,10 @@ body {
         bottom: 3%;
         left: 40%;
         -webkit-transition: left 0.5s ease;
+        width: 30%;
     }
     .body-wrap .secondr :nth-child(3).active {
-        left: -10%;
+        left: 3%;
     }
 
     /* 第三屏 */
@@ -547,6 +562,36 @@ body {
         left: -24%;
         margin-left: 0;
         top: 46%;
+    }
+
+    /* 4 */
+    .body-wrap .fourr :nth-child(1) {
+        width: 56%;
+        top: 8%;
+    }
+    .body-wrap .fourr.active :nth-child(2) {
+        top: 18%;
+        left: 82%;
+    }
+    .body-wrap .fourr.active :nth-child(3) {
+        bottom: 5%;
+        left: 21%;
+    }
+    .body-wrap .fourr.active :nth-child(4) {
+        bottom: 9%;
+        left: 84%;
+    }
+    .body-wrap .fourr.active :nth-child(5) {
+        left: 17%;
+        top: 22%;
+    }
+    .body-wrap .fl.four img {
+        width: 100%;
+    }
+
+    /* 5 */
+    .body-wrap .fiver img {
+        width: 80%;
     }
 
     /* 6屏 */
