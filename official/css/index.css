@@ -485,19 +485,11 @@ body {
 /* 15.6寸笔记本 
     打印 高: 734   宽:1536
 */
-<<<<<<< HEAD
-/* @media screen and (min-width: 1440px) and (max-width: 1919px) */
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-    .body-wrap .fl img{
-        margin-left: 16%;
-        width: 62%;
-=======
 @media screen and (min-width: 1440px) and (max-width: 1919px){
     .body-wrap .fl.one img{
         width: 52%;
         margin-left: 5%;
         margin-top: 12%;
->>>>>>> b8f7deed941019f162accb2f48846824a3a7b264
     }
     .body-wrap .second img {
         margin-left: 0;
@@ -508,13 +500,8 @@ body {
         width: 56%;
         bottom: 12%;
         position: absolute;
-<<<<<<< HEAD
-        margin-left: 22%;
-        z-index: 1;+
-=======
         margin-left: 30%;
         z-index: 1;
->>>>>>> b8f7deed941019f162accb2f48846824a3a7b264
     }
     .body-wrap .secondr :nth-child(2) {
         position: absolute;

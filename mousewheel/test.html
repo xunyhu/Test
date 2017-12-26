@@ -57,11 +57,11 @@
             <div class="page">5</div>
         </div>
         <div id="page">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
+            <button onclick="change(0)">1</button>
+            <button onclick="change(1)">2</button>
+            <button onclick="change(2)">3</button>
+            <button onclick="change(3)">4</button>
+            <button onclick="change(4)">5</button>
         </div>
     </div>
     <script>
@@ -72,6 +72,17 @@
         // document.body.addEventListener("DOMMouseScroll", function(event) {
         //     console.dir(event);	
         // });
+        var wrap = document.getElementById("wrap");
+        var main = document.getElementById("main");
+        var hei = document.body.clientHeight;
+
+        function change(x) {
+            if (window.navigator.appName == 'Microsoft Internet Explorer' && (window.navigator.appVersion.indexOf('MSIE 8.0') > 0)) {
+                setTimeout(main.style.top = -(x * hei) + 'px', 1000);
+            } else {
+                $("#main").animate({top: (-(x * hei) + 'px')}, 500);
+            }
+        }
 
         window.onload = function () {
             function addwheel(obj, fn) {
@@ -106,9 +117,6 @@
             }
             addwheel();
 
-            var wrap = document.getElementById("wrap");
-            var main = document.getElementById("main");
-            var hei = document.body.clientHeight;
             wrap.style.height = hei + "px";
             var obj = document.getElementsByTagName("div");
             for (var i = 0; i < obj.length; i++) {
@@ -151,11 +159,12 @@
                     event.preventDefault();
                 }
             }
+
             function toPage(now) {
                 if (window.navigator.appName == 'Microsoft Internet Explorer' && (window.navigator.appVersion.indexOf('MSIE 8.0') > 0)) {
                     setTimeout(main.style.top = now + 'px', 1000);
                 } else {
-                    $("#main").animate({top: (now + 'px')}, 1000);
+                    $("#main").animate({top: (now + 'px')}, 500);
                 }
             }
         }
