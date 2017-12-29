@@ -100,7 +100,7 @@
                 //     oDiv[i].style.background = bg;
                 // }
                 var oDiv = document.getElementsByTagName('div');
-                for (var i = 0; i < oDiv.length; i++) {
+                for (var i = 0; i < oDiv.length; i++) { 
                     oDiv[i].style.background = randomColor();
                 }
             }
@@ -132,6 +132,8 @@
             function move(event) {
                 var oEvent = event || window.event;
                 startTime = new Date().getTime();
+
+
 
                 var direction;
                 if (oEvent.wheelDelta) {
