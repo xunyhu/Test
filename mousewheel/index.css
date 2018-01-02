@@ -85,6 +85,18 @@ ul {
     color: #fff;
     text-decoration: none;
 }
+/* 固定底部 */
+.content-foot {
+    height: 30px;
+    position: fixed;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    color: #fff;
+    font-size: 13px;
+    font-family: "Microsoft JhengHei";
+}
 
 /* 滚屏设置 */
 .content-wrap {
@@ -108,5 +120,111 @@ ul {
     background: #c3cad0;
     opacity: .2;
     margin: 8px 0;
+    cursor: pointer;
     filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+}
+.content-page .active {
+    background: #fee300;
+    opacity: 1;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+}
+/* 22,23寸屏幕 */
+@media screen and (max-width: 1920px) {
+    /* 1 */
+    .body-wrap {
+        width: 55%;
+        height: 70%;
+        margin: auto;
+        padding-top: 9%;
+    }
+    .body-wrap .fl, .body-wrap .fr {
+        width: 50%;
+        position: relative;
+        height: 100%;
+        text-align: center;
+    }
+    .body-wrap .fl {
+        text-align: left;
+    }
+    .body-wrap .one img {
+        margin-left: 10%;
+        width: 56%;
+    }
+    .body-wrap .oner :nth-child(1){
+        width: 100%;
+        margin-top: 7%;
+    }
+    .body-wrap .oner :nth-child(2){
+        width: 35%;
+        margin-top: 20%;
+    }
+    .body-wrap .oner :nth-child(4){
+        margin-top: 8%;
+    }
+    /* 2 */
+    .body-wrap .two img {
+        margin-left: 0;
+        position: absolute;
+        bottom: 39%;
+    }
+    .body-wrap .twor {
+        text-align: left;
+    }
+    .body-wrap .twor :nth-child(1) {
+        position: absolute;
+        width: 55%;
+        margin-top: 13%;
+        z-index: 10;
+        opacity: 0;
+        transition: all .5s;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        -ms-transition: all .5s;
+        -o-transition: all .5s;
+        margin-left: 24%;
+        -webkit-transform: translate(0,100px);
+        -moz-transform: translate(0,100px);
+        -ms-transform: translate(0,100px);
+        -o-transform: translate(0,100px);
+        transform: translate(0,100px);
+    }
+    .active .body-wrap .twor :nth-child(1){
+        -webkit-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        transform: translate(0,0);
+        opacity: 1;
+    }
+    .body-wrap .twor :nth-child(2) {
+        position: absolute;
+        top: 20%;
+        left: 40%;
+        -webkit-transition: left 0.5s .5s;
+        -moz-transition: left 0.5s .5s;
+        -ms-transition: left 0.5s .5s;
+        -o-transition: left 0.5s .5s;
+        opacity: 0;
+    }
+    .active .body-wrap .twor :nth-child(2){
+        left: 67%;
+        opacity: 1;
+    }
+    .body-wrap .twor :nth-child(3) {
+        position: absolute;
+        top: 38%;
+        left: 40%;
+        transform: rotate(-3deg);
+        -webkit-transition: left 0.5s .5s;
+        -moz-transition: left 0.5s .5s;
+        -ms-transition: left 0.5s .5s;
+        -o-transition: left 0.5s .5s;
+        opacity: 0;
+    }
+    .active .body-wrap .twor :nth-child(3) {
+        left: 5%;
+        opacity: 1;
+    }
+    /* 2 */
+    
 }
