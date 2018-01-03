@@ -1,0 +1,79 @@
+/* 21寸屏幕 1680*1050 */
+@media screen and (max-width: 1680px) {
+    .wrap {
+        padding-top: 13%;
+    }
+    /* 2 */
+    .body-wrap .two img{
+        width: 100%;
+    }
+    .body-wrap .twor :nth-child(1){
+        margin-top: 23%;
+    }
+    /* 5 */
+    .body-wrap .five div{
+        height: 67%;
+        margin-top: 22%;
+    }
+    .body-wrap .fiver img{
+        width: 90%;
+        left: 5%;
+    }
+    /* 6 */
+    .body-wrap .six img{
+        width: 100%;
+    }
+}
+/* 20寸屏幕 1600*900 */
+@media screen and (max-width: 1680px) {
+    .wrap {
+        padding-top: 9%;
+    }
+    /* 2 */
+    .body-wrap .twor :nth-child(2){
+        width: 36%;
+        top: 26%;
+    }
+    /* 3 */
+    .body-wrap .threer img{
+        width: 118%;
+    }
+    /* 4 */
+    .body-wrap .four img{
+        width: 108%;
+    }
+    .body-wrap .fourr :nth-child(1){
+        width: 52%;
+    }
+    .body-wrap .fourr :nth-child(2){
+        width: 33%;
+    }
+    .active .body-wrap .fourr :nth-child(3){
+        bottom: 12%;
+    }
+}
+/* 小屏幕 1366*768 */
+@media screen and (max-width: 1366px){
+    /* 2 */
+    .body-wrap .twor :nth-child(3){
+        top: 34%;
+    }
+    /* 4 */
+    .active .body-wrap .fourr :nth-child(4){
+        left: 82%;
+    }
+    .body-wrap .fourr :nth-child(4){
+        width: 33%;
+    }
+    .body-wrap .fourr :nth-child(5){
+        width: 25%;
+    }
+    .body-wrap .fourr :nth-child(3){
+        width: 30%;
+    }
+    .active .body-wrap .fourr :nth-child(3){
+        left: 19%;
+    }
+}
+
+

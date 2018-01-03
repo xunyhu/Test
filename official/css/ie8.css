@@ -1,0 +1,86 @@
+.head{
+    width: 1000px;
+}
+/* 1 */
+.body-wrap {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+.body-wrap .fl, .body-wrap .fr{
+    width: 50%;
+    position: relative;
+}
+.body-wrap .one img {
+    width: 280px;
+}
+.boay-wrap .oner {
+    text-align: center;
+}
+.body-wrap .oner .img2{
+    margin-top: 15%;
+    margin-left: 30%;
+}
+.body-wrap .oner .img3{
+    margin-left: 32%;
+}
+/* 2 */
+.body-wrap .two img{
+    margin-top: 43%;
+}
+.body-wrap .twor .img1{
+    position: absolute;
+    margin-left: 20%;
+    z-index: 99;
+}
+.body-wrap .twor .img2{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+.body-wrap .twor .img3{
+    position: absolute;
+    top: 120px;
+}
+/* 3 */
+.body-wrap .three .img2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.body-wrap .threer img{
+    margin-top: 43%;
+}
+/* 4 */
+.body-wrap .four img{
+    margin-top: 43%;
+}
+.body-wrap .fourr .img1{
+    position: absolute;
+    left: 20%;
+}
+/* 5 */
+.body-wrap .five .img1{
+    position: absolute;
+}
+.body-wrap .fiver img{
+    margin-top: 43%;
+}
+/* 6 */
+.body-wrap .six img{
+    width: 100%;
+    margin-top: 43%;
+}
+.body-wrap .sixr .img2{
+    position: absolute;
+    left: 24%;
+    top: 0;
+}
+.body-wrap .sixr .img3{
+    position: absolute;
+    left: 14%;
+    top: 45%;
+}

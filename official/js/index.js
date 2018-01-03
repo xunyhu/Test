@@ -1,122 +1,81 @@
-window.onload = function(){
-    var $index = 0;
-    var swiper = new Swiper('.swiper-container', {
-        direction: 'vertical',
-        slidesPerView: 1,
-        spaceBetween: 0,
-        mousewheelControl: true,
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        onSetTransition: function(swiper, transiton){
-            $index = swiper.activeIndex;
-        },
-        noSwiping : true
-    });
-
-    //设置背景
-    var backSlide = document.querySelectorAll('.swiper-slide'); 
-    for (var i = 0; i < backSlide.length; i++) {
-        addbackground(backSlide[i], '../images/head_bg'+ (i + 1) +'.png');
+ //非pc端打开
+ window.onresize = function() {
+    if(getBrowser().devices.windows||getBrowser().devices.linux||getBrowser().devices.mac){
+        console.log("PC端");
+    } else {
+        window.location.href="https://h5.tudouni.doubozhibo.com/tudouni/html/dnc.html";
     }
+     window.location.reload();
+ }
+ if(getBrowser().devices.windows||getBrowser().devices.linux||getBrowser().devices.mac){
+    console.log("PC端");
+} else {
+    window.location.href="https://h5.tudouni.doubozhibo.com/tudouni/html/dnc.html";
+}
 
-    //鼠标滚轮事件
-    window.onmousewheel = function(event) {
-        event = event || window.event;
-        showAnimation($index);
-    };
-    
-    //点击分页
-    var $btn = document.getElementById('button');
-    $btn.onclick = function(){
-        showAnimation($index);
+//ie8及以下取消点击分页功能
+if (window.navigator.appName == 'Microsoft Internet Explorer') {
+    if (brosList.IE(8) && window.navigator.userProfile !== undefined) {
+        $('.content-page').css({'display':'none'});
     }
+}    
 
-    //打印屏幕尺寸
-    console.log("高: "+window.document.body.clientHeight, "  宽:"+window.document.body.clientWidth)
+//鼠标滚轮事件
+if (window.navigator.userAgent.toLowerCase().indexOf('firefox') > 0) {
+    document.body.addEventListener("DOMMouseScroll", addwheel, false);
+} else {
+    document.body.onmousewheel = addwheel;
+}
 
-    var second = document.querySelector('.body-wrap .secondr :nth-child(1)');    
-    var second1 = document.querySelector('.body-wrap .secondr :nth-child(2)');
-    var second2 = document.querySelector('.body-wrap .secondr :nth-child(3)');
-
-    var three1 = document.querySelector('.body-wrap .three :nth-child(1)');    
-    var three2 = document.querySelector('.body-wrap .three :nth-child(2)');   
-    
-    var four = document.querySelector('.body-wrap .fourr');    
-
-    var five = document.querySelector('.body-wrap .five');   
-
-    var six = document.querySelector('.body-wrap .sixr') ;
-    
-    function showAnimation(x) {
-        switch (x) {
-            case 1:
-                second.className = 'active';            
-                second1.className = 'active';
-                second2.className = 'active';
-                three1.className = ' ';
-                three2.className = ' ';
-                four.className = 'fr fourr';
-                five.className = 'fl five';
-                six.className = 'fr sixr';
-                break;
-            case 2:
-                three1.className = 'active';
-                three2.className = 'active';
-                second.className = ' ';            
-                second1.className = ' ';
-                second2.className = ' ';
-                four.className = 'fr fourr';
-                five.className = 'fl five';
-                six.className = 'fr sixr';
-                break;
-            case 3:
-                four.className += ' active';
-                second.className = ' ';            
-                second1.className = ' ';
-                second2.className = ' ';
-                three1.className = ' ';
-                three2.className = ' ';
-                five.className = 'fl five';
-                six.className = 'fr sixr';
-                break;
-            case 4:
-                five.className += ' active';
-                second.className = ' ';            
-                second1.className = ' ';
-                second2.className = ' ';
-                three1.className = ' ';
-                three2.className = ' ';
-                four.className = 'fr fourr';
-                six.className = 'fr sixr';
-                break;
-            case 5:
-                six.className += ' active';
-                second.className = ' '; 
-                second1.className = ' ';
-                second2.className = ' ';
-                three1.className = ' ';
-                three2.className = ' ';
-                four.className = 'fr fourr';
-                five.className = 'fl five';
-                break;
-            default:
-                three1.className = ' ';
-                three2.className = ' ';
-                second.className = ' '; 
-                second1.className = ' ';
-                second2.className = ' ';
-                four.className = 'fr fourr';
-                five.className = 'fl five';
-                six.className = 'fr sixr';
-                return;
+var $height = document.body.clientHeight;
+var $main = $('.content')[0];
+var $start = 0; $end = 0; $now = 0;
+function addwheel(event) {
+    var oEvent = event || window.event;
+    var $direction; //滚轮方向 true为向下 false为向上
+    $start = new Date().getTime();
+    if (oEvent.wheelDelta) {
+        $direction = oEvent.wheelDelta > 0 ? false : true;
+    }
+    if (oEvent.wheelDeltai) {
+        $direction = oEvent.wheelDelta > 0 ? false : true;
+    }
+    if (oEvent.detail) {
+        $direction = oEvent.detail < 0 ? false : true;
+    }
+    if (($end - $start) < -1000 ) {
+        if ($direction && parseInt($main.offsetTop) > -(5*$height)) {
+           var $down = -(parseInt($main.offsetTop)/$height) + 1;
+           change($down)
         }
+        if (!$direction && parseInt($main.offsetTop) < 0) {
+            var $up = -(parseInt($main.offsetTop)/$height + 1);
+            change($up)
+        }
+        $end = new Date().getTime();
+    } else {
+        if (window.navigator.appName == 'Microsoft Internet Explorer') {
+            event.returnValue = false; 
+            return;
+        }
+        event.preventDefault();
     }
+}
 
-    function addbackground(ele, url){
-        ele.style.backgroundImage = 'url(' + url + ')';
-        ele.style.width = '100%';
-        ele.style.backgroundSize = 'cover';
-        ele.style.backgroundRepeat = 'no-repeat';
+//点击翻屏   
+function change(x) {
+    if (window.navigator.appName == 'Microsoft Internet Explorer' && (window.navigator.appVersion.indexOf('MSIE 8.0') > 0)) {
+        setTimeout($main.style.top = -(x * $height) + 'px', 500);
+    } else {
+        $(".content").animate({top: (-(x * $height) + 'px')}, 500);
     }
+    $('.content-page div').removeClass("active");
+    $('.content-page div').eq(x).addClass("active");
+    addAnimal(x);
+}
 
+//添加动画
+function addAnimal(x) {
+    $('.content').children().removeClass('active');
+    $('.content').children().eq(x).addClass("active");
 }

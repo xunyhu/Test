@@ -1,4 +1,12 @@
  //非pc端打开
+ window.onresize = function() {
+    if(getBrowser().devices.windows||getBrowser().devices.linux||getBrowser().devices.mac){
+        console.log("PC端");
+    } else {
+        window.location.href="https://h5.tudouni.doubozhibo.com/tudouni/html/dnc.html";
+    }
+     window.location.reload();
+ }
  if(getBrowser().devices.windows||getBrowser().devices.linux||getBrowser().devices.mac){
     console.log("PC端");
 } else {
@@ -71,6 +79,3 @@ function addAnimal(x) {
     $('.content').children().removeClass('active');
     $('.content').children().eq(x).addClass("active");
 }
-
-//打印屏幕尺寸
-console.log("高: "+window.document.body.clientHeight, "  宽:"+window.document.body.clientWidth)
