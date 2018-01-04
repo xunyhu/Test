@@ -7,5 +7,5 @@ $(function(){
             $(this).addClass('active');
             $('#m-content .right div').removeClass('active').eq(index).addClass('active');
         })
-    })
+    });
 })
