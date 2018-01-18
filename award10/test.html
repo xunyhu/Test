@@ -10,33 +10,33 @@
 </head>
 
 <body>
-    <div id="gua1" style="width:295px;;margin:0 auto;">
+    <!-- <div id="gua1" style="width:295px;;margin:0 auto;"> -->
         <img id="gua1_img" src="img/gua_image.png" style="position: absolute;">
-        <canvas id="front" style="position:absolute;no-repeat" />
-    </div>
-
+        <canvas id="front" style="position:absolute;" />
+    <!-- </div> -->
 </body>
 <script>
     var gua = 1;
     var imgSrc = 'img/aa.png';
     var imgSrc2 = 'img/notice_bg.png';
     var imgSrc3 = 'http://img0.imgtn.bdimg.com/it/u=2642419287,2437485247&fm=200&gp=0.jpg';
-    $("img").load(function() {
-        var body_width = $(window).width();
-        var body_height = $(window).height();
+    $("#gua1_img").load(function() {
+        console.log(1)
         $("#gua1_img").width(300).height(160);
-        var height = 141;
-        var width = 285;
-        var gua1_img_width = $("#gua1_img").width();
-        $("#front").css({
-            "margin-top": 9.3 + "px",
-            "margin-left": 7.5 + "px"
-        });
-        $("#bg").width("100%").height($(window).height() - 1);
+        // $("#gua1_img").width();
+        var height = $("#gua1_img").height();
+        var width = $("#gua1_img").width();
+        //var gua1_img_width = $("#gua1_img").width();
+        // $("#front").css({
+        //     "margin-top": 9.3 + "px",
+        //     "margin-left": 7.5 + "px"
+        // });
+        // $("#bg").width("100%").height($(window).height() - 1);
         if (gua > 0) {
             bodys(height, width);
         }
     });
+    //bodys(141, 285);
 
     function bodys(height, width) {
         var img = new Image();
@@ -85,7 +85,7 @@
 
             canvas.style.backgroundImage = 'url(' + img.src + ')';
             ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'b9b9b9';
+            ctx.fillStyle = 'red';
             ctx.fillRect(0, 0, w, h);
 
             layer(ctx);

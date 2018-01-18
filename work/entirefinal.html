@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>影动全城 终极决赛</title>
+    <style>
+        html, body {height: 100%; width: 100%;}
+        * {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+        html {-ms-touch-action: none;}
+        body {background: #22004a;}
+        body,ul,li {padding: 0;margin: 0;border: 0;}
+        img {display: block; width: 100%;}
+        * {margin: 0; padding: 0;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);-webkit-tap-highlight-color: transparent;tap-highlight-color: rgba(0, 0, 0, 0);}
+        .wrap {width: 90%; margin-left: 5%; position: relative; margin-top: -13%;}
+        .txt {width: 100%; background: #3a047d; margin-top: -5px; z-index: -1; border-radius: 5px;}
+        .txt p {color: #21c1f5; text-indent: 32px; text-align: justify; padding: 20px 12px 10px 10px; font-size: 0.75rem;}
+        .vbox {width: 100%; height: 150px; background: #1f0044; position: relative;}
+        .vbox div {
+            position: absolute; top: -21px; left: 50%; transform: translate(-50%, 0); width: 14px; height: 35px;
+            background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y-jt.png') no-repeat center;
+        }
+        .judge-wrap {margin-top: 15px;}
+        .judge-list {position: relative; top: -15px; z-index: -1;}
+        .judge-w, .judge-L, .judge-H {
+            padding-bottom: 17px;
+            padding-top: 10px;
+            margin-top: -6px;
+        }
+        .judge-w {
+            background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/pwk1.png') no-repeat;
+            background-size: 100% 100%;
+        }
+        .judge-L {
+            background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/pwk2.png') no-repeat;
+            background-size: 100% 100%;
+        }
+        .judge-H {
+            background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/pwk3.png') no-repeat;
+            background-size: 100% 100%;
+        }
+        .judge {background: #3a047d; width: 90%; margin-left: 3%; padding: 0.8rem 0.3rem;}
+        dl {width: 100%; position: relative; overflow: hidden;}
+        dt{float: left;  width: 33%; position: absolute; top: 50%; transform: translate(0, -50%); border: 1.5px solid #5d62b6; border-radius: 3px;}
+        dd {float: right; width: 62%; height: 100%; margin-left: 12px;}
+        .judge-L dd {margin-top: 0.4rem; margin-bottom: 0.4rem;}
+        .bg2 {width: 98%; position: relative; top: 4px; left: 4px; border: 1.5px solid #5d62b6; border-radius: 3px;}
+        .bg2 img {width: 100%; border-radius: 3px;}
+        .name {color: #ffa100; font-size: 0.8rem; }
+        .tid {color: #ffa100; font-size: 0.7rem; height: 1rem;}
+        .time {color: #19cbf9; font-size: 0.6rem; line-height: 0.8rem;}
+        .info {color: #fff;  font-size: 0.5rem; line-height: 0.8rem; text-indent: 20px; text-align: justify;}
+        .explain {background: #3a047d; width: 96%; margin-left: 2%; margin-top: -5px; color: #21c1f5; padding-bottom: 1rem; margin-bottom: -15px;}
+        .explain p {padding: 10px 16px 0 15px; font-size: 0.75rem; text-align: justify;}
+        .roll {margin-top: 20px;}
+        .roll-wrap {background: #3a047d; width: 96%; margin-left: 2%; margin-top: -5px; padding-top: 1rem; padding-bottom: 2rem;}
+        .roll-top div {display: inline-block; text-align: center; font-size: 0.75rem; color: #21c1f5; width: 29%; background: #4c04a5; padding: 5px 0; border-radius: 7px;}
+        .roll-top {width: 85%; margin-left: 7%; margin-bottom: -3px;}
+        .wrapper-wrap {width: 94%;margin-left: 3%;  padding-top: 1rem; padding-bottom: 1.5rem;background: #6905e5; border-radius: 8px; }
+        #wrapper {width: 100%; height: 12rem; overflow: hidden; position: relative;}
+        #scroller {width: 85%; margin-left: 5%;}
+        #scroller ul {list-style: none; padding: 0; margin: 0; width: 100%; text-align: left;}
+        #scroller li {border-bottom: 1px solid #3e0387; font-size: 14px; color: #fff;} 
+        #scroller .last {border: none;}
+        #scroller li span {display: inline-block; width: 29%; text-align: center; margin-right: 4%;}
+        /* #scroller li span:nth-child(1) {} */
+        #scroller li span:nth-child(2), #scroller li span:nth-child(3) {height: 40px;line-height: 40px;}
+        .iScrollVerticalScrollbar {position: absolute; z-index: 9999; width: 7px; bottom: 2px; top: 2px; right: 10px; background: #3e0387; border-radius: 3px;}
+        .iScrollIndicator {position: absolute; width: 7px; height: 7px; border-radius: 100%; background: #fff;}
+        .contact {padding-top: 1.5rem; padding-bottom: 2rem;}
+        .contact p {font-size: 0.6rem; color: #fff; height: 1rem; line-height: 1rem; text-align: center;}
+        .contact a {color: #f8da3a; display: inline-block; text-decoration: none; border-bottom: 1px solid;}
+    </style>
+</head>
+<body onload="loaded()">
+    <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y-1.jpg" alt="">
+    <div class="wrap">
+        <img class="title" src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y%20(1).png" alt="">
+        <div class="txt">
+            <p>2018土豆泥直播年度开年大战即将隆重开启。这里有最真实精彩的主播才艺，此次决赛将等比评出30强，更激烈的比赛，更精彩的展现，就在这里，让我们一起《影动全城》！</p>
+        </div>
+        <div class="vbox">
+            <div></div>
+        </div>
+        <div class="judge-wrap">
+            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y%20(6).png" alt="">
+            <div class="judge-list">
+                <div class="judge-w">
+                    <div class="judge">
+                        <dl>
+                            <dt>
+                                <div class="bg2"><img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y_2.jpg" alt=""></div>
+                            </dt>
+                            <dd>
+                                <p class="name"><strong>钢琴大师  万芮辰</strong></p>
+                                <p class="tid">ID:1870809</p>
+                                <p class="time">直播时间： 21号晚20:00-21:30</p>
+                                <p class="info">青年钢琴演奏家、博士; 2013年签约北京蒲森文化传媒有限公司，并首发个人专辑《a小调的寂寞》。曾与彭家鹏 、蒋燮斌、尼克史密斯、姜金一等多位著名指挥家深度合作，并获得美国加州贝多芬钢琴比赛等多项国内外大奖。</p>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="judge-L">
+                    <div class="judge">
+                        <dl>
+                            <dt>
+                                <div class="bg2"><img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y_3.jpg" alt=""></div>
+                            </dt>
+                            <dd>
+                                <p class="name"><strong>广东台主持人  刘雯雯</strong></p>
+                                <p class="tid">ID:300111</p>
+                                <p class="time">直播时间： 22号晚20:00-21:30</p>
+                                <p class="info">广东广播电视台90后新锐主持人刘雯雯，《一起旅游吧》当家主持，资深旅游体验师。曾主持《音为爱情》《南方视窗》《影动全城》等节目，因生动活泼的主持风格受观众粉丝喜爱。</p>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="judge-H">
+                    <div class="judge">
+                            <dl>
+                                <dt>
+                                    <div class="bg2"><img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y_4.jpg" alt=""></div>
+                                </dt>
+                                <dd>
+                                    <p class="name"><strong>广东台主持人  侯玉婷</strong></p>
+                                    <p class="tid">ID:300111</p>
+                                    <p class="time">直播时间： 23号晚20:00-21:30</p>
+                                    <p class="info">广东广播电视台资深主持人、国家级主任播音员，曾获首届金话筒全国十佳主持人称号、第十一届亚运会国家特别贡献奖、新中国建国60年60人全国优秀主持人奖、全国法制十佳大奖、亚洲地区十佳主持人奖。</p>
+                                </dd>
+                            </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="explain-wrap">
+            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y%20(3).png" alt="">
+            <div class="explain">
+                <p><strong>比赛规则: </strong></p>
+                <p>1、进入决赛的选手，准备好自我介绍及才艺表演，时间控制在3min内。</p>
+                <p>2、选手必须在评委直播时间在线，按照顺序与评委连麦，评委评选时间均在开播半小时后。</p>
+                <p>3、成绩组成：评委评分占70%，选手在活动期间收到影动全城专属礼物的总价值占30%。</p>
+                <p>4、请选手与土豆泥客服联系，加入选手官方群，如未加入，视为自动放弃比赛权利。</p>
+            </div>
+            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/lw.png" alt="">
+        </div>
+        <img class="roll" src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y%20(2).png" alt="">
+        <div class="roll-wrap">
+            <div class="roll-top">
+                <div><strong>选手</strong></div>
+                <div><strong>土豆泥ID</strong></div>
+                <div><strong>比赛时间</strong></div>
+            </div>
+            <div class="wrapper-wrap">
+                <div id="wrapper">
+                    <div id="scroller">
+                        <ul>
+                            <li><span>🍖肉肉吃肉肉</span><span>2049351</span><span>1月21日</span></li>
+                            <li><span>伊儿🔥影动全城</span><span>121212</span><span>1月21日</span></li>
+                            <li><span>🎵歌手🎙️倍儿M</span><span>359096</span><span>1月21日</span></li>
+                            <li><span>阿粉🏅黑粉会①团长</span><span>3407113</span><span>1月21日</span></li>
+                            <li><span>童波🔥华语男歌手</span><span>3456134</span><span>1月21日</span></li>
+                            <li><span>了尘🔥TG领航</span><span>2856333</span><span>1月21日</span></li>
+                            <li><span>张公子要上进🎸</span><span>1925039</span><span>1月21日</span></li>
+                            <li><span>🎹正豪🛳 合拍</span><span>2170779</span><span>1月21日</span></li>
+                            <li><span>酒窝小孙俪🌈甜歌</span><span>4937389</span><span>1月21日</span></li>
+                            <li><span>小管🛳合拍</span><span>2139294</span><span>1月21日</span></li>
+                            <li><span>小萨🛳合拍</span><span>2756940</span><span>1月21日</span></li>
+                            <li><span>甜心教主🛳合拍</span><span>3528779</span><span>1月21日</span></li>
+                            <li><span>好声音卜凡</span><span>2448747</span><span>1月21日</span></li>
+                            <li><span>琪琪_</span><span>2053457</span><span>1月21日</span></li>
+                            <li><span>🐸萱妮儿🛳合拍</span><span>2159659</span><span>1月21日</span></li>
+                            <li><span>段段🦀</span><span>3429329</span><span>1月21日</span></li>
+
+                            <li><span>有毒</span><span>52014</span><span>1月22日</span></li>                            
+                            <li><span>魔术♤小栋</span><span>3780221</span><span>1月22日</span></li>                            
+                            <li><span>☔️兰儿【小可爱】</span><span>99299</span><span>1月22日</span></li>                            
+                            <li><span>🌟开心亮🛳合拍</span><span>2138503</span><span>1月22日</span></li>                            
+                            <li><span>吴天一🐼One</span><span>199243</span><span>1月22日</span></li>                            
+                            <li><span>楚楚不凡🛳合拍</span><span>2008180</span><span>1月22日</span></li>                            
+                            <li><span>阿飒风云🛳合拍</span><span>4630267</span><span>1月22日</span></li>                            
+                            <li><span>AL反串歌手晓涛</span><span>1960295</span><span>1月22日</span></li>                            
+                            <li><span>黄可爱👵🏻yo</span><span>1801618</span><span>1月22日</span></li>                            
+                            <li><span>新疆木木</span><span>4213835</span><span>1月22日</span></li>                            
+                            <li><span>🚀马鹏飞🛳合拍</span><span>2310236</span><span>1月22日</span></li>                            
+                            <li><span>热舞🎏糖_蜜儿🎏</span><span>4936880</span><span>1月22日</span></li>                            
+                            <li><span>黑菇凉🐳Star</span><span>2156634</span><span>1月22日</span></li>                            
+                            <li><span>十三妹🛳合拍</span><span>414330</span><span>1月22日</span></li>                            
+                            <li><span>帅帅吖🌝梦笛</span><span>2093771</span><span>1月22日</span></li>                            
+                            <li><span>夏天☀音乐人</span><span>1907241</span><span>1月22日</span></li>                            
+                            <li><span>✨小豆芽✨</span><span>30381</span><span>1月22日</span></li>                            
+                            <li><span>男票大人🛳合拍</span><span>2451770</span><span>1月22日</span></li>                            
+                            <li><span>🔥舞77🔥</span><span>4260238</span><span>1月22日</span></li>           
+                            
+                            <li><span>玲珑🛳合拍</span><span>232323</span><span>1月23日</span></li>                                       
+                            <li><span>麦与鼓的组合</span><span>3701402</span><span>1月23日</span></li>                                       
+                            <li><span>💎李雯慧💎</span><span>367494</span><span>1月23日</span></li>                                       
+                            <li><span>左撇子思思🐝SST</span><span>4539758</span><span>1月23日</span></li>                                       
+                            <li><span>珊瑚妹妹</span><span>1942115</span><span>1月23日</span></li>                                       
+                            <li><span>🎵雪梨💿</span><span>3296945</span><span>1月23日</span></li>                                       
+                            <li><span>ଘ大超ଓ🐳Star</span><span>2095900</span><span>1月23日</span></li>                                       
+                            <li><span>郑小姐的范</span><span>317962</span><span>1月23日</span></li>                                       
+                            <li><span>舞蝶🌸小馨🛳合拍</span><span>2551863</span><span>1月23日</span></li>                                       
+                            <li><span>🎤小龍🎼歌者</span><span>2099783</span><span>1月23日</span></li>                                       
+                            <li><span>奕宣🛳合拍</span><span>2451293</span><span>1月23日</span></li>                                       
+                            <li><span>实力唱将👑薇薇</span><span>4909179</span><span>1月23日</span></li>                                       
+                            <li><span>技燃欧巴🛳合拍</span><span>2126474</span><span>1月23日</span></li>                                       
+                            <li><span>小然🛳合拍</span><span>4397597</span><span>1月23日</span></li>                                       
+                            <li><span>彩虹🛳合拍</span><span>2159282</span><span>1月23日</span></li>                                       
+                            <li><span>虫戏🛳合拍</span><span>2145925</span><span>1月23日</span></li>                                       
+                            <li><span>小仙女💛</span><span>2335886</span><span>1月23日</span></li>                                       
+                            <li><span>梦笛❤小荻</span><span>330909</span><span>1月23日</span></li>                                       
+                            <li class="last"><span>🎤丁丁🛳合拍</span><span>330434</span><span>1月23日</span></li>                                       
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact">
+            <p>*最终解释权归土豆泥官方所有  如有疑问请联系<a href="https://static.meiqia.com/dist/standalone.html?_=t&eid=59437">官方客服</a></p>
+        </div>
+    </div>
+    
+</body>
+    <script type="text/javascript" src="https://h5.tudouni.doubozhibo.com/tudouni/js/iscroll.js"></script>
+    <script>
+        //初始化
+        function initFontSize(size, width) {
+            var size = size || 20, width = width || 375,
+                clientWidth = document.documentElement.clientWidth <= 480 ? document.documentElement.clientWidth : 480;
+            document.getElementsByTagName('html')[0].style.fontSize = clientWidth * size / width + 'px'
+        }
+        window.addEventListener("resize", function () {
+            setTimeout(function () {
+                initFontSize();
+            }, 200)
+        });
+        initFontSize();
+
+        var myScroll;
+        function loaded () {
+            var wrap = document.getElementById('wrapper');
+            myScroll = new IScroll(wrap, {
+                scrollX: false,
+                scrollY: true,
+                scrollbars: 'custom',
+                resizeScrollbars: false
+            });
+            wrap.addEventListener('touchmove', function (e) { e.preventDefault(); },{
+                capture: false,
+                passive: false
+            });
+        }
+
+    </script>
+</html>
