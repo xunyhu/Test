@@ -12,40 +12,50 @@
         body {background: #22004a;}
         body,ul,li {padding: 0;margin: 0;border: 0;}
         img {display: block; width: 100%;}
+        a {color: #fff; text-decoration: none;}
         * {margin: 0; padding: 0;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);-webkit-tap-highlight-color: transparent;tap-highlight-color: rgba(0, 0, 0, 0);}
         .wrap {width: 90%; margin-left: 5%; position: relative; margin-top: -13%;}
         .txt {width: 100%; background: #3a047d; margin-top: -5px; z-index: -1; border-radius: 5px;}
-        .txt p {color: #21c1f5; text-indent: 32px; text-align: justify; padding: 20px 12px 10px 10px; font-size: 0.75rem;}
+        .txt p {color: #21c1f5; text-indent: 32px; text-align: justify; padding: 20px 12px 18px 10px; font-size: 0.75rem;}
         .vbox {width: 100%; height: 150px; background: #1f0044; position: relative;}
         .vbox div {
-            position: absolute; top: -21px; left: 50%; transform: translate(-50%, 0); width: 14px; height: 35px;
-            background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y-jt.png') no-repeat center;
+            position: absolute; top: -8px; left: 50%; transform: translate(-50%, 0); width: 12px; height: 20px;
+            background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y_jt.png');
+            background-size: 100%;
         }
-        .judge-wrap {margin-top: 15px;}
-        .judge-list {position: relative; top: -15px; z-index: -1;}
+        .judge-wrap {margin-top: 18px;}
+        .judge-list {position: relative; top: -17px; z-index: -1;}
         .judge-w, .judge-L, .judge-H {
-            padding-bottom: 17px;
             padding-top: 10px;
             margin-top: -6px;
+            position: relative;
         }
         .judge-w {
             background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/pwk1.png') no-repeat;
             background-size: 100% 100%;
+            padding-bottom: 21px;
         }
         .judge-L {
             background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/pwk2.png') no-repeat;
             background-size: 100% 100%;
+            padding-bottom: 19px;
         }
         .judge-H {
             background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/pwk3.png') no-repeat;
             background-size: 100% 100%;
+            padding-bottom: 10px;
         }
-        .judge {background: #3a047d; width: 90%; margin-left: 3%; padding: 0.8rem 0.3rem;}
+        .judge {background: #3a047d; width: 93%; margin-left: 3%; padding: 0.8rem 0.3rem;}
+        .arrow {
+            position: absolute; top: -24px; left: 50%; transform: translate(-50%, 0); width: 12px; height: 40px;
+            background: url('https://image.tudouni.doubozhibo.com/common/h5/carnival/0116y_jt.png');
+            background-size: 100%;
+        }
         dl {width: 100%; position: relative; overflow: hidden;}
         dt{float: left;  width: 33%; position: absolute; top: 50%; transform: translate(0, -50%); border: 1.5px solid #5d62b6; border-radius: 3px;}
         dd {float: right; width: 62%; height: 100%; margin-left: 12px;}
         .judge-L dd {margin-top: 0.4rem; margin-bottom: 0.4rem;}
-        .bg2 {width: 98%; position: relative; top: 4px; left: 4px; border: 1.5px solid #5d62b6; border-radius: 3px;}
+        .bg2 {width: 98%; position: relative; top: 6px; left: 6px; border: 1.5px solid #5d62b6; border-radius: 3px;}
         .bg2 img {width: 100%; border-radius: 3px;}
         .name {color: #ffa100; font-size: 0.8rem; }
         .tid {color: #ffa100; font-size: 0.7rem; height: 1rem;}
@@ -60,12 +70,12 @@
         .wrapper-wrap {width: 94%;margin-left: 3%;  padding-top: 1rem; padding-bottom: 1.5rem;background: #6905e5; border-radius: 8px; }
         #wrapper {width: 100%; height: 12rem; overflow: hidden; position: relative;}
         #scroller {width: 85%; margin-left: 5%;}
-        #scroller ul {list-style: none; padding: 0; margin: 0; width: 100%; text-align: left;}
-        #scroller li {border-bottom: 1px solid #3e0387; font-size: 14px; color: #fff;} 
+        #scroller ul {list-style: none; padding: 0; margin: 0; width: 100%; display: table; border-collapse: collapse;}
+        #scroller li {border-bottom: 1px solid #3e0387; font-size: 14px; color: #fff; padding: 0.2rem 0;} 
         #scroller .last {border: none;}
-        #scroller li span {display: inline-block; width: 29%; text-align: center; margin-right: 4%;}
+        #scroller li span {display: inline-block; width: 29%; text-align: center; margin-right: 4%; vertical-align: middle;}
         /* #scroller li span:nth-child(1) {} */
-        #scroller li span:nth-child(2), #scroller li span:nth-child(3) {height: 40px;line-height: 40px;}
+        #scroller li span:nth-child(2), #scroller li span:nth-child(3) {height: 30px;line-height: 30px;}
         .iScrollVerticalScrollbar {position: absolute; z-index: 9999; width: 7px; bottom: 2px; top: 2px; right: 10px; background: #3e0387; border-radius: 3px;}
         .iScrollIndicator {position: absolute; width: 7px; height: 7px; border-radius: 100%; background: #fff;}
         .contact {padding-top: 1.5rem; padding-bottom: 2rem;}
@@ -102,6 +112,7 @@
                     </div>
                 </div>
                 <div class="judge-L">
+                    <div class="arrow"></div>
                     <div class="judge">
                         <dl>
                             <dt>
@@ -117,6 +128,7 @@
                     </div>
                 </div>
                 <div class="judge-H">
+                    <div class="arrow"></div>
                     <div class="judge">
                             <dl>
                                 <dt>
@@ -251,6 +263,5 @@
                 passive: false
             });
         }
-
     </script>
 </html>
