@@ -1,0 +1,528 @@
+body {background: #1a57e3;}
+img {width: 100%; display: block;}
+.fl {float: left;}
+.fr {float: right;}
+
+/* 标题 */
+.top, .explain, .explain_r, .rule_wrap li {position: relative;}
+.top p {
+    color: #0D17A9;
+    position: absolute;
+    bottom: 0.8%;
+    text-align: center;
+    width: 50%;
+    font-size: 0.7rem;
+    left: 36%;
+    font-weight: 600;
+}
+
+/* 活动说明 */
+.explain {margin-top: 15px; height: 7.5rem;}
+.explain_l {width: 35%;}
+.explain_r {width: 65%; height: 100%;}
+.explain_r_box {
+    position: absolute;
+    background: red;
+    width: 90%;
+    left: 5%;
+    top: 18%;
+    height: 66%;
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_5.png) no-repeat;
+    background-size: 100%;
+    color: #f9c43a;
+}
+.explain_r_box img {position: absolute; bottom: 0; right: 13%; width: 40%;}
+.explain_r_box p {
+    text-indent: 2em;
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin: 0 0.5rem;
+}
+
+/* 活动说明弹层 */
+.rule {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.8);
+    display: none;
+    z-index: 999;
+}
+.rule_wrap {
+    width: 96%;
+    height: 90%;
+    margin-top: 5%;
+    margin-left: 3%;
+    position: relative;
+}
+.rule_close {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_6_c.png) no-repeat center center;
+    background-size: 100%;
+}
+#wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 领钱消息 */
+.message_wrap {
+    margin-top: 15px;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2.5rem;
+    background: red;
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_9.png) no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+#message {
+    overflow: hidden; 
+    text-align:center; 
+    position: absolute;
+    left: 19%;
+    right: 2%;
+    top: 35%;
+    bottom: 20%;
+    color: #ffe431;
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 0.8rem;
+    /* font-weight: 600; */
+}
+
+/* 列表 */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    height: 0;
+}
+.list_wrap {
+    width: 94%;
+    margin-left: 2.3%;
+    margin-top: 50px;
+    position: relative;
+}
+.list {
+    position: absolute;
+    /* background: red; */
+    top: 0;
+    left: 8%;
+    width: 84%;
+    height: 96%;
+}
+.list_top {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: -1rem;
+    position: relative;
+}
+.list_top .fl {position: absolute; top: 0; bottom: 0; width: 59%; left: 0;}
+.list_top .fr {position: absolute; top: 0; bottom: 0; width: 41%; left: 59%;}
+.list_content {
+    width: 100%;
+    height: 90%;
+    margin-top: 13%;
+    font-size: 0.7rem;
+    text-align: center;
+}
+.list_content .list_nothing {
+    color: #0800af;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    margin-top: 100%;
+}
+.m_give .list_nothing {
+    color: #0800af;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    margin-top: 40%;
+    text-align: center;
+}
+.list_content ul {width: 100%; height: 100%;}
+.list_gold {
+    width: 52%;
+    margin: 0 auto;
+    text-align: center;
+}
+.list_gold a, .list_silver a {display: block;}
+.list_gold .list_earnings {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+}
+.list_toux {
+    width: 4rem; height: 4rem; border-radius: 100%;
+    margin: 0 auto;
+    border: 2px solid #f2f2f2;
+    position: relative;
+}
+.list_toux img {width: 4rem; height: 4rem;  border-radius: 50%;}
+.list_toux span {
+    position: absolute;
+    right: 26%;
+    top: -31%;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_gold.png) no-repeat;
+    background-size: 100%;
+}
+.list_name {
+    color: #261fc0;
+    height: 1rem;
+    line-height: 1rem;
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+}
+.list_earnings {
+    background: #0900b6;
+    color: #ffe300;
+    border-radius: 15px;
+    height: 1.1rem;
+    line-height: 1.1rem;
+}
+.list_silver {margin-right: 4%;}
+.list_earnings {font-size: 0.6rem;}
+.list_silver, .list_cuprum {
+    width: 48%;
+    margin-top: 14%;
+    display: inline-block;
+    float: left;
+    margin-bottom: 1rem;
+}
+.list_silver .list_toux span {
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_silver.png) no-repeat;
+    background-size: 100%;
+    top: -30%;
+}
+.list_cuprum .list_toux span {
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_cuprum.png) no-repeat;
+    background-size: 100%;
+}
+/* 列表前十 */
+.list_ten {
+    width: 94%; margin: 0 auto; overflow: hidden; margin-top: 0.7rem;
+}
+.list_ten a {display: block;}
+.list_ten_info {margin-left: 13px; margin-top: 0.5rem; width: 6.5rem;}
+.list_ten .list_ten_info {width: 7.5rem;}
+.list_ten_name, .list_ten_earnings {height: 1rem; line-height: 1rem;}
+.list_ten_name {
+    color: #261fc0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+}
+.list_ten_earnings {
+    padding: 2px 0;     
+    background: #0900b6;
+    color: #ffe300;
+    border-radius: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+}
+.list_ten_toux {
+    width: 3rem; height: 3rem; border-radius: 100%; border: 2px solid #f2f2f2; position: relative; margin-left: 2rem;
+}
+.list_ten_toux img {width: 100%; height: 100%; border-radius: 50%;}
+.list_ten_toux span {
+    position: absolute;
+    display: inline-block;
+    width: 1.5rem;
+    height: 1rem;
+    line-height: 1rem;
+    left: -1.6rem;
+    top: 64%;
+    margin-top: -1rem;
+    border-radius: 15px 5px 5px 15px;
+    color: #ffe300;
+    background: #0900b6;
+}
+
+/* 参与度 分享 */
+.share {position: fixed; top: 80px; right: 10px;}
+.share_ucenter {
+    width: 1.5rem;
+    height: 5rem;
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_ucenter.png) no-repeat;
+    background-size: 100%;
+}
+.share_friend {
+    width: 1.5rem;
+    height: 5rem;
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_share.png) no-repeat;
+    background-size: 100%;
+}
+.involve_wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.8);
+    display: none;
+}
+.involve_me {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 42%;
+    height: 15rem;
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_query.png) no-repeat;
+    background-size: 100%;
+}
+.involve_content {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    height: 25%;
+    color: #6f8ce5;
+    font-size: 0.8rem;
+    transform: translate(-50%, 0);
+}
+.involve_close {
+    position: absolute;
+    bottom: 18%;
+    left: 35%;
+    width: 100px;
+    height: 45px;
+}
+.involve_content p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.involve_content .involve_name {
+    display: inline-block;
+}
+.involve_content .involve_num {
+    display: inline-block;
+}
+
+/* 联系客服 */
+.contact {margin-top: 25px; color: #fff; font-size: 0.7rem; text-align: center;}
+.contact .contanct_mg {height: 1rem;}
+.contact a {text-decoration: none; color: #ffe431; border-bottom: 1px solid;}
+
+/* 双手 */
+.hand {overflow: hidden; margin-top: 20px;}
+.hand .getmoney, .hand .losemoney {position: relative;}
+.hand .fl {margin-left: 5%;}
+.hand .fl p {font-size: 0.6rem; text-align: center; color: #ffec3d; height: 1rem; line-height: 1rem;}
+.hand .fr {margin-right: 5%;}
+.hand .fl, .hand .fr {width: 40%;}
+.hand_left_t {position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0,0,0,.8); z-index: 99; display: none;}
+.hand_left_t2 {position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0,0,0,.8); z-index: 999; display: none;}
+.hand_left_t div, .hand_left_t2 div {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 42%;
+}
+.hand_left_t div span, .hand_left_t2 div span {
+    position: absolute;
+    bottom: 13%;
+    left: 35%;
+    width: 100px;
+    height: 45px;
+    display: block;
+}
+
+/* 我要领钱 */
+.ask {position: absolute; width: 30px; height: 30px; top: 26%; right: 5%;}
+.getmony_go {position: absolute;  width: 120px; top: 46%; bottom: 0; left: 10%;}
+.losemony_go {position: absolute;  width: 120px; top: 46%; bottom: 0; left: 10%;}
+.m_get_wrap,  .m_get_wrap2 {position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0,0,0,.8); z-index: 999; display: none;}
+.m_get {position: relative;width: 90%;margin: 0 auto;margin-top: 42%;}
+.m_get span {position: absolute;bottom: 9%;left: 35%;width: 100px;height: 45px;display: block;}
+.m_get p {
+    position: absolute;
+    top: 51%;
+    right: 32%;
+    color: #0800ae;
+    font-size: 0.9rem;
+    font-weight: 600;
+    width: 14%;
+    text-align: center;
+}
+/* 我要捐钱 */
+.m_give_wrap {position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0,0,0,.8); z-index: 99; display: none;}
+.m_give {
+    position: relative;
+    width: 86%;
+    margin: 0 auto;
+}
+.m_give .m_give_close {
+    position: absolute;
+    bottom: 0;
+    right: 45%;
+    width: 45px;
+    height: 45px;
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_6_c.png) no-repeat center center;
+    background-size: 89%;
+    margin-bottom: -22px;
+}
+#wrapper2 {
+    position: absolute;
+    top: 23%;
+    bottom: 28%;
+    left: 10%;
+    right: 10%;
+    overflow: hidden;
+}
+#wrapper2 .iScrollVerticalScrollbar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 5px;
+    background: #a6abff;
+}
+#wrapper2 .iScrollIndicator {
+    background: #0900b6;
+    width: 5px;
+    height: 10px;
+}
+#wo li {
+    width: 100%;
+    overflow: hidden;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+/* 搜索 */
+.fl .fl_img_box{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    border: 2px solid #f2f2f2;
+    position: relative;
+    margin: 0 auto;
+}
+.fl .fl_img_box img{
+    border-radius: 50%;
+}
+.fl .fl_name{
+    font-size: 0.7rem;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+}
+#search {
+    position: absolute;
+    /* background: yellow; */
+    top: 77%;
+    bottom: 5%;
+    left: 8%;
+    right: 8%;
+}
+.search_result {
+    width: 28%;
+    margin-top: 3%;
+}
+.search_form {
+    position: absolute;
+    top: 6%;
+    width: 75%;
+    left: 30%;
+}
+.search_form div {
+    margin-top: 3%;
+}
+.search_form .search_box {
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_input_1.png) no-repeat;
+    background-size: 100% 100%;
+    height: 1.7rem;
+}
+.search_form .donate_box {
+    background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_input_2.png) no-repeat;
+    background-size: 100% 100%;
+    height: 1.7rem;
+    opacity: 0.55;
+}
+.search_form .donator {opacity: 1;}
+.search_form .donate_box p {
+    width: 70%;
+    float: left;
+    height: 1rem;
+    margin-top: 0.3rem;
+    padding: 0 5px 0 9px;
+    font-size: 15px;
+    color: #0900b2;
+    font-size: 0.7rem;
+    height: 1rem;
+    line-height: 1rem;
+    font-weight: 600;
+    text-indent: 8px;
+}
+.search_form input {
+    width: 70%;
+    outline: 0;
+    float: left;
+    height: 1rem;
+    /* line-height: 1rem; */
+    margin-top: 0.3rem;
+    padding: 0 5px 0 9px;
+    color: #666;
+    font-size: 15px;
+    vertical-align: middle;
+    border: none;
+    background: url();
+}
+.search_form .search_btn, .search_form .donate_btn {
+    width: 21%;
+    height: 100%;
+    float: left;
+}
+/* 土豆号不正确弹窗 */
+.m_give_t1, .m_give_t2, .m_give_t3, .m_give_t4, .m_give_t5, .m_give_t6 {position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0,0,0,.8); z-index: 99; display: none;}
+.m_give_t1 .m_get span, 
+.m_give_t2 .m_get span,
+.m_give_t3 .m_get span {bottom: 4%;}
+.m_give_t4 .m_get span {bottom: 5%; left: 19%;}
+.m_give_t4 .m_get div {
+    position: absolute;
+    bottom: 5%;
+    left: 51%;
+    width: 100px;
+    height: 45px;
+    display: block;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
+    color: #0900b2;
+    font-size: 0.7rem;
+    height: 1rem;
+    line-height: 1rem;
+    font-weight: 600;
+    text-indent: 8px;
+}
+
+/* 埋点 */
+body a {display: none;}
+.container a {display: block;}
+.contact a {display: inline-block;}

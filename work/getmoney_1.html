@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>泥壕争霸赛</title>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/whyInvistor.js"></script>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/vue.min.js"></script>
+    <link rel="stylesheet" href="https://h5.tudouni.doubozhibo.com/tudouni/css/getmoney_com.css">
+    <link rel="stylesheet" href="https://h5.tudouni.doubozhibo.com/tudouni/css/getmoney.css">
+    <script>
+        var _czc = _czc || [];
+        _czc.push(["_setAccount", "1273041342"]);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <section class="top">
+            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_1.jpg" alt="">
+            <p>活动时间: 3月15日-3月22日</p>
+        </section>
+        <section class="explain">
+            <div class="explain_l fl"><img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_2.png" alt=""></div>
+            <div class="explain_r fr">
+                <div class="explain_r_box">
+                    <!-- <p>泥壕，是传说中拥有超多土豆泥的神壕。</p>
+                    <p>在土豆泥正式上线之际，泥壕们纷纷现身，开启了史无前例的送钱争霸赛！！</p> -->
+                    <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_4.png" alt="">
+                </div>
+            </div>
+        </section>
+        <section class="rule">
+            <div class="rule_wrap">
+                <div id="wrapper">
+                    <div class="scroller">
+                        <ul>
+                            <li>
+                                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_6_2.png" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rule_close"></div>
+                </div>
+            </div>
+        </section>
+        <section class="hand">
+            <div class="fl getmoney">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_7.png" alt="">
+                <p v-if='systemMud > 0' v-text="'只剩' + systemMud + 'g土豆泥啦'"></p>
+                <div class="ask" @click="layer(3)"></div>
+                <div class="getmony_go" @click="getmoney"></div>
+            </div>
+            <div class="fr losemoney">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_8.png" alt="">
+                <div class="ask" @click="layer(5)"></div>
+                <!-- 我要捐钱 -->
+                <div class="losemony_go" @click="layer(9)"></div>
+            </div>
+        </section>
+        <!-- 领钱捐钱提示 -->
+        <section class="hand_left_t">
+            <div><img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_getmoney.png" alt=""><span @click="layer(4)"></span></div>
+        </section>
+        <section class="hand_left_t2">
+            <div><img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_lostmoney.png" alt=""><span @click="layer(6)"></span></div>
+        </section>
+        
+        <!-- 领取消息 -->
+        <!-- <section class="message_wrap">
+            <div id="message">
+                <ul class="mingdan">
+                    <li>xxx领取了30g土豆泥</li>
+                    <li>xx领取了8g土豆泥</li>
+                    <li>xx领取了5g土豆泥</li>
+                    <li>xx领取了10g土豆泥</li>
+                    <li>xx领取了18g土豆泥</li>
+                    <li>xx领取了22g土豆泥</li>
+                    <li>xx领取了5g土豆泥</li>
+                    <li>xx领取了25g土豆泥</li>
+                </ul>
+            </div>
+        </section> -->
+        <!-- 泥壕/主播 列表 -->
+        <section class="list_wrap">
+            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_10.png" alt="">
+            <div id="cola" class="list">
+                <div class="list_top">
+                    <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_11_a.png" v-if="initial == 1" alt="">
+                    <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_11_b.png" v-if="initial !== 1" alt="">
+                    <div class="fl" @click="greet(1)"></div>
+                    <div class="fr" @click="greet(2)"></div>
+                </div>
+                <div class="list_content">
+                    <p class="list_nothing"  v-if='initial == 1 && donatorList.length == 0 || initial != 1 && donatorList.length == 0' >虚位以待~</p>
+                    <ul class="clearfix">
+                        <!-- 泥壕榜前三 -->
+                        <li class="list_gold" v-if='initial == 1 && donatorList.length > 0' >                      
+                            <div class="list_toux">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ donatorList[0].donatorId">
+                                    <img :src="donatorList[0].donatorImg ? donatorList[0].donatorImg : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
+                                <span></span>
+                            </div>
+                            <p class="list_name" v-text='donatorList[0].donatorName'></p>
+                            <p class="list_earnings" v-text='"捐赠: "+ donatorList[0].totalAmount + "g土豆泥"'></p>
+                        </li>
+                        <li class="list_silver" v-if='initial == 1 && donatorList.length > 1' >
+                            <div class="list_toux">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ donatorList[1].donatorId">
+                                    <img :src="donatorList[1].donatorImg ? donatorList[1].donatorImg : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
+                                <span></span>
+                            </div>   
+                            <p class="list_name" v-text='donatorList[1].donatorName'></p>
+                            <p class="list_earnings" v-text='"捐赠: "+ donatorList[1].totalAmount + "g土豆泥"'></p>
+                        </li>
+                        <li class="list_cuprum" v-if='initial == 1 && donatorList.length > 2' >
+                            <div class="list_toux">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ donatorList[2].donatorId">
+                                    <img :src="donatorList[2].donatorImg ? donatorList[2].donatorImg : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
+                                <span></span>
+                            </div>
+                            <p class="list_name" v-text='donatorList[2].donatorName'></p>
+                            <p class="list_earnings" v-text='"捐赠: "+ donatorList[2].totalAmount + "g土豆泥"'></p>
+                        </li>
+                        <div style="clear:both;"></div>
+    
+                        <!-- 主播榜前三 -->
+                        <li class="list_gold" v-if='initial !== 1 && anchorList.length > 0' >                            
+                            <div class="list_toux">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ anchorList[0].anchorId">
+                                    <img :src="anchorList[0].anchorImg ? anchorList[0].anchorImg : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
+                                <span></span>
+                            </div>
+                            <p class="list_name" v-text='anchorList[0].anchorName'></p>
+                            <p class="list_earnings" v-text='"收获: "+ anchorList[0].totalAmount + "g土豆泥"'></p>
+                        </li>
+                        <li class="list_silver" v-if='initial !== 1 && anchorList.length > 1' >
+                            <div class="list_toux">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ anchorList[1].anchorId">
+                                    <img :src="anchorList[1].anchorImg ? anchorList[1].anchorImg : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                    </a>
+                                <span></span>
+                            </div>                       
+                            <p class="list_name" v-text='anchorList[1].anchorName'></p>
+                            <p class="list_earnings" v-text='"收获: "+ anchorList[1].totalAmount + "g土豆泥"'></p>
+                        </li>
+                        <li class="list_cuprum" v-if='initial !== 1 && anchorList.length > 2' >
+                            <div class="list_toux">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ anchorList[2].anchorId">
+                                    <img :src="anchorList[2].anchorImg ? anchorList[2].anchorImg : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
+                                <span></span>
+                            </div>
+                            <p class="list_name" v-text='anchorList[2].anchorName'></p>
+                            <p class="list_earnings" v-text='"收获: "+ anchorList[2].totalAmount + "g土豆泥"'></p>
+                        </li>
+                        <div style="clear:both;"></div>
+    
+                        <!-- 泥壕 -->
+                        <li class="list_ten" v-for='(i, index) in donatorList' v-if='initial == 1 && donatorList.length > 3 && index > 2' >
+                            <a :href="'tudouni://tudouni/userSpace?uid='+ i.donatorId">
+                                <div class="list_ten_toux fl">
+                                    <img :src='i.donatorImg ? i.donatorImg : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                    <span v-text='index + 1'></span>
+                                </div>
+                            </a>
+                            <div class="fl list_ten_info">
+                                <p class="list_ten_name" v-text="i.donatorName"></p>
+                                <p class="list_ten_earnings" v-text="'捐赠：' + i.totalAmount +'g土豆泥'"></p>
+                            </div>
+                        </li>
+    
+                        <!-- 主播 -->
+                        <li class="list_ten" v-for='(i, index) in anchorList' v-if='initial !== 1 && anchorList.length > 3 && index > 2' >
+                            <a :href="'tudouni://tudouni/userSpace?uid='+ i.anchorId">
+                                <div class="list_ten_toux fl">
+                                    <img :src='i.anchorImg ? i.anchorImg : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"'  alt="">
+                                    <span v-text='index + 1'></span>
+                                </div>
+                            </a>
+                            <div class="fl list_ten_info">
+                                <p class="list_ten_name" v-text="i.anchorName"></p>
+                                <p class="list_ten_earnings" v-text="'收获：' + i.totalAmount +'g土豆泥'"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="contact">
+            <p>*最终解释权归土豆泥官方所有&nbsp;&nbsp;如有疑问请联系<a href="https://static.meiqia.com/dist/standalone.html?_=t&eid=59437">官方客服</a></p>
+            <p class="contanct_mg"></p>
+        </section>
+        <section class="share">
+            <div class="share_ucenter" @click="layer(1)"></div>
+            <div class="share_friend"></div>
+        </section>
+
+        <!-- 参与度查询 -->
+        <section class="involve_wrap">
+            <div class="involve_me">
+                <div class="involve_content">
+                    <p><span class="involve_name">捐赠：</span> <span class="involve_num">{{iDonateMud}}g土豆泥</span></p>
+                    <p><span class="involve_name">收获：</span> <span class="involve_num">{{DonateMudToMe}}g土豆泥</span></p>
+                    <p><span class="involve_name">领取：</span> <span class="involve_num">{{SystemTotalMud}}g土豆泥</span></p>
+                </div>
+                <div class="involve_close" @click="layer(2)"></div>
+            </div>
+        </section>
+
+        <!-- 我要领钱 -->
+        <div class="m_get_wrap"></div>
+        <div class="m_get_wrap2">
+            <div class="m_get">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_getmoney_31.png" alt="">
+                <span @click="layer(8)"></span>
+                <p>{{tudouni}}g</p>
+            </div>
+        </div>
+
+        <!-- 我要捐钱 -->
+        <div class="m_give_wrap">
+            <div class="m_give" id="wocao_search">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_give1.png" alt="">
+                <span class="m_give_close" @click="layer(10)"></span>
+                <div id="wrapper2">
+                    <div class="scroller">
+                        <p class="list_nothing"  v-if='giveList.length == 0' >虚位以待~</p>
+                        <ul id="wo">
+                            <li v-for="i in giveList">
+                                    <div class="list_ten_toux fl">
+                                        <img :src='i.donatorImg ? i.donatorImg : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                    </div>
+                                <div class="fl list_ten_info">
+                                    <p class="list_ten_name" v-text="i.donatorName"></p>
+                                    <p class="list_ten_earnings" v-text="i.amount +'g土豆泥'"></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="search">
+                    <div class="fl search_result" v-if="search_Info.default">
+                        <a :href="'tudouni://tudouni/userSpace?uid='+ search_Info.userId">
+                            <div class="fl_img_box">
+                                <img :src="search_Info.photo ? search_Info.photo + '?x-oss-process=image/resize,m_fixed,w_100,image/crop,w_100,h_100,g_center' : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'">
+                            </div>
+                        </a>                    
+                        <p class="fl_name">{{search_Info.nickname}}</p>
+                    </div>
+                    <div class="fl search_form">
+                        <div class="search_box">
+                            <input maxlength="9" id="wocao" @focus="inputFun" @blur='inputBlu(0)' autocomplete="off" default="请输入主播土豆号" type="number" placeholder="请输入主播土豆号" v-model="search_Info.tdId"/>
+                            <span class="search_btn" @click="searchInfo()"></span>
+                        </div>
+                        <div class="donate_box" v-if="donator_Default">
+                              <p>最低捐赠额为1000g</p>     
+                        </div>
+                        <div class="donate_box donator" v-if="!donator_Default">
+                            <input maxlength="10" id="nicao" @focus="inputFun" @blur='inputBlu(1)' autocomplete="off" default="请输入主播土豆号" type="number" placeholder="最低捐赠额为1000g" v-model="donator_Info.amount"/>
+                            <span class="donate_btn" @click="donateFun()"></span>               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- 请输入土豆号弹窗 -->
+        <div class="m_give_t1">
+            <div class="m_get">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_daojs2.png" alt="">
+                <span @click="layer(12)"></span>
+            </div>
+        </div>
+
+        <!-- 捐赠时没有输入土豆号弹窗 -->
+        <div class="m_give_t2">
+            <div class="m_get">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_daojs1.png" alt="">
+                <span @click="layer(14)"></span>
+            </div>
+        </div>
+
+        <!-- 土豆泥余额不足 -->
+        <div class="m_give_t3">
+            <div class="m_get">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_daojs4.png" alt="">
+                <span @click="layer(18)"></span>
+            </div>
+        </div>
+
+        <!-- 确认捐赠 --> 
+        <div class="m_give_t4">
+            <div class="m_get">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_daojs3.png" alt="">
+                <span @click="layer(16)"></span>
+                <div @click="donate"></div>
+            </div>
+        </div>
+
+        <!-- 捐赠成功 -->
+        <div class="m_give_t5">
+            <div class="m_get">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_g_success.png" alt="">
+                <span @click="layer(19)"></span>
+            </div>
+        </div> 
+
+        <!-- 捐给自己 -->
+        <div class="m_give_t6">
+            <div class="m_get">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_lostmoney2.png" alt="">
+                <span @click="layer(20)"></span>
+            </div>
+        </div>
+    </div>
+    <script src="https://s19.cnzz.com/z_stat.php?id=1273041342&web_id=1273041342" language="JavaScript"></script>
+</body>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/jquery.js"></script>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/browser.js"></script>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/iscroll.js"></script>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/getmoney.js"></script>
+    <script>
+        $('.share_friend').click(function(){
+            function connectWebViewJavascriptBridge(callback) {
+                if (window.WebViewJavascriptBridge) {
+                    callback(WebViewJavascriptBridge);
+                } else {
+                    document.addEventListener('WebViewJavascriptBridgeReady', function () {
+                        callback(WebViewJavascriptBridge)
+                    }, false);
+                    console.log("failed");
+                }
+            }
+            connectWebViewJavascriptBridge(function (bridge) {
+                bridgeObj = bridge;
+                bridgeObj.callHandler('share', {
+                    'url': 'https://h5.tudouni.doubozhibo.com/tudouni/html/getmoney_1.html',
+                    'title': '土豆泥泥壕疯狂撒币，你还不速来捡币？',
+                    'content': '史上最强泥壕争霸赛，福利拿到手软！',
+                    'img': 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0309_mini.jpg'
+                }, function (response) {
+                    console.log('success');
+                });
+            });
+        })
+    </script>
+</html>
