@@ -1,0 +1,12 @@
+{
+    "msg": "success",
+    "data": [{
+        "avatar": "http://image.tudouni.doubozhibo.com/header/7a5a4ed9a36b4c0b95ba3a1f2663e691.jpg?x-oss-process=image/resize,m_fill,h_150,w_150",
+        "lostProfitCoin": 0,
+        "nickname": "我是132🏀️🏀",
+        "ratio": 128,
+        "times": 0,
+        "winProfitCoin": 0
+    }],
+    "code": 0
+}
