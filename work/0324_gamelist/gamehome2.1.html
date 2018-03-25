@@ -131,11 +131,50 @@
                 <!-- 我的排名 -->
                 <div class="my_list_wrap" v-if='melist'>
                     <div class="my_list_table">
-                        <div class="my_list_row">
+                        <!-- 上榜 -->
+                        <div class="my_list_row" v-if="inRanking">
+                            <!-- 第一 -->
+                            <div class="list_toux list_glod" v-if="ranking == 1">
+                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                <span></span>
+                            </div>
+                            <div class="list_text" v-if="ranking == 1">
+                                <p><span>昵称：</span><span v-text="medata.nickname"></span></p>
+                                <p><span>战豆力：</span><em class="num">{{medata.ratio | fighting }}</em></p>
+                            </div>
+                            <!-- 第二 -->
+                            <div class="list_toux list_silver" v-if="ranking == 2">
+                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                <span></span>
+                            </div>
+                            <div class="list_text" v-if="ranking == 2">
+                                <p><span>昵称：</span><span v-text="medata.nickname"></span></p>
+                                <p><span>战豆力：</span><em class="num">{{medata.ratio | fighting }}</em></p>
+                            </div>
+                            <!-- 第三 -->
+                            <div class="list_toux list_cuprum" v-if="ranking == 3">
+                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                <span></span>
+                            </div>
+                            <div class="list_text" v-if="ranking == 3">
+                                <p><span>昵称：</span><span v-text="medata.nickname"></span></p>
+                                <p><span>战豆力：</span><em class="num">{{medata.ratio | fighting }}</em></p>
+                            </div>
+                            <!-- 前100 -->
+                            <div class="list_toux list_ten" v-if="ranking > 3">
+                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                <span v-text="ranking"></span>
+                            </div>
+                            <div class="list_text" v-if="ranking > 3">
+                                <p><span>昵称：</span><span v-text="medata.nickname"></span></p>
+                                <p><span>战豆力：</span><em class="num">{{medata.ratio | fighting }}</em></p>
+                            </div>
+                        </div>
+                        <!-- 未上榜 -->
+                        <div class="my_list_row" v-if="!inRanking">
                             <div class="list_toux list_ten">
                                 <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
-                                <span v-text="ranking" v-show="inRanking"></span>
-                                <p class="no_list" v-show="!inRanking">未上榜</p>
+                                <p class="no_list">未上榜</p>
                             </div>
                             <div class="list_text">
                                 <p><span>昵称：</span><span v-text="medata.nickname"></span></p>
@@ -172,10 +211,10 @@
                     tips: '',
                     listdata: [],
                     item: [],
-                    melist: false,//我的排名
-                    inRanking: false,
-                    ranking: '',
-                    medata: {}
+                    melist: false, //code==0时才显示我的排名
+                    inRanking: false, //是否上榜
+                    ranking: '',  //我的名次
+                    medata: {}   //我的昵称和战斗力
                 },
                 mounted: function() {
                     this.IsLive = this.kgetCookie("IsLive");
@@ -242,13 +281,15 @@
                         var self = this;
                         $.ajax({
                             type: "get",
+                            async: false, 
                             // url: 'https://waptest.tudouni.doubozhibo.com/auth/games/h5/gameList',
-                            url: '../data/gamelist.json',
+                            url: 'gamelist.json',
                             data: {
                                 type: 'monthly',
                                 count: 100
                             },
                             success: function(res){
+                                res = JSON.parse(res);
                                 if (res.code == 0 && res.data) {
                                     self.listdata = res.data;
                                     self.item = res.data.slice(0, 20);
@@ -260,22 +301,19 @@
                         var self = this;
                         $.ajax({
                             type: "get",
+                            async: false, 
                             // url: 'https://waptest.tudouni.doubozhibo.com/auth/games/h5/myList',
-                            url: '../data/me.json',
+                            url: 'me.json',
                             data: {
                                 type: 'daily',
                                 //gh5Token: self.AccessToken
                                 gh5Token: '88fdf90dbd5adb9f44f790eeb7d14d6b'
                             },
-                            // beforeSend: function(xhr){
-                            //     // xhr.setRequestHeader('gh5Sign', self.AccessToken);
-                            //     // xhr.setRequestHeader('gh5Token', '47ca130e4e210046b3b5048291bc9297');
-                            //     // xhr.setRequestHeader('gh5Token', self.AccessToken);
-                            // },
                             success: function(res){
+                                res = JSON.parse(res);
                                 if (res.code == 0) {
-                                    self.melist = true;
-                                    self.medata = res.data[0];
+                                    self.melist = true;  //显示排名
+                                    self.medata = res.data[0]; //我的排名数据
                                     self.changeMe(self.medata);
                                 }
                             },
@@ -286,13 +324,25 @@
                     },
                     changeMe: function(data) {
                         var self = this;
-                        for (var i=0; i<self.listdata.length; i++) {
-                            if (data.ratio >= self.listdata[i].ratio) {
-                                self.inRanking = true;
-                                self.ranking = i + 1;
+                        if (data.ratio == 0) { //战斗力比值为0直接未上榜
+                            self.inRanking = false;
+                            return;
+                        } else {
+                            //判断是不在100以内
+                            if (self.listdata.length == 100 && data.ratio < self.listdata[99].ratio) {
+                                self.inRanking = false;
                                 return;
                             }
-                        } 
+                            //判断在100以内
+                            for (var i=0; i<100; i++) {
+                                if(data.nickname == self.listdata[i].nickname) {
+                                    self.medata = self.listdata[i];
+                                    self.ranking = i + 1;
+                                    self.inRanking = true;
+                                    return;
+                                }
+                            }
+                        }
                     },
                     stringfyQueryString: function(obj) {
                         if (!obj) return '';

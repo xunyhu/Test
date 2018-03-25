@@ -1,2 +1,4 @@
 official/gulp/node_modules
 official_uat
+.vscode
+ant_react/node_modules

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table布局</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        ul {list-style: none;}
+        .box {width: 100%; height: 600px;}
+        ul {width: 100%; height: 100%;}
+        li {width: 100%; height: 10%; display: table;}
+        .boxin {
+            height: 100%;
+            width: 100%;
+            display: table-cell;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+        }
+        .in {width: 25%; height: 75%; background: red; display: inline-block;}
+        .in2 {width: 70%; height: 75%; background: yellow; display: inline-block;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <div class="boxin">
+                    <div class="in"></div>
+                    <div class="in"></div>
+                    <div class="in"></div>
+                    <div class="in"></div>
+                    <!-- <div class="in2"></div> -->
+                </div>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>
