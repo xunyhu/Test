@@ -12,11 +12,12 @@
         <style>
             * {margin: 0; padding: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);-webkit-tap-highlight-color: transparent;tap-highlight-color: rgba(0, 0, 0, 0);}
             body {-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; -khtml-user-select: none; user-select: none; }
+            body a {display: none;}
             img {width: 100%; display: block;}
             .top, .content, .bottom {position: relative;}
             .douniu {position: absolute; bottom: 7%; width: 33%; left: 14%; top: 60%;}
             .doudizhu {position: absolute; bottom: 7%; width: 33%; left: 52%; top: 60%;}
-            .bottom a {position: absolute; bottom: 0; right: 36%; width: 18%; height: 30px;}
+            .bottom a {position: absolute; bottom: 0; right: 36%; width: 18%; height: 30px; display: block;}
             .kmask{width: 100%;height: 100%;position: fixed;top: 0;right: 0;background:rgba(0, 0, 0, 0.7);z-index: 99;overflow: hidden;}
             .kmask_box{width: 100%;position: fixed;top: 35%;z-index: 100;}
             .kmask_box img{width: 80%;margin: 0 auto;}
@@ -28,6 +29,7 @@
             .content_list ul {list-style: none; width: 100%; height: 100%; display: table; overflow: hidden;}
             .content_list li {overflow: hidden; display: table-row; vertical-align: middle;}
             .list_toux, .list_text {display: inline-block; vertical-align: middle;}
+            .list_toux a {display: block;}
             .list_toux {width: 2.3rem; height: 2.3rem; margin-left: 2rem; position: relative; border-radius: 100%; border: 2px solid #1c7f02;}
             .list_toux img {border-radius: 100%; width: 100%; height: 100%; position: relative; z-index: 99;}
             .list_toux span {
@@ -73,22 +75,28 @@
                 color: #fff; border-radius: 15px 5px 5px 15px; background: #086b3e; border: 2px solid #319869; z-index: 1; padding: 2px 0 2px 5px;
             }
         </style>
+        <script>
+            var _czc = _czc || [];
+            _czc.push(["_setAccount", "1273239377"]);
+        </script>
     </head>
     <body>
         <div class="container">
             <div class="top">
-                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0321yx_01.jpg">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0326g_04.jpg">
                 <div class="douniu" @click="goGames(1)"></div>
                 <div class="doudizhu" @click="goGames(2)"></div>
             </div>
             <div class="content">
-                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0321yx_02.jpg" alt="">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0326g_02.jpg" alt="">
                 <!-- 排行榜 -->
                 <div class="content_list">
                     <ul>
                         <li v-if="item.length > 1">
-                            <div class="list_toux list_glod">
-                                <img :src="item[0].avatar ? item[0].avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                            <div class="list_toux list_glod" @click="handle(1)">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ item[0].userId">
+                                    <img :src="item[0].avatar ? item[0].avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
                                 <span></span>
                             </div>
                             <div class="list_text">
@@ -97,8 +105,10 @@
                             </div>
                         </li>
                         <li v-if="item.length > 2">
-                            <div class="list_toux list_silver">
-                                <img :src="item[1].avatar ? item[1].avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                            <div class="list_toux list_silver" @click="handle(2)">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ item[1].userId">
+                                    <img :src="item[1].avatar ? item[1].avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
                                 <span></span>
                             </div>
                             <div class="list_text">
@@ -107,8 +117,10 @@
                             </div>
                         </li>
                         <li v-if="item.length > 3">
-                            <div class="list_toux list_cuprum">
-                                <img :src="item[2].avatar ? item[2].avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                            <div class="list_toux list_cuprum" @click="handle(3)">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ item[2].userId">
+                                    <img :src="item[2].avatar ? item[2].avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
                                 <span></span>
                             </div>
                             <div class="list_text">
@@ -117,8 +129,10 @@
                             </div>
                         </li>
                         <li v-for="(i, index) in item" v-if="index > 2">
-                            <div class="list_toux list_ten">
-                                <img :src="i.avatar ? i.avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                            <div class="list_toux list_ten" @click="handle(index + 1)">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ i.userId">
+                                    <img :src="i.avatar ? i.avatar : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                                </a>
                                 <span v-text="index + 1"></span>
                             </div>
                             <div class="list_text">
@@ -134,8 +148,10 @@
                         <!-- 上榜 -->
                         <div class="my_list_row" v-if="inRanking">
                             <!-- 第一 -->
-                            <div class="list_toux list_glod" v-if="ranking == 1">
-                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                            <div class="list_toux list_glod" v-if="ranking == 1" @click="handle('我自己')">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ medata.userId">
+                                    <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                </a>
                                 <span></span>
                             </div>
                             <div class="list_text" v-if="ranking == 1">
@@ -143,8 +159,10 @@
                                 <p><span>战豆力：</span><em class="num">{{medata.ratio | fighting }}</em></p>
                             </div>
                             <!-- 第二 -->
-                            <div class="list_toux list_silver" v-if="ranking == 2">
-                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                            <div class="list_toux list_silver" v-if="ranking == 2" @click="handle('我自己')">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ medata.userId">
+                                    <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                </a>
                                 <span></span>
                             </div>
                             <div class="list_text" v-if="ranking == 2">
@@ -152,8 +170,10 @@
                                 <p><span>战豆力：</span><em class="num">{{medata.ratio | fighting }}</em></p>
                             </div>
                             <!-- 第三 -->
-                            <div class="list_toux list_cuprum" v-if="ranking == 3">
-                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                            <div class="list_toux list_cuprum" v-if="ranking == 3" @click="handle('我自己')">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ medata.userId">
+                                    <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                </a>
                                 <span></span>
                             </div>
                             <div class="list_text" v-if="ranking == 3">
@@ -161,9 +181,11 @@
                                 <p><span>战豆力：</span><em class="num">{{medata.ratio | fighting }}</em></p>
                             </div>
                             <!-- 前100 -->
-                            <div class="list_toux list_ten" v-if="ranking > 3">
-                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
-                                <span v-text="ranking"></span>
+                            <div class="list_toux list_ten" v-if="ranking > 3" @click="handle('我自己')">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ medata.userId">
+                                    <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                </a>
+                                <span></span>
                             </div>
                             <div class="list_text" v-if="ranking > 3">
                                 <p><span>昵称：</span><span v-text="medata.nickname"></span></p>
@@ -171,9 +193,11 @@
                             </div>
                         </div>
                         <!-- 未上榜 -->
-                        <div class="my_list_row" v-if="!inRanking">
+                        <div class="my_list_row" v-if="!inRanking" @click="handle('我自己')">
                             <div class="list_toux list_ten">
-                                <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                <a :href="'tudouni://tudouni/userSpace?uid='+ medata.userId">
+                                    <img :src='medata.avatar ?  medata.avatar : "https://h5.tudouni.doubozhibo.com/m/img/userHeader.png"' alt="">
+                                </a>
                                 <p class="no_list">未上榜</p>
                             </div>
                             <div class="list_text">
@@ -185,7 +209,7 @@
                 </div>
             </div>
             <div class="bottom">
-                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0321yx_03.jpg" alt="">
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0326g_03.jpg" alt="">
                 <a href="https://static.meiqia.com/dist/standalone.html?_=t&eid=59437"></a>
             </div>
 
@@ -198,6 +222,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://s19.cnzz.com/z_stat.php?id=1273239377&web_id=1273239377" language="JavaScript"></script>
     </body>
         <script>
             new Vue({
@@ -242,6 +267,7 @@
                         }
                         switch (x) {
                             case 1:
+                                _czc.push(["_trackEvent", "排行榜", "豆牛", "点击次数"]);
                                 $.ajax({
                                     type: "get",
                                     url: 'https://wap.tudouni.doubozhibo.com/auth/games/h5/isSetBoundless',
@@ -258,6 +284,7 @@
                                 });
                                 break;
                             case 2:
+                                _czc.push(["_trackEvent", "排行榜", "豆地主", "点击次数"]);
                                 $.ajax({
                                     type: "get",
                                     url: 'https://wap.tudouni.doubozhibo.com/auth/games/h5/isSetBoundless',
@@ -282,14 +309,15 @@
                         $.ajax({
                             type: "get",
                             async: false, 
+                            url: 'https://wap.tudouni.doubozhibo.com/auth/games/h5/gameList',
+                            // url: '../data/gamelist.json',
                             // url: 'https://waptest.tudouni.doubozhibo.com/auth/games/h5/gameList',
-                            url: 'gamelist.json',
                             data: {
-                                type: 'monthly',
+                                type: 'daily',
                                 count: 100
                             },
                             success: function(res){
-                                res = JSON.parse(res);
+                                    //res = JSON.parse(res);
                                 if (res.code == 0 && res.data) {
                                     self.listdata = res.data;
                                     self.item = res.data.slice(0, 20);
@@ -302,15 +330,16 @@
                         $.ajax({
                             type: "get",
                             async: false, 
+                            url: 'https://wap.tudouni.doubozhibo.com/auth/games/h5/myList',
+                            // url: '../data/me.json',
                             // url: 'https://waptest.tudouni.doubozhibo.com/auth/games/h5/myList',
-                            url: 'me.json',
                             data: {
                                 type: 'daily',
-                                //gh5Token: self.AccessToken
-                                gh5Token: '88fdf90dbd5adb9f44f790eeb7d14d6b'
+                                gh5Token: self.AccessToken
+                                // gh5Token: '257a6e32cdcc57375a6423e7c195222d'
                             },
                             success: function(res){
-                                res = JSON.parse(res);
+                                    //res = JSON.parse(res);
                                 if (res.code == 0) {
                                     self.melist = true;  //显示排名
                                     self.medata = res.data[0]; //我的排名数据
@@ -343,6 +372,9 @@
                                 }
                             }
                         }
+                    },
+                    handle: function(x) { 
+                        _czc.push(["_trackEvent", "排行榜", x, "点击次数"]);              
                     },
                     stringfyQueryString: function(obj) {
                         if (!obj) return '';
