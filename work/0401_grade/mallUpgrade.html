@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no" />
+    <title>帮TA升级</title>
+    <link rel="stylesheet" href="mallGrade.css">
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/whyInvistor.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div :class="{'isApp': isApp }">
+            <header>
+                <span class="head_goback" @click="goBack"></span>
+                <h1>帮TA升级</h1>
+                <span class="head_rule" @click="goRule">规则</span>
+            </header>
+        </div>
+        <div class="content">
+            <div class="card">
+                <div class="card_info">
+                    <div class="info_img">
+                        <img src="https://h5.tudouni.doubozhibo.com/m/img/userHeader.png" alt="">
+                        <span><img src="https://image.tudouni.doubozhibo.com/common/h5/male@2x.png" alt=""></span>
+                    </div>
+                    <p class="info_name">杜子腾</p>
+                    <p class="info_id">ID 345678</p>
+                </div>
+                <span class="left"></span>
+                <span class="right"></span>
+                <p class="info_grade"><em>青铜</em></p>
+            </div>
+            <div class="grade">
+                <p class="grade_tips">选择提升的等级</p>
+                <div class="grade_type">
+                    <div class="grade_item fl" :class="{'isSelect': select1}" @click="choose(1)">
+                        <div class="grade_1"><span>白银</span></div>
+                        <p>需支付1000土豆泥</p>
+                    </div>
+                    <div class="grade_item fr" :class="{'isSelect': select2}" @click="choose(2)">
+                        <div class="grade_1"><span>黄金</span></div>
+                        <p>需支付10万土豆泥</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_tips">
+            <p>您的土豆泥余额<span> </span></p>
+        </div>
+        <div class="bottom_f" @click="pay(true)">帮TA提升等级</div>
+        <div class="pay" :class="{'isApp': isApp }" style="display: none" v-show="isPay"> 
+            <div class="pay_cancel" @click="pay(false)"></div>
+            <div class="pay_box">
+                <div class="pay_title">
+                    <span @click="pay(false)">取消</span>
+                    <h1>确认支付</h1>
+                </div>
+                <div class="pay_content">
+                    <p><span></span>1000土豆泥</p>
+                    <p>您当前拥有20000土豆泥</p>
+                </div>
+                <div class="pay_confirm" @click="payNow">立即支付</div>
+            </div>
+        </div>
+        <div class="pay_success" :class="{'isApp': isApp }" style="display: none" v-show="payOk">
+            <div class="pay_box">
+                <div class="pay_title_s">
+                    <h1><span></span>升级成功</h1>
+                </div>
+                <div class="pay_content_s">
+                    <p>昵称：杜子腾</p>
+                    <p>当前等级：天马</p>
+                </div>
+                <div class="pay_confirm" @click="pSuccess">完成</div>
+            </div>
+        </div>
+        <div class="pay_fail" :class="{'isApp': isApp }" style="display: none" v-show="pFail">
+            <div class="pay_box_f">
+                <div class="pay_title_s">
+                    <h1>提示</h1>
+                </div>
+                <div class="pay_content_s">
+                    <p>抱歉! 您的土豆泥余额不足!</p>
+                </div>
+                <div class="pay_confirm" @click="payFail">完成</div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/jquery.js"></script>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/vue.min.js"></script>
+    <script>
+        var userAgent = window.navigator.userAgent;
+        var isApp = userAgent.indexOf('tudouni') > -1 || userAgent.indexOf('tuoduni') > -1 || userAgent.indexOf('sa-sdk-ios') > -1;
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener('WebViewJavascriptBridgeReady', function() {
+                callback(WebViewJavascriptBridge)
+                }, false)
+            }
+        }
+        connectWebViewJavascriptBridge(function(bridge) {
+            window.bridge=bridge
+            bridge.init(function(message, responseCallback) {
+                if (responseCallback) {
+                responseCallback("Right back atcha")
+                }
+            })
+        });
+        new Vue({
+            el: '.container',
+            data: {
+                isApp: isApp,
+                select1: '',
+                select2: '',
+                isPay: false,
+                payOk: false,
+                pFail: false,
+                nowGrade: [], //升级用户头像, 性别, 昵称, id, 等级,  我的土豆泥余额
+                payInfo: {}, //支付人id, 被升级人id, 金额
+                domain: ''
+            }, 
+            mounted: function() {
+
+            },
+            methods: {
+                choose: function(x) {
+                    switch (x) {
+                        case 1 :
+                            this.select2 = '';
+                            this.select1 = !this.select1;
+                            break;
+                        case 2:
+                            this.select1 = '';
+                            this.select2 = !this.select2;
+                            break;
+                        default: 
+                            this.select1 = '';
+                            this.select2 = '';
+                            return;
+                    }
+                },
+                pay: function(x) {
+                    this.isPay = x;
+                },
+                payNow: function() {
+                    //支付成功
+                    this.isPay = false;
+                    this.payOk = true;
+
+                    //支付失败
+                    //this.pFail = true;
+                },
+                pSuccess: function() {
+                    this.payOk = false;
+                },
+                payFail: function() {
+                    this.pFail = false;
+                },
+                goBack: function() {
+                    if (window.bridge) {
+                        window.bridge.callHandler('closeWebView',{},function(response){});
+                    }
+                },
+                goRule: function() {
+                   if (window.bridge) {
+                        window.bridge.callHandler('jumpPage', {
+                            "url": 'https://h5.tudouni.doubozhibo.com/tudouni/html/clearule.html'
+                        }, function (response) {
+
+                        });
+                   }
+                    //window.bridge.callHandler('setTabIndex',{"index":2},function(response){});
+                }
+            },
+            filters: {
+                
+            }
+        })
+    </script>
+</html>
