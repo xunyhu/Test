@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no" />
     <title>我的等级</title>
@@ -37,20 +38,27 @@
                 <p class="grade_tips" style="display: none;" v-show="myGrade.agentSeries == '钻石'">您已经是最高级了</p>
                 <div class="grade_type">
                     <div class="grade_ul">
-                        <div class="grade_item" :class="{'isSelect': select1}" @click="choose(1)">
-                            <div class="grade_1"><span v-text="gradeType.a"></span></div>
-                            <p><span>方式1:</span><br>需支付1000土豆泥</p>
-                            <p class="grade_min"><span>方式2:</span><br>邀请&#8805;3豆粉</p>
+                        <div class="grade_item" :class="{'isSelect': select1}">
+                            <div @click="choose(1)">
+                                <div class="grade_1"><span v-text="gradeType.a"></span></div>
+                                <p><span>方式1:</span><br>需支付1000土豆泥</p>
+                                <p class="grade_min"><span>方式2:</span><br>邀请&#8805;3豆粉</p>
+                            </div>
+                            <div class="grade_no" v-if="myGrade.agentSeries != '会员'"></div>
                         </div>
-                        <div class="grade_item" :class="{'isSelect': select2}" @click="choose(2)">
-                            <div class="grade_1"><span v-text="gradeType.b"></span></div>
-                            <p><span>方式1:</span><br>需支付10万土豆泥</p>
-                            <p class="grade_min"><span>方式2:</span><br>邀请直属豆粉100人<br>推荐豆粉200人</p>
+                        <div class="grade_item" :class="{'isSelect': select2}">
+                            <div @click="choose(2)">
+                                <div class="grade_1"><span v-text="gradeType.b"></span></div>
+                                <p><span>方式1:</span><br>需支付10万土豆泥</p>
+                                <p class="grade_min"><span>方式2:</span><br>邀请直属豆粉100人<br>推荐豆粉200人</p>
+                            </div>
+                            <div class="grade_no" v-if="myGrade.agentSeries == '黄金' || myGrade.agentSeries == '钻石'"></div>
                         </div>
-                        <div class="grade_item" :class="{'isSelect': select2}" @click="choose(3)">
+                        <div class="grade_item">
                             <div class="grade_1"><span v-text="gradeType.c"></span></div>
                             <p><span>方式1:</span><br>需支付10万土豆泥</p>
                             <p class="grade_min"><span>方式2:</span><br>邀请直属豆粉100人<br>推荐豆粉200人</p>
+                            <div class="grade_no"></div>
                         </div>                        
                     </div>
                 </div>
@@ -231,13 +239,38 @@
                     var s = Number(this.payNum);
                     if (t < s) {
                         //支付失败
+                        this.select1 = '';
+                        this.select2 = '';
                         this.pFail = true;
                         return;
                     }
-                    //升级成功
-                    this.myGrade.experience = t - s;
-                    if (this.payInfo.series == 3) this.myGrade.agentSeries = '黄金';
-                    this.payOk = true;
+                    var self = this;
+                    $.ajax({
+                        type: 'post',
+                        url: self.domain + '/auth/h5/user/upgradeAgentSeries',
+                        data: {
+                            // uid: self.uid,
+                            // targetId: self.uid,
+                            uid: 1601,
+                            targetId: 1601,
+                            series: self.payInfo.series
+                        },
+                        success: function(res) {
+                            console.log(res);
+                            if (res.code == 0) {
+                                //升级成功
+                                self.myGrade.experience = t - s;
+                                if (self.payInfo.series == 3) self.myGrade.agentSeries = '白银';
+                                if (self.payInfo.series == 4) self.myGrade.agentSeries = '黄金';
+                                self.select1 = '';
+                                self.select2 = '';                    
+                                self.payOk = true;
+                            } else {
+                                self.pFail = true;
+                            }
+                        }
+                    });
+                    
                 },
                 pSuccess: function() {
                     this.payOk = false;
@@ -279,7 +312,7 @@
                                 for (var key in self.myGrade) {
                                     self.myGrade[key] = data[key];   
                                 }
-                                self.exchange(self.myGrade.agentSeries);
+                                //self.exchange(self.myGrade.agentSeries);
                             }
                         }
                     })
@@ -303,6 +336,7 @@
                             self.myGrade.agentSeries = '会员';
                             return;
                     }
+                    self.myGrade.agentSeries = '会员';
                 }
             },
             filters: {

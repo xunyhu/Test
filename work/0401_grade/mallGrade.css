@@ -50,11 +50,14 @@ header h1 {font-size: 17px; font-weight: 500; width: 60%; height: 100%; margin: 
 .grade_ul::-webkit-scrollbar {display:none; width: 0; height: 0;}
 
 .grade_item {
-    width: 6.5rem; padding: 2px 1px; margin-right: 0.7rem;
+    width: 6.5rem; padding: 2px 1px; margin-right: 0.7rem; position: relative;
     /* background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0331_sjbg.png) no-repeat;
     background-size: 100% 100%;; */
 }
 .grade_item.isSelect {border: 1px solid #6f6f7d; border-radius: 8px; padding: 1px 0;}
+.grade_no {
+    position: absolute; top: 2px; bottom: 2px; left: 3px; right: 3px; border-radius: 5px; background: rgba(0, 0, 0, .1);
+}
 .grade_1 {
     width: 100%; height: 4.2rem; background: red; color: #fff; font-size: 0.8rem; font-weight: bold;
     background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0331_sj_2.png) no-repeat;
