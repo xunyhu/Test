@@ -32,19 +32,25 @@ header h1 {font-size: 17px; font-weight: 500; width: 60%; height: 100%; margin: 
 .card .left {position: absolute; top: 35%; left: -5px; width: 10px; height: 10px; border-radius: 100%; background: #fff;}
 .card .right {position: absolute; top: 35%; right: -5px; width: 10px; height: 10px; border-radius: 100%; background: #fff;}
 .card_info {display: inline-block;}
-.info_img {width: 3.8rem; height: 3.8rem; border-radius: 50%; border: 2px solid #d6cbbf; margin: 0 auto; margin-top: 0.6rem; margin-bottom: 0.2rem; position: relative;}
+.info_img {width: 3.8rem; height: 3.8rem; border-radius: 50%; border: 2px solid #fff; margin: 0 auto; margin-top: 0.6rem; margin-bottom: 0.2rem; position: relative;}
 .info_img img {width: 100%; height: 100%; border-radius: 100%;}        
 .info_img span {position: absolute; bottom: 0; right: 0; width: 1rem; height: 1rem;}                
-.info_name {width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: #fff; font-size: 0.7rem; margin-bottom: 0.2rem;}    
+.info_name {width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: #fff; font-size: 0.7rem; margin-bottom: 0.2rem; margin-top: 0.4rem;}    
 .info_id {font-weight: normal; font-size: 0.6rem; margin: 0; color: #fff; margin-bottom: 0.6rem;}      
 .info_grade {position: absolute; top: 13%; right: 0; width: 2.5rem; height: 1rem; line-height: 1rem; background: #333; font-size: 0.7rem; color: #fff; border-radius: 15px 0 0 15px;}       
 
 /* 选择提升的等级 */
 .grade {width: 90%; margin: 0 auto; margin-top: 1.5rem;}
 .grade_tips {font-size: 0.7rem; font-weight: bold; text-align: center;}
-.grade_type {width: 94%; margin: 0 auto; margin-top: 1rem; overflow: hidden;}
+.grade_type {width: 100%; margin: 0 auto; margin-top: 1rem; overflow: hidden;}
+.grade_ul {
+    display: -webkit-box;
+    overflow-x: scroll;
+}
+.grade_ul::-webkit-scrollbar {display:none; width: 0; height: 0;}
+
 .grade_item {
-    width: 45%; padding: 2px 1px;
+    width: 6.5rem; padding: 2px 1px; margin-right: 0.7rem;
     /* background: url(https://image.tudouni.doubozhibo.com/common/h5/carnival/0331_sjbg.png) no-repeat;
     background-size: 100% 100%;; */
 }
@@ -68,10 +74,11 @@ header h1 {font-size: 17px; font-weight: 500; width: 60%; height: 100%; margin: 
 .bottom div {width: 48%;}
 .bottom div:nth-child(1) {color: #fff; background: #FCCD00; border-radius: 10px;}
 .bottom div:nth-child(2) {color: #fff; background: #FF5C5C; border-radius: 10px;}
+.bottom div.no_pay {background: #ccc;}
 
 /* 支付 */
-.pay, .pay_success, .pay_fail {position: fixed; top: 45px; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, .2);}
-.pay.isApp, .pay_success.isApp, .pay_fail.isApp {top: 66px;}
+.pay, .pay_success, .pay_fail, .pay_no {position: fixed; top: 45px; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, .2);}
+.pay.isApp, .pay_success.isApp, .pay_fail.isApp, .pay_no.isApp {top: 66px;}
 .pay_cancel {position: absolute; top: 0; bottom: 38%; width: 100%;}
 .pay_box {position: absolute; bottom: 0; width: 100%; height: 38%; background: #fff; border-radius: 12px 12px 0 0; font-size: 0.7rem;}
 .pay_title, .pay_title_s {width: 100%; height: 40px; line-height: 40px; position: relative;}
@@ -94,12 +101,16 @@ header h1 {font-size: 17px; font-weight: 500; width: 60%; height: 100%; margin: 
     position: absolute; bottom: 5%; width: 68%; left: 50%; transform: translate(-50%, 0); text-align: center; height: 40px; line-height: 40px;
     border-radius: 10px; font-size: 0.8rem; background: #FF5C5C; color: #fff;
 }
-.pay_content_s {color: #666; transform: translate(-50%, -70%);}
+.pay_content_s {color: #666; transform: translate(-50%, -60%);}
+.pay_no .pay_content_s {transform: translate(-50%, -70%);}
 .pay_content_s p{margin-top: 0.3rem;}
-.pay_box_f {position: absolute; width: 70%; left: 15%; height: 26%; top: 30%; background: #fff; border-radius: 10px; font-size: 0.7rem;}
+.pay_fail .pay_content_s P:nth-child(2){text-align: left;}
+.pay_box_f {position: absolute; width: 70%; left: 15%; height: 33%; top: 30%; background: #fff; border-radius: 10px; font-size: 0.7rem;}
+.pay_no .pay_box_f {height: 26%;}
 
 /* 帮TA升级 */
 .bottom_f {
     position: fixed; bottom: 0; height: 40px; line-height: 40px; text-align: center; font-size: 0.7rem; width: 68%; left: 16%; 
     overflow: hidden; margin-bottom: 13px; color: #fff; background: #FF5C5C; border-radius: 10px;
 }
+

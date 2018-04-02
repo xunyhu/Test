@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no" />
     <title>我的等级</title>
-    <link rel="stylesheet" href="mallGrade.css">
+    <link rel="stylesheet" href="../css/mallGrade.css">
     <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/whyInvistor.js"></script>
 </head>
 <body>
@@ -22,28 +22,36 @@
             <div class="card">
                 <div class="card_info">
                     <div class="info_img">
-                        <img src="https://h5.tudouni.doubozhibo.com/m/img/userHeader.png" alt="">
-                        <span><img src="https://image.tudouni.doubozhibo.com/common/h5/male@2x.png" alt=""></span>
+                        <img :src="myGrade.photo ? myGrade.photo + '?x-oss-process=image/resize,m_fixed,w_100,image/crop,w_100,h_100,g_center' : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                        <span><img :src="myGrade.sex == 1 ? 'https://image.tudouni.doubozhibo.com/common/h5/carnival/man@3x.png' : 'https://image.tudouni.doubozhibo.com/common/h5/carnival/women@3x.png'" alt=""></span>
                     </div>
-                    <p class="info_name">杜子腾</p>
-                    <p class="info_id">ID 345678</p>
+                    <p class="info_name" v-text="myGrade.nickName"></p>
+                    <p class="info_id" v-text="'ID ' + myGrade.unumber"></p>
                 </div>
                 <span class="left"></span>
                 <span class="right"></span>
-                <p class="info_grade"><em>青铜</em></p>
+                <p class="info_grade"><em v-text="myGrade.agentSeries"></em></p>
             </div>
             <div class="grade">
-                <p class="grade_tips">选择提升的等级</p>
+                <p class="grade_tips" style="display: none;" v-show="myGrade.agentSeries != '钻石'">升级赚取更多收益</p>
+                <p class="grade_tips" style="display: none;" v-show="myGrade.agentSeries == '钻石'">您已经是最高级了</p>
                 <div class="grade_type">
-                    <div class="grade_item fl" :class="{'isSelect': select1}" @click="choose(1)">
-                        <div class="grade_1"><span>白银</span></div>
-                        <p><span>方式1:</span><br>需支付1000土豆泥</p>
-                        <p class="grade_min"><span>方式2:</span><br>邀请&#8805;3豆粉</p>
-                    </div>
-                    <div class="grade_item fr" :class="{'isSelect': select2}" @click="choose(2)">
-                        <div class="grade_1"><span>黄金</span></div>
-                        <p><span>方式1:</span><br>需支付10万土豆泥</p>
-                        <p class="grade_min"><span>方式2:</span><br>邀请直属豆粉100人<br>推荐豆粉200人</p>
+                    <div class="grade_ul">
+                        <div class="grade_item" :class="{'isSelect': select1}" @click="choose(1)">
+                            <div class="grade_1"><span v-text="gradeType.a"></span></div>
+                            <p><span>方式1:</span><br>需支付1000土豆泥</p>
+                            <p class="grade_min"><span>方式2:</span><br>邀请&#8805;3豆粉</p>
+                        </div>
+                        <div class="grade_item" :class="{'isSelect': select2}" @click="choose(2)">
+                            <div class="grade_1"><span v-text="gradeType.b"></span></div>
+                            <p><span>方式1:</span><br>需支付10万土豆泥</p>
+                            <p class="grade_min"><span>方式2:</span><br>邀请直属豆粉100人<br>推荐豆粉200人</p>
+                        </div>
+                        <div class="grade_item" :class="{'isSelect': select2}" @click="choose(3)">
+                            <div class="grade_1"><span v-text="gradeType.c"></span></div>
+                            <p><span>方式1:</span><br>需支付10万土豆泥</p>
+                            <p class="grade_min"><span>方式2:</span><br>邀请直属豆粉100人<br>推荐豆粉200人</p>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -52,20 +60,22 @@
             <p>您的土豆泥余额<span> </span>、直属豆粉<span> </span>人、推荐豆粉<span> </span>人</p>
         </div>
         <div class="bottom">
-            <div class="fl" @click="pay(true)">土豆泥提升等级</div>
+            <div class="fl" @click="pay(true)" v-if="payType">土豆泥提升等级</div>
+            <div class="fl no_pay" v-if="!payType">土豆泥提升等级</div>
             <div class="fr">邀请豆粉提升等级</div>
         </div>
         <div class="pay" :class="{'isApp': isApp }" style="display: none" v-show="isPay"> 
+            <div class="pay_cancel" @click="pay(false)"></div>
             <div class="pay_box">
                 <div class="pay_title">
                     <span @click="pay(false)">取消</span>
-                    <h1>确认支付</h1>
+                    <h1>确认兑换</h1>
                 </div>
                 <div class="pay_content">
-                    <p><span></span>1000土豆泥</p>
-                    <p>您当前拥有20000土豆泥</p>
+                    <p><span></span>{{payNum}}土豆泥</p>
+                    <p v-text="'您当前拥有' + myGrade.experience +'土豆泥'"></p>
                 </div>
-                <div class="pay_confirm" @click="payNow">立即支付</div>
+                <div class="pay_confirm" @click="payNow" v-text="'立即升级'"></div>
             </div>
         </div>
         <div class="pay_success" :class="{'isApp': isApp }" style="display: none" v-show="payOk">
@@ -74,8 +84,8 @@
                     <h1><span></span>升级成功</h1>
                 </div>
                 <div class="pay_content_s">
-                    <p>昵称：杜子腾</p>
-                    <p>当前等级：天马</p>
+                    <p v-text="'昵称： '+  myGrade.nickName"></p>
+                    <p v-text="'当前等级： ' + myGrade.agentSeries"></p>
                 </div>
                 <div class="pay_confirm" @click="pSuccess">完成</div>
             </div>
@@ -87,6 +97,18 @@
                 </div>
                 <div class="pay_content_s">
                     <p>抱歉! 您的土豆泥余额不足!</p>
+                    <p>您可以试试:<br/>1. 邀请朋友成为你的豆粉<br/>2. 通过打赏主播获得更多土豆泥</p>
+                </div>
+                <div class="pay_confirm" @click="payFail">完成</div>
+            </div>
+        </div>
+        <div class="pay_no" :class="{'isApp': isApp }" style="display: none" v-show="payNo">
+            <div class="pay_box_f">
+                <div class="pay_title_s">
+                    <h1>提示</h1>
+                </div>
+                <div class="pay_content_s">
+                    <p>请选择要升级的级别</p>
                 </div>
                 <div class="pay_confirm" @click="payFail">完成</div>
             </div>
@@ -111,10 +133,17 @@
             window.bridge=bridge
             bridge.init(function(message, responseCallback) {
                 if (responseCallback) {
-                responseCallback("Right back atcha")
+                    responseCallback("Right back atcha")
                 }
             })
         });
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return r[2];
+            return null;
+        }
+
         new Vue({
             el: '.container',
             data: {
@@ -123,13 +152,34 @@
                 select2: '',
                 isPay: false,
                 payOk: false,
+                payNo: false,
                 pFail: false,
-                myGrade: [], //头像, 性别, 昵称, id, 等级, 土豆泥余额, 直属豆粉, 推荐豆粉
-                payInfo: {}, //id, 金额
-                domain: ''
+                payNum: '',
+                payType: true,
+                gradeType: {
+                    a: '白银',
+                    b: '黄金',
+                    c: '钻石'
+                },
+                myGrade: { //头像, 性别, 昵称, id, 商城等级, 土豆泥余额, 直属豆粉, 推荐豆粉
+                    photo: '',
+                    sex: '',
+                    nickName: '',
+                    unumber: '',
+                    agentSeries: '',
+                    experience: ''
+                }, 
+                payInfo: {
+                    uid: getUrlParam('uid'),
+                    targetId: '',
+                    series: ''
+                }, //支付用户id, 被升级用户id, 升级级别
+                domain: 'http://47.96.29.209:8080',
+                token: getUrlParam('token'),
+                uid: getUrlParam('uid')
             },
             mounted: function() {
-
+                this.getInfo();
             },
             methods: {
                 choose: function(x) {
@@ -137,10 +187,28 @@
                         case 1 :
                             this.select2 = '';
                             this.select1 = !this.select1;
+                            if (this.select1) {
+                                this.payInfo.series = 3;
+                                this.payNum = 1000;
+                                this.myGrade.agentSeries == this.gradeType.a ? this.payType = false : this.payType = true;
+                            } else {
+                                this.payInfo.series = '';
+                                this.payNum = '';
+                                this.payType = true;
+                            }
                             break;
                         case 2:
                             this.select1 = '';
                             this.select2 = !this.select2;
+                            if (this.select2) {
+                                this.payInfo.series = 4;
+                                this.payNum = '10万';
+                                this.myGrade.agentSeries == this.gradeType.b ? this.payType = false : this.payType = true;
+                            } else {
+                                this.payInfo.series = '';
+                                this.payNum = '';
+                                this.payType = true;
+                            }
                             break;
                         default: 
                             this.select1 = '';
@@ -149,21 +217,34 @@
                     }
                 },
                 pay: function(x) {
-                    this.isPay = x;
+                    if(this.payInfo.series) {
+                        this.isPay = x;
+                    } else {
+                        this.payNo = true;
+                    }
                 },
                 payNow: function() {
-                    //支付成功
                     this.isPay = false;
+                    //判断当前用户土豆泥余额是否够支付所选等级
+                    var t = Number(this.myGrade.experience);
+                    if (this.payNum == '10万') this.payNum = 100000;
+                    var s = Number(this.payNum);
+                    if (t < s) {
+                        //支付失败
+                        this.pFail = true;
+                        return;
+                    }
+                    //升级成功
+                    this.myGrade.experience = t - s;
+                    if (this.payInfo.series == 3) this.myGrade.agentSeries = '黄金';
                     this.payOk = true;
-
-                    //支付失败
-                    //this.pFail = true;
                 },
                 pSuccess: function() {
                     this.payOk = false;
                 },
                 payFail: function() {
                     this.pFail = false;
+                    this.payNo = false;
                 },
                 goBack: function() {
                     if (window.bridge) {
@@ -179,6 +260,49 @@
                         });
                    }
                     //window.bridge.callHandler('setTabIndex',{"index":2},function(response){});
+                },
+                getInfo: function() {
+                    var self = this;
+                    $.ajax({
+                        type: 'get',
+                        url: self.domain + '/auth/h5/user/info',
+                        data: {
+                            // token: self.token,
+                            // uid: self.uid
+
+                            token: 'e2707128919fa3cd632bb0d34510408c',
+                            uid: 1601
+                        },
+                        success: function(res) {
+                            if (res.code == 0) {
+                                var data = res.data;
+                                for (var key in self.myGrade) {
+                                    self.myGrade[key] = data[key];   
+                                }
+                                self.exchange(self.myGrade.agentSeries);
+                            }
+                        }
+                    })
+                },
+                exchange: function(x) {
+                    var self = this;
+                    switch (x) {
+                        case 2 :
+                            self.myGrade.agentSeries = '会员';
+                            break;
+                        case 3:
+                            self.myGrade.agentSeries = '白银';
+                            break;
+                        case 4 :
+                            self.myGrade.agentSeries = '黄金';
+                            break;
+                        case 5:
+                            self.myGrade.agentSeries = '钻石';
+                            break;
+                        default: 
+                            self.myGrade.agentSeries = '会员';
+                            return;
+                    }
                 }
             },
             filters: {
