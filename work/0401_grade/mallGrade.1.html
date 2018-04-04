@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no" />
+    <title>我的等级</title>
+    <!-- <link rel="stylesheet" href="../css/mallGrade.1.css"> -->
+    <link rel="stylesheet" href="http://dev-sbzhibo-h5.oss-cn-hangzhou.aliyuncs.com/app/css/mallGrade.css">
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/whyInvistor.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="card">
+                <div class="card_info">
+                    <div class="info_img">
+                        <img :src="myGrade.photo ? myGrade.photo + '?x-oss-process=image/resize,m_fixed,w_100,image/crop,w_100,h_100,g_center' : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
+                        <span><img :src="myGrade.sex == 1 ? 'https://image.tudouni.doubozhibo.com/common/h5/carnival/man@3x.png' : 'https://image.tudouni.doubozhibo.com/common/h5/carnival/women@3x.png'" alt=""></span>
+                    </div>
+                    <p class="info_name" v-text="myGrade.nickName"></p>
+                    <p class="info_id" v-text="'ID ' + myGrade.unumber"></p>
+                </div>
+                <span class="left"></span>
+                <span class="right"></span>
+                <p class="info_grade"><em v-text="myGrade.agentSeries"></em></p>
+                <span class="info_grade_highest" v-if="myGrade.agentSeries == '钻石'"></span>
+            </div>
+            <!-- 会员 -->
+            <div class="grade"  style="display: none;" v-show="myGrade.agentSeries == '会员'">
+                <div class="grade_tips">
+                    <span>升级VIP不只是更省钱</span>
+                    <span class="ellipsis" @click="toggler"></span>
+                    <div class="ellipsis_type">
+                        <!-- <div @click="exChange(0)" v-if="!gradeTips.a">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_8@2x.png" alt="">
+                        </div> -->
+                        <div @click="exChange(1)" v-if="gradeTips.a">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_1@2x.png" alt="">
+                        </div>
+                        <div @click="exChange(2)">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_2@2x.png" alt="">
+                            <p style="display: none;" v-show="gradeTips.b" v-text="gradeTips.b"></p>
+                        </div>
+                        <div @click="exChange(3)">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_3@2x.png" alt="">
+                            <p style="display: none;" v-show="gradeTips.c" v-text="gradeTips.c"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grade_type">
+                    <div class="grade_item" style="display: none" v-show="!gradeTips.a">
+                        <div class="grade_item_top">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_1@3x.png" alt="">
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>购物更省钱</p>
+                            <p class="fr"><span></span>邀请得奖励</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>推广赚佣金</p>
+                            <p class="fr"><span></span>持续有收益</p>
+                        </div>
+                        <div class="grade_item_rule">
+                            <h3>规则说明</h3>
+                            <div class="grade_item_rule_box">
+                                <p>1. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>2. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>3. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>4. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>5. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>6. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grade_item" style="display: none" v-show="gradeTips.a">
+                        <div class="grade_item_top">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_7@3x.png" alt="">
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>购物更省钱</p>
+                            <p class="fr"><span></span>邀请得奖励</p>
+                        </div>
+                        <div class="grade_item_rule">
+                            <h3>规则说明</h3>
+                            <div class="grade_item_rule_box">
+                                <p>1. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>2. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>3. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>4. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>5. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>6. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nothing"></div>
+                </div>
+            </div>
+            <!-- 白银 -->
+            <div class="grade"  style="display: none;" v-show="myGrade.agentSeries == '白银'">
+                <div class="grade_tips">
+                    <span>升级获取更多利益</span>
+                    <span class="ellipsis" @click="toggler"></span>
+                    <div class="ellipsis_type">
+                        <!-- <div @click="handle(0)" v-if="!baiy">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_1@2x.png" alt="">
+                        </div> -->
+                        <div @click="handle(1)" v-if="baiy">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_2@2x.png" alt="">
+                        </div>
+                        <div @click="exChange(3)">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_3@2x.png" alt="">
+                            <p style="display: none;" v-show="gradeTips.c" v-text="gradeTips.c"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grade_type">
+                    <div class="grade_item" style="display: none" v-show="!baiy">
+                        <div class="grade_item_top">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_2@3x.png" alt="">
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>购物更省钱</p>
+                            <p class="fr"><span></span>邀请得奖励</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>推广赚佣金</p>
+                            <p class="fr"><span></span>持续有收益</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>豆聊建大群</p>
+                        </div>
+                    </div>
+                    <div class="grade_item" style="display: none" v-show="baiy">
+                        <div class="grade_item_top">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_1@3x.png" alt="">
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>购物更省钱</p>
+                            <p class="fr"><span></span>邀请得奖励</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>推广赚佣金</p>
+                            <p class="fr"><span></span>持续有收益</p>
+                        </div>
+                        <div class="grade_item_rule">
+                            <h3>规则说明</h3>
+                            <div class="grade_item_rule_box">
+                                <p>1. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>2. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>3. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>4. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>5. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>6. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nothing"></div>
+                </div>
+            </div>
+            <!-- 黄金/钻石 -->
+            <div class="grade"  style="display: none;" v-show="myGrade.agentSeries == '黄金' || myGrade.agentSeries == '钻石'">
+                <div class="grade_tips" style="display: none;" v-show="myGrade.agentSeries == '黄金'"><span>升级获取更多利益</span></div>
+                <div class="grade_tips" style="display: none;" v-show="myGrade.agentSeries == '钻石'"><span>您已经是最高级了</span></div>
+                <div class="grade_type">
+                    <div class="grade_item" style="display: none" v-show="!baiy">
+                        <div class="grade_item_top">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_3@3x.png" alt="">
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>购物更省钱</p>
+                            <p class="fr"><span></span>邀请得奖励</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>推广赚佣金</p>
+                            <p class="fr"><span></span>持续有收益</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>豆聊建大群</p>
+                            <p class="fr"><span></span>服务直通车</p>
+                        </div>
+                    </div>
+                    <div class="nothing"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 升级支付按钮 -->
+        <div class="bottom_tips" style="display: none;" v-show="payTips">
+            <p v-if="myGrade.agentSeries == '会员'" ><span>您距离升级“白银”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(3)}}个直属豆粉</span></p>
+            <p v-if="myGrade.agentSeries == '白银'" ><span>您距离升级“黄金”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(100)}}个直属豆粉、{{secondLevel | minus(200)}}个推荐豆粉!</span></p>
+        </div>
+        <div class="bottom_wrap">
+            <div class="bottom" v-if="myGrade.agentSeries == '会员' || myGrade.agentSeries == '白银'">
+                <div class="fl" @click="payOpen">土豆泥兑换等级</div>
+                <div class="fr" @click="goInvite">邀请朋友提升等级</div>
+            </div>
+        </div>
+        <div class="bottom_wrap" v-if="myGrade.agentSeries == '黄金' || myGrade.agentSeries == '钻石'">
+            <div class="bottom">
+                <div class="bottom_invite" @click="goInvite" v-if="myGrade.agentSeries == '黄金'">邀请朋友提升等级</div>
+                <div class="bottom_invite" @click="goInvite" v-if="myGrade.agentSeries == '钻石'">邀请朋友一起来玩</div>
+            </div>
+        </div>
+
+        <!-- 升级支付弹层 -->
+        <div class="pay"  style="display: none" v-show="isPay"> 
+            <div class="pay_cancel" @click="pay(false)"></div>
+            <div class="pay_box">
+                <div class="pay_title">
+                    <span @click="pay(false)">取消</span>
+                    <h1>确认兑换</h1>
+                </div>
+                <div class="pay_content">
+                    <p><span></span>{{needTdn}}土豆泥</p>
+                    <p v-text="'您当前拥有' + myGrade.experience +'土豆泥'"></p>
+                </div>
+                <div class="pay_confirm" @click="payNow" v-text="'立即升级'"></div>
+            </div>
+        </div>
+        <div class="pay_success" style="display: none" v-show="payOk">
+            <div class="pay_box">
+                <div class="pay_title_s">
+                    <h1><span></span>升级成功</h1>
+                </div>
+                <div class="pay_content_s">
+                    <p v-text="'昵称： '+  myGrade.nickName"></p>
+                    <p v-text="'当前等级： ' + myGrade.agentSeries"></p>
+                </div>
+                <div class="pay_confirm" @click="pSuccess">完成</div>
+            </div>
+        </div>
+        <div class="pay_fail" style="display: none" v-show="pFail">
+            <div class="pay_box_f">
+                <div class="pay_title_s">
+                    <h1>提示</h1>
+                </div>
+                <div class="pay_content_s" v-if="!sameType">
+                    <p>抱歉! 您的土豆泥余额不足!</p>
+                    <p>您可以试试:<br/>1. 邀请朋友成为你的豆粉<br/>2. 通过打赏主播获得更多土豆泥</p>
+                </div>
+                <div class="pay_content_s" v-if="sameType">
+                    <p>当前等级已经达到或超过升级等级</p>
+                </div>
+                <div class="pay_confirm" @click="payFail">完成</div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/jquery.js"></script>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/vue.min.js"></script>
+    <script>
+        var userAgent = window.navigator.userAgent;
+        var isApp = userAgent.indexOf('tudouni') > -1 || userAgent.indexOf('tuoduni') > -1 || userAgent.indexOf('sa-sdk-ios') > -1;
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener('WebViewJavascriptBridgeReady', function() {
+                callback(WebViewJavascriptBridge)
+                }, false)
+            }
+        }
+        connectWebViewJavascriptBridge(function(bridge) {
+            window.bridge=bridge
+            bridge.init(function(message, responseCallback) {
+                if (responseCallback) {
+                    responseCallback("Right back atcha")
+                }
+            })
+        });
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return r[2];
+            return null;
+        }
+
+        new Vue({
+            el: '.container',
+            data: {
+                isApp: isApp,
+                isPay: false, //支付开关
+                payOk: false, //支付成功
+                payNo: false, //未选择支付等级
+                pFail: false, //支付失败
+                sameType: false,  //假如支付时当前等级已达到目标等级
+                payTips: false, //支付余额不足提示
+                gradeType: {
+                    a: '白银',
+                    b: '黄金',
+                    c: '钻石'
+                },
+                myGrade: { //头像, 性别, 昵称, id, 商城等级, 土豆泥余额
+                    photo: '',
+                    sex: '',
+                    nickName: '',
+                    unumber: '',
+                    agentSeries: '',
+                    experience: ''
+                }, 
+                payInfo: {
+                    uid: getUrlParam('uid'),
+                    targetId: '',
+                    series: ''
+                }, //支付用户id, 被升级用户id, 升级级别
+                domain: 'http://47.96.29.209:8080',
+                token: getUrlParam('token') || 'bf6178551539f5d695305268f51381d8',
+                uid: getUrlParam('uid') || 1601,
+                gradeTips: {
+                    a: '',
+                    b: '',
+                    c: ''
+                },
+                needTdn: 0,
+                lackTdn: 0,
+                firstLevel: '', //直属豆粉
+                secondLevel: '', //推荐豆粉
+                baiy: ''
+            },
+            mounted: function() {
+                this.getInfo();
+            },
+            methods: {
+                choose: function(x) {
+                    switch (x) {
+                        case 1 :
+                            this.select2 = '';
+                            this.select1 = !this.select1;
+                            if (this.select1) {
+                                this.payInfo.series = 3;
+                                this.payNum = 1000;
+                                this.myGrade.agentSeries == this.gradeType.a ? this.payType = false : this.payType = true;
+                            } else {
+                                this.payInfo.series = '';
+                                this.payNum = '';
+                                this.payType = true;
+                            }
+                            break;
+                        case 2:
+                            this.select1 = '';
+                            this.select2 = !this.select2;
+                            if (this.select2) {
+                                this.payInfo.series = 4;
+                                this.payNum = '10万';
+                                //判断当前等级和选中等级一致时升级按钮变灰
+                                this.myGrade.agentSeries == this.gradeType.b ? this.payType = false : this.payType = true;
+                                //选中时支付按钮上面的提示
+                                //this.payTips = true;
+                            } else {
+                                this.payInfo.series = '';
+                                this.payNum = '';
+                                this.payType = true;
+                                //this.payTips = false;
+                            }
+                            break;
+                        default: 
+                            this.select1 = '';
+                            this.select2 = '';
+                            return;
+                    }
+                },
+                pay: function(x) {
+                    this.isPay = x;
+                },
+                payOpen: function() {
+                    var a = Number(this.myGrade.experience);
+                    var b = Number(this.needTdn);
+                    //判断当前用户土豆泥余额是否够支付所选等级
+                    if (a < b) {
+                        this.lackTdn = b - a;
+                        this.payTips = true;
+                    } else {
+                        this.isPay = true;
+                    }
+                    //this.isPay = true;
+                },
+                payNow: function() {
+                    //点击立即升级时关闭支付弹层, 还原默认提示语
+                    this.isPay = false;
+                    this.sameType = false;
+                    var self = this;
+                    $.ajax({
+                        type: 'post',
+                        url: self.domain + '/auth/h5/user/upgradeAgentSeries',
+                        data: {
+                            uid: self.uid,
+                            targetId: self.uid,
+                            token: self.token,
+                            series: self.payInfo.series
+                        },
+                        success: function(res) {
+                             //升级成功
+                            if (res.code == 0) {
+                                if (self.payInfo.series == 3) self.myGrade.agentSeries = '白银';
+                                if (self.payInfo.series == 4) self.myGrade.agentSeries = '黄金';                
+                                self.payOk = true;
+                            } 
+
+                            //土豆泥余额不足
+                            if (res.code == 4128) {
+                                self.sameType = false;
+                                self.pFail = true;
+                            }
+
+                            //当前等级已达到目标等级
+                            if (res.code == 1067) {
+                                self.sameType = true;
+                                self.pFail = true;
+                            }
+                        }
+                    });
+                    
+                },
+                pSuccess: function() {
+                    this.payOk = false;
+                },
+                payFail: function() {
+                    this.pFail = false;
+                    this.payNo = false;
+                },
+                getInfo: function() {
+                    var self = this;
+                    $.ajax({
+                        type: 'get',
+                        url: self.domain + '/auth/h5/user/info',
+                        data: {
+                            token: self.token,
+                            uid: self.uid
+                        },
+                        success: function(res) {
+                            if (res.code == 0) {
+                                var data = res.data;
+                                for (var key in self.myGrade) {
+                                    self.myGrade[key] = data[key];   
+                                }
+                                self.exchanges(self.myGrade.agentSeries);
+                            }
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'get',
+                        url: self.domain + '/auth/h5/invite/aggCount',
+                        data: {
+                            token: self.token,
+                            uid: self.uid
+                        },
+                        success: function(res) {
+                            var res = JSON.parse(res);
+                            if (res.code == 0) {
+                                self.firstLevel = res.data.firstLevel;
+                                self.secondLevel = res.data.secondLevel;
+                            }
+                        }
+                    });
+                },
+                exchanges: function(x) {
+                    var self = this;
+                    switch (x) {
+                        case 2 :
+                            self.myGrade.agentSeries = '会员';
+                            self.payInfo.series = 3;
+                            self.needTdn = 1000;
+                            break;
+                        case 3:
+                            self.myGrade.agentSeries = '白银';
+                            self.payInfo.series = 4;
+                            self.needTdn = 100000;
+                            break;
+                        case 4 :
+                            self.myGrade.agentSeries = '黄金';
+                            break;
+                        case 5:
+                            self.myGrade.agentSeries = '钻石';
+                            break;
+                        default: 
+                            self.myGrade.agentSeries = '会员';
+                            return;
+                    }
+                    // self.myGrade.agentSeries = '会员';
+                },
+                goInvite: function() {
+                    window.location.href = "tudouni://tudouni/invisitPoster";
+                },
+                toggler: function() {
+                    var self = this;
+                    self.gradeTips.b = '';
+                    self.gradeTips.c = '';
+                    self.payTips = false;
+                    $(".ellipsis_type").toggle();
+                },
+                exChange: function(x) {
+                    //console.log(x)
+                    var self = this;
+                    switch (x) {
+                        case 0 :
+                            self.gradeTips.b = '';
+                            self.gradeTips.c = '';
+                            self.gradeTips.a = true;
+                            self.payTips = false;
+                            $(".ellipsis_type").toggle();
+                            break;
+                        case 1 :
+                            self.gradeTips.b = '';
+                            self.gradeTips.c = '';
+                            self.gradeTips.a = false;
+                            self.payTips = false;
+                            $(".ellipsis_type").toggle();
+                            break;
+                        case 2 :
+                            self.gradeTips.c = '';
+                            if (self.gradeTips.b == '') {
+                                self.gradeTips.b = '白银可见';
+                            } else if(self.gradeTips.b == '白银可见') {
+                                self.gradeTips.b = '';
+                            }
+                            break;
+                        case 3 : 
+                            self.gradeTips.b = '';
+                            if (self.gradeTips.c == '') {
+                                self.gradeTips.c = '黄金可见';
+                            } else if(self.gradeTips.c == '黄金可见') {
+                                self.gradeTips.c = '';
+                            }
+                            break;
+                        default: 
+                            self.gradeTips.b = '';
+                            self.gradeTips.c = '';
+                            return;
+                    }
+                },
+                handle: function(x) {
+                    var self = this;
+                    switch (x) {
+                        case 0 : 
+                            self.baiy = true;
+                            $(".ellipsis_type").toggle();
+                            self.payTips = false;
+                            break;
+                        case 1 :
+                            self.baiy = false;
+                            $(".ellipsis_type").toggle();
+                            self.payTips = false;
+                            break;
+                        default:
+                            self.baiy = '';
+                            return;
+                    }
+                }
+            },
+            filters: {
+                minus: function(a, b) {
+                    var result = b - a;
+                    return result;
+                }
+            }
+        })
+    </script>
+</html>
