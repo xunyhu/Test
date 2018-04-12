@@ -24,9 +24,16 @@
         .title {width: 78%; margin: 0 auto; position: relative;}
         .title img {width: 100%;}
         .title .weixin {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
-        .title .info {
+        /* .title .info {
             position: absolute; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #FFEB10;
             text-align: center; left: 5%; right: 5%; bottom: 17%;
+            background-image: -webkit-gradient(linear, 50% 50%, 50% bottom, from(#ffffff), to(#FFEB10));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        } */
+        .info_wrap {position: absolute; bottom: 14%; left: 5%; right: 6%; height: 15%; font-size: 0.7rem;}
+        .info_wrap p {
+            height: 50%; text-align: center;
             background-image: -webkit-gradient(linear, 50% 50%, 50% bottom, from(#ffffff), to(#FFEB10));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -79,8 +86,12 @@
             <div class="logo"></div>
             <div class="title">
                 <div class="weixin"></div>
-                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0409_3_2@3x.png" alt="">
-                <div class="info"><span id="nickname"></span>邀请你领取低至6折的土豆泥购物特权</div>
+                <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0409_3_3@3x.png" alt="">
+                <!-- <div class="info"><span id="nickname"></span><br/>邀请你领取低至6折的土豆泥购物特权</div> -->
+                <div class="info_wrap">
+                    <p id="nickname"></p>
+                    <p>邀请你领取低至6折的土豆泥购物特权</p>
+                </div>
             </div>
         </div>
         <div class="down">
@@ -96,7 +107,7 @@
                         <input type="number" id="phoneCode" placeholder="2.请输入6位验证码" oninput="if(value.length>6)value=value.slice(0,6)">
                     </div>
                 </div>
-                <div class="key" id="bindBtn">接受邀请</div>
+                <div class="key" id="bindBtn" data-clipboard-action="copy" data-clipboard-target="div">接受邀请</div>
                 <p class="tips">想赚多点钱 ? 土豆泥有方法!</p>
             </div>
         </div>
@@ -123,7 +134,7 @@
             }
             $("#nickname").text(nickName);
             var tcode = decodeURI(getUrlParam("code"));
-            var invistor = getUrlParam("unionid");
+            var invistor = getUrlParam("unionid") || '';
 
             //输入手机号\验证码
             $("#phone").keyup(function () {
@@ -147,7 +158,8 @@
 
             //获取验证码
             var validCode = true;
-            var domain = "https://waptest.tudouni.doubozhibo.com";
+            // var domain = "https://waptest.tudouni.doubozhibo.com";
+            var domain = "https://wap.tudouni.doubozhibo.com";
             $("#codeBtn").click(function () {
                 _czc.push(["_trackEvent", "绑定手机号", "获取验证码", "点击次数"]);
                 if (checkPhone($("#phone").val()) == false) {
@@ -160,7 +172,8 @@
                         url: domain + "/h5/user/invite/getVerifCode",
                         data: {
                             phone: $("#phone").val(),
-                            inviterUnionid: invistor
+                            inviterUnionid: invistor,
+                            inviterUserCode: tcode
                         },
                         success: function (data) {
                             if (data.code == 0) {
@@ -203,58 +216,61 @@
                     return;
                 }
                 //复制邀请码到剪切板
-                var clipboard = new ClipboardJS('#bindBtn', {
-                    text: function () {
-                        return '#tdn' + tcode + '#tdn' + $("#phone").val();
-                    }
-                });
-
-                clipboard.on('success', function (e) {
-                    console.log(e);
-                });
-
-                clipboard.on('error', function (e) {
-                    console.log(e);
-                });
+                //copyCode('#tdn'+ tcode + '#tdn' + $("#phone").val());
                 $.ajax({
                     type: "get",
                     url: domain + "/h5/user/invite/action/addBindingRequest",
                     data: {
                         phone: $("#phone").val(),
                         code: $("#phoneCode").val(),
-                        inviterUnionid: invistor
+                        inviterUnionid: invistor,
+                        inviterUserCode: tcode
                     },
                     success: function (data) {
                         if (data.code == 0) {
-                            showNoties('<p>绑定成功！</p>', '前往土豆泥APP');
+                            showNoties('<p>受邀成功！</p>', '前往土豆泥APP');
+                            //复制手机号到剪切板
+                            copyCode('#bind' + $("#phone").val());
                         } else if (data.code == 1031) {
                             showNoties('<p>嘻嘻！你不记得了吗？</p><p>你已经接受过邀请了~</p>', '前往土豆泥APP');
-                        } else {
-                            showNoties('<p>'+ data.msg + '</p>', '确定');
+                        } else if (data.code == 1030) {
+                            showNoties('<p>不能邀请自己哟~</p>', '确定');
+                        } else if (data.code == 9001) {
+                            showNoties('<p>验证码错误~</p>', '确定');
                             //复制邀请码到剪切板
-                            var clipboard = new ClipboardJS('#bindBtn', {
-                                text: function() {
-                                    return '#tdn'+ tcode + '#tdn' + $("#phone").val();
-                                }
-                            });
-                        
-                            clipboard.on('success', function(e) {
-                                console.log(e);
-                            });
-                        
-                            clipboard.on('error', function(e) {
-                                console.log(e);
-                            });
+                            copyCode('#tdn'+ tcode + '#tdn' + $("#phone").val());
+                        } else {
+                            //showNoties('<p>'+ data.msg + '</p>', '确定');
+                            showNoties('<p>好像出了点状况，请稍后再试~</p>', '确定');
+                            //复制邀请码到剪切板
+                            copyCode('#tdn'+ tcode + '#tdn' + $("#phone").val());
                         }
                     },
                     error: function () {
-                        showNoties('<p>绑定失败</p>', '确定');
+                        showNoties('<p>受邀失败</p>', '确定');
                     }
                 });
             });
 
         });
 
+        var txt = '';
+        var clipboard = new ClipboardJS('#bindBtn', {
+                text: function () {
+                    return txt;
+                }
+        });
+
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+        function copyCode(txt) {
+            window.txt = txt;
+        }
         function showNoties(txt, btn) {
             $('.tanC').show();
             $('.tanC_content').html(txt);
