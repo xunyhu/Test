@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>土豆泥省赚秘籍</title>
+    <style>
+        * {margin: 0; padding: 0;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);-webkit-tap-highlight-color: transparent;tap-highlight-color: rgba(0, 0, 0, 0);}
+        html, body {width: 100%; height: 100%;}
+        img {width: 100%; display: block;}
+        .bottom, .wrap {position: relative;}
+        .bottom a {position: absolute; display: block; width: 18%; height: 30px; bottom: 1.5%; right: 10%;}
+        /* 
+            http://tudouni-h5.oss-cn-hangzhou.aliyuncs.com/tudouni/video/7984c0ec9ddc68a54b09806c563623a4.mp4
+        */
+        .video_wrap {
+            position: absolute; top: 0; bottom: 0; left: 7.5%; width: 84%;
+            background: url(http://tudouni-image.oss-cn-hangzhou.aliyuncs.com/common/h5/carnival/0411_04.jpg) no-repeat;
+            background-size: 100% 100%;
+            opacity: 0.75;
+        }
+        #play {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px;
+            background: url(http://tudouni-image.oss-cn-hangzhou.aliyuncs.com/common/h5/carnival/0411_play.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        #mv-video {display: none;}
+    </style>
+</head>
+<body>
+    <img src="http://tudouni-image.oss-cn-hangzhou.aliyuncs.com/common/h5/carnival/0411_01.jpg" alt="">
+    <div class="wrap">
+        <img src="http://tudouni-image.oss-cn-hangzhou.aliyuncs.com/common/h5/carnival/0411_02.jpg" alt="">
+        <div class="video_wrap">
+            <video id="mv-video" width="100%" height="100%" controls  poster="http://tudouni-image.oss-cn-hangzhou.aliyuncs.com/common/h5/carnival/0411_04.jpg">
+                <source src="http://tudouni-h5.oss-cn-hangzhou.aliyuncs.com/tudouni/video/7984c0ec9ddc68a54b09806c563623a4.mp4" type="video/mp4" />
+            </video>
+            <div id="play"></div>
+        </div>
+    </div>
+    <div class="bottom">
+        <img src="http://tudouni-image.oss-cn-hangzhou.aliyuncs.com/common/h5/carnival/0411_03.jpg" alt="">
+        <a href="https://static.meiqia.com/dist/standalone.html?_=t&eid=59437"></a>
+    </div>
+</body>
+    <script>
+        var $play = document.getElementById('play');
+        var $video = document.getElementById('mv-video');
+
+        $play.onclick = function() {
+            this.style.display = 'none';
+            $video.style.display = 'block';
+            $video.play();
+        }
+    </script>
+</html>
