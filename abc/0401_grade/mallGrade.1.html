@@ -6,15 +6,23 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no" />
-    <title>我的等级</title>
+    <title>商城等级</title>
     <!-- <link rel="stylesheet" href="../css/mallGrade.1.css"> -->
-    <link rel="stylesheet" href="http://dev-sbzhibo-h5.oss-cn-hangzhou.aliyuncs.com/app/css/mallGrade.css">
+    <!-- <link rel="stylesheet" href="http://dev-sbzhibo-h5.oss-cn-hangzhou.aliyuncs.com/app/css/mallGrade.css"> -->
+    <link rel="stylesheet" href="https://h5.tudouni.doubozhibo.com/tudouni/css/mallGrade.css">
     <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/whyInvistor.js"></script>
+    <script>
+        var _czc = _czc || [];
+        _czc.push(["_setAccount", "1273328506"]);
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="content">
-            <div class="card">
+            <div 
+                class="card"
+                :class="{'isHuiy': myGrade.agentSeries == '会员', 'isBaiy': myGrade.agentSeries == '白银', 'isHuan': myGrade.agentSeries == '黄金', 'isZuan': myGrade.agentSeries == '钻石'}"
+            >
                 <div class="card_info">
                     <div class="info_img">
                         <img :src="myGrade.photo ? myGrade.photo + '?x-oss-process=image/resize,m_fixed,w_100,image/crop,w_100,h_100,g_center' : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'" alt="">
@@ -23,10 +31,10 @@
                     <p class="info_name" v-text="myGrade.nickName"></p>
                     <p class="info_id" v-text="'ID ' + myGrade.unumber"></p>
                 </div>
-                <span class="left"></span>
-                <span class="right"></span>
+                <!-- <span class="left"></span>
+                <span class="right"></span> -->
                 <p class="info_grade"><em v-text="myGrade.agentSeries"></em></p>
-                <span class="info_grade_highest" v-if="myGrade.agentSeries == '钻石'"></span>
+                <span class="info_grade_highest" style="display: none;" v-show="headAgent"></span>
             </div>
             <!-- 会员 -->
             <div class="grade"  style="display: none;" v-show="myGrade.agentSeries == '会员'">
@@ -36,10 +44,10 @@
                     <div class="ellipsis_type">
                         <!-- <div @click="exChange(0)" v-if="!gradeTips.a">
                             <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_8@2x.png" alt="">
-                        </div> -->
+                        </div>
                         <div @click="exChange(1)" v-if="gradeTips.a">
                             <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_1@2x.png" alt="">
-                        </div>
+                        </div> -->
                         <div @click="exChange(2)">
                             <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_2@2x.png" alt="">
                             <p style="display: none;" v-show="gradeTips.b" v-text="gradeTips.b"></p>
@@ -50,7 +58,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="grade_type">
                     <div class="grade_item" style="display: none" v-show="!gradeTips.a">
                         <div class="grade_item_top">
@@ -67,12 +74,24 @@
                         <div class="grade_item_rule">
                             <h3>规则说明</h3>
                             <div class="grade_item_rule_box">
-                                <p>1. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
-                                <p>2. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
-                                <p>3. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
-                                <p>4. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
-                                <p>5. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
-                                <p>6. 规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则规则</p>
+                                <p>
+                                    1. 土豆泥用户分为普通会员、VIP会员，其中VIP会员细分为白银、黄金、钻石3个等级。<br/>
+                                        &nbsp;&nbsp;A.土豆泥普通会员只能领取惠券和参与优惠活动，不能获得平台奖励佣金；<br/>
+                                        &nbsp;&nbsp;B.土豆泥VIP会员既可以领券，也可以拿平台奖励佣金；<br/>
+                                        &nbsp;&nbsp;C.单次购物的全部平台奖励佣金=消费佣金＋推广佣金，各占50%（例如购买某商品，商平台奖励佣金为10元，则消费佣金5元，推广佣金5元）；
+                                </p>
+                                <p>2. 平台奖励的消费佣金的获取：VIP会员自购能获取100%消费佣金；VIP会员推荐的直属普通会员购物后，VIP会员也能获取100%消费佣金。</p>
+                                <p>3. 平台奖励的推广佣金的获取：取得消费佣金的VIP会员，他的邀约人如果达到VIP会员级别，就能获取平台奖励的推广佣金。</p>
+                                <p>4. 佣金比例按等级区分：白银10%、黄金20%、钻石30%。</p>
+                                <p>
+                                    5. VIP会员升级规则<br/>
+                                        &nbsp;&nbsp;A.用户下载土豆泥并注册后，即为土豆泥普通会员；<br/>
+                                        &nbsp;&nbsp;B.如何升级成为白银：直属邀请用户达3人，或缴纳1000“土豆泥”即可升级成为白银级别；<br/>
+                                        &nbsp;&nbsp;C.如何升级成为黄金：直属邀请用户与二级邀请用户合计达100人，或缴纳3000“土豆泥”即可升级成为黄金级别；<br/>
+                                        &nbsp;&nbsp;D.如何升级成为钻石：直属邀请用户与二级邀请用户合计达300人，或缴纳1万“土豆泥”即可升级成为钻石级别；
+                                        <!-- &nbsp;&nbsp;C.如何升级成为黄金：直属邀请用户达100人，二级邀请用户达200人，或缴纳3000“土豆泥”即可升级成为黄金级别；<br/>
+                                        &nbsp;&nbsp;D.如何升级成为钻石：直属邀请用户达300人，二级邀请用户达1500人，或缴纳1万“土豆泥”即可升级成为钻石级别； -->
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -107,10 +126,10 @@
                     <div class="ellipsis_type">
                         <!-- <div @click="handle(0)" v-if="!baiy">
                             <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_1@2x.png" alt="">
-                        </div> -->
+                        </div>
                         <div @click="handle(1)" v-if="baiy">
                             <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_2@2x.png" alt="">
-                        </div>
+                        </div> -->
                         <div @click="exChange(3)">
                             <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_3@2x.png" alt="">
                             <p style="display: none;" v-show="gradeTips.c" v-text="gradeTips.c"></p>
@@ -161,10 +180,33 @@
                     <div class="nothing"></div>
                 </div>
             </div>
-            <!-- 黄金/钻石 -->
-            <div class="grade"  style="display: none;" v-show="myGrade.agentSeries == '黄金' || myGrade.agentSeries == '钻石'">
-                <div class="grade_tips" style="display: none;" v-show="myGrade.agentSeries == '黄金'"><span>升级获取更多利益</span></div>
-                <div class="grade_tips" style="display: none;" v-show="myGrade.agentSeries == '钻石'"><span>您已经是最高级了</span></div>
+            <!-- 黄金 -->
+            <div class="grade"  style="display: none;" v-show="myGrade.agentSeries == '黄金'">
+                <div class="grade_tips"><span>升级获取更多利益</span></div>
+                <div class="grade_type">
+                    <div class="grade_item" style="display: none" v-show="!baiy">
+                        <div class="grade_item_top">
+                            <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0404_3@3x.png" alt="">
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>购物更省钱</p>
+                            <p class="fr"><span></span>邀请得奖励</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>推广赚佣金</p>
+                            <p class="fr"><span></span>持续有收益</p>
+                        </div>
+                        <div class="grade_item_bot">
+                            <p class="fl"><span></span>豆聊建大群</p>
+                            <p class="fr"><span></span>服务直通车</p>
+                        </div>
+                    </div>
+                    <div class="nothing"></div>
+                </div>
+            </div>
+            <!-- 钻石 -->
+            <div class="grade"  style="display: none;" v-show="myGrade.agentSeries == '钻石'">
+                <div class="grade_tips"><span>您已经是最高级了</span></div>
                 <div class="grade_type">
                     <div class="grade_item" style="display: none" v-show="!baiy">
                         <div class="grade_item_top">
@@ -190,16 +232,20 @@
 
         <!-- 升级支付按钮 -->
         <div class="bottom_tips" style="display: none;" v-show="payTips">
-            <p v-if="myGrade.agentSeries == '会员'" ><span>您距离升级“白银”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(3)}}个直属豆粉</span></p>
-            <p v-if="myGrade.agentSeries == '白银'" ><span>您距离升级“黄金”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(100)}}个直属豆粉、{{secondLevel | minus(200)}}个推荐豆粉!</span></p>
+            <!-- <p v-if="myGrade.agentSeries == '会员'"><span>您距离升级“白银”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(3)}}个直属豆粉</span></p>
+            <p v-if="myGrade.agentSeries == '白银'"><span>您距离升级“黄金”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(100)}}个直属豆粉、{{secondLevel | minus(200)}}个推荐豆粉!</span></p>
+            <p v-if="myGrade.agentSeries == '黄金'"><span>您距离升级“钻石”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(300)}}个直属豆粉、{{secondLevel | minus(1500)}}个推荐豆粉!</span></p> -->
+            <p v-if="myGrade.agentSeries == '会员'"><span>您距离升级“白银”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者{{firstLevel | minus(3)}}个直属豆粉！</span></p>
+            <p v-if="myGrade.agentSeries == '白银'"><span>您距离升级“黄金”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者整个团队达到{{allLevel | minus(100)}}人！</span></p>
+            <p v-if="myGrade.agentSeries == '黄金'"><span>您距离升级“钻石”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者整个团队达到{{allLevel | minus(300)}}人！</span></p>
         </div>
         <div class="bottom_wrap">
-            <div class="bottom" v-if="myGrade.agentSeries == '会员' || myGrade.agentSeries == '白银'">
+            <div class="bottom" v-if="myGrade.agentSeries != '钻石'">
                 <div class="fl" @click="payOpen">土豆泥兑换等级</div>
                 <div class="fr" @click="goInvite">邀请朋友提升等级</div>
             </div>
         </div>
-        <div class="bottom_wrap" v-if="myGrade.agentSeries == '黄金' || myGrade.agentSeries == '钻石'">
+        <div class="bottom_wrap" v-if="myGrade.agentSeries == '钻石'">
             <div class="bottom">
                 <div class="bottom_invite" @click="goInvite" v-if="myGrade.agentSeries == '黄金'">邀请朋友提升等级</div>
                 <div class="bottom_invite" @click="goInvite" v-if="myGrade.agentSeries == '钻石'">邀请朋友一起来玩</div>
@@ -227,8 +273,10 @@
                     <h1><span></span>升级成功</h1>
                 </div>
                 <div class="pay_content_s">
-                    <p v-text="'昵称： '+  myGrade.nickName"></p>
-                    <p v-text="'当前等级： ' + myGrade.agentSeries"></p>
+                    <div>
+                        <p v-text="'昵称： '+  myGrade.nickName"></p><br/>
+                        <p v-text="'当前等级： ' + myGrade.agentSeries"></p>
+                    </div>
                 </div>
                 <div class="pay_confirm" @click="pSuccess">完成</div>
             </div>
@@ -249,6 +297,7 @@
             </div>
         </div>
     </div>
+    <script src="https://s22.cnzz.com/z_stat.php?id=1273328506&web_id=1273328506" language="JavaScript"></script>
 </body>
     <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/jquery.js"></script>
     <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/vue.min.js"></script>
@@ -308,7 +357,8 @@
                     series: ''
                 }, //支付用户id, 被升级用户id, 升级级别
                 domain: 'http://47.96.29.209:8080',
-                token: getUrlParam('token') || 'bf6178551539f5d695305268f51381d8',
+                // domain: 'https://wap.tudouni.doubozhibo.com',
+                token: getUrlParam('token') || '6d96fff45abbeacf55f9aa2ab06c5109',
                 uid: getUrlParam('uid') || 1601,
                 gradeTips: {
                     a: '',
@@ -319,7 +369,9 @@
                 lackTdn: 0,
                 firstLevel: '', //直属豆粉
                 secondLevel: '', //推荐豆粉
-                baiy: ''
+                allLevel: '', //直属加推荐人数
+                baiy: '',
+                headAgent: false  //是否为大A
             },
             mounted: function() {
                 this.getInfo();
@@ -369,10 +421,13 @@
                 payOpen: function() {
                     var a = Number(this.myGrade.experience);
                     var b = Number(this.needTdn);
+                    _czc.push(["_trackEvent", "我的等级", "土豆泥兑换等级", "点击次数"]);
                     //判断当前用户土豆泥余额是否够支付所选等级
                     if (a < b) {
                         this.lackTdn = b - a;
                         this.payTips = true;
+                        var self = this;
+                        setTimeout(function(){self.payTips = false;}, 3000);
                     } else {
                         this.isPay = true;
                     }
@@ -386,6 +441,8 @@
                     $.ajax({
                         type: 'post',
                         url: self.domain + '/auth/h5/user/upgradeAgentSeries',
+                        // type: 'get',
+                        // url: '../data/upgrade.json',
                         data: {
                             uid: self.uid,
                             targetId: self.uid,
@@ -398,6 +455,8 @@
                                 if (self.payInfo.series == 3) self.myGrade.agentSeries = '白银';
                                 if (self.payInfo.series == 4) self.myGrade.agentSeries = '黄金';                
                                 self.payOk = true;
+                                //self.myGrade.experience -= self.needTdn;
+                                self.getInfo();
                             } 
 
                             //土豆泥余额不足
@@ -427,6 +486,7 @@
                     $.ajax({
                         type: 'get',
                         url: self.domain + '/auth/h5/user/info',
+                        // url: '../data/meinfo.json',
                         data: {
                             token: self.token,
                             uid: self.uid
@@ -434,6 +494,7 @@
                         success: function(res) {
                             if (res.code == 0) {
                                 var data = res.data;
+                                self.headAgent = data.headAgent;
                                 for (var key in self.myGrade) {
                                     self.myGrade[key] = data[key];   
                                 }
@@ -445,6 +506,7 @@
                     $.ajax({
                         type: 'get',
                         url: self.domain + '/auth/h5/invite/aggCount',
+                        // url: '../data/mecount.json',
                         data: {
                             token: self.token,
                             uid: self.uid
@@ -454,6 +516,7 @@
                             if (res.code == 0) {
                                 self.firstLevel = res.data.firstLevel;
                                 self.secondLevel = res.data.secondLevel;
+                                self.allLevel = Number(self.firstLevel) + Number(self.secondLevel);
                             }
                         }
                     });
@@ -469,10 +532,12 @@
                         case 3:
                             self.myGrade.agentSeries = '白银';
                             self.payInfo.series = 4;
-                            self.needTdn = 100000;
+                            self.needTdn = 3000;
                             break;
                         case 4 :
                             self.myGrade.agentSeries = '黄金';
+                            self.payInfo.series = 5;
+                            self.needTdn = 10000;
                             break;
                         case 5:
                             self.myGrade.agentSeries = '钻石';
@@ -481,9 +546,12 @@
                             self.myGrade.agentSeries = '会员';
                             return;
                     }
-                    // self.myGrade.agentSeries = '会员';
+                    // self.myGrade.agentSeries = '白银';
+                    // self.payInfo.series = 3;
+                    // self.needTdn = 1000;
                 },
                 goInvite: function() {
+                    _czc.push(["_trackEvent", "我的等级", "邀请朋友提升等级", "点击次数"]);
                     window.location.href = "tudouni://tudouni/invisitPoster";
                 },
                 toggler: function() {
@@ -509,12 +577,14 @@
                             self.gradeTips.c = '';
                             self.gradeTips.a = false;
                             self.payTips = false;
+                            
                             $(".ellipsis_type").toggle();
                             break;
                         case 2 :
                             self.gradeTips.c = '';
                             if (self.gradeTips.b == '') {
                                 self.gradeTips.b = '白银可见';
+                                _czc.push(["_trackEvent", "我的等级", "黄金", "点击次数"]);
                             } else if(self.gradeTips.b == '白银可见') {
                                 self.gradeTips.b = '';
                             }
@@ -523,6 +593,7 @@
                             self.gradeTips.b = '';
                             if (self.gradeTips.c == '') {
                                 self.gradeTips.c = '黄金可见';
+                                _czc.push(["_trackEvent", "我的等级", "钻石", "点击次数"]);
                             } else if(self.gradeTips.c == '黄金可见') {
                                 self.gradeTips.c = '';
                             }
@@ -558,6 +629,6 @@
                     return result;
                 }
             }
-        })
+        });
     </script>
 </html>
