@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no" />
     <title>商城等级</title>
-    <link rel="stylesheet" href="../css/mallGrade.2.css">
+    <link rel="stylesheet" href="mallGrade.2.css">
     <!-- <link rel="stylesheet" href="http://dev-sbzhibo-h5.oss-cn-hangzhou.aliyuncs.com/app/css/mallGrade.css"> -->
     <!-- <link rel="stylesheet" href="https://h5.tudouni.doubozhibo.com/tudouni/css/mallGrade.css"> -->
     <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/whyInvistor.js"></script>
@@ -41,23 +41,39 @@
 
             <!-- 等级内容 -->  
             <div class="grade">
-                <p class="grade_tips">赚钱能力<span v-text="ability(myGrade.agentSeries, headAgent, 0)" :class="{'isHuiy': myGrade.agentSeries == '会员'}"></span></p>
+                <p class="grade_tips">赚钱能力<span v-text="'（' + ability(myGrade.agentSeries, headAgent, 0) + '）'" :class="{'isHuiy': myGrade.agentSeries == '会员'}"></span></p>
                 <p class="grade_tips_xx"  v-html="ability(myGrade.agentSeries, headAgent, 1)"></p>
                 <div class="grade_tips_zhuanb_wrap">
                     <p class="grade_tips_zhuanb" :class="{'isZuan': myGrade.agentSeries == '钻石'}" v-text="ability(myGrade.agentSeries, headAgent, 2)"></p>
                 </div>
-                <div class="grade_type">
-                    <div class="grade_item">
-                        <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a_2@2x.png" alt="">
-                        <p v-text="'赚钱能力' + ability('白银', headAgent, 0)"></p>
+                <div class="grade_type" style="display:none" v-show="myGrade.agentSeries == '会员'">
+                    <div class="grade_item" @click="choose(3)">
+                        <img :src="bayimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('白银', headAgent, 0) + ')'"></p>
                     </div>
-                    <div class="grade_item">
-                        <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b@2x.png" alt="">
-                        <p v-text="'赚钱能力' + ability('黄金', headAgent, 0)"></p>
+                    <div class="grade_item" @click="choose(4)">
+                        <img :src="huanimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('黄金', headAgent, 0) + ')'"></p>
                     </div>
-                    <div class="grade_item">
-                        <img src="https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_c@2x.png" alt="">
-                        <p v-text="'赚钱能力' + ability('钻石', headAgent, 0)"></p>
+                    <div class="grade_item" @click="choose(5)">
+                        <img :src="zuanimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('钻石', headAgent, 0) + ')'"></p>
+                    </div>
+                </div>
+                <div class="grade_type" style="display:none" v-show="myGrade.agentSeries == '白银'">
+                    <div class="grade_item" @click="choose(4)">
+                        <img :src="huanimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('黄金', headAgent, 0) + ')'"></p>
+                    </div>
+                    <div class="grade_item" @click="choose(5)">
+                        <img :src="zuanimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('钻石', headAgent, 0) + ')'"></p>
+                    </div>
+                </div>
+                <div class="grade_type" style="display:none" v-show="myGrade.agentSeries == '黄金'">
+                    <div class="grade_item" @click="choose(5)">
+                        <img :src="zuanimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('钻石', headAgent, 0) + ')'"></p>
                     </div>
                 </div>
                 <div class="grade_item_rule">
@@ -95,13 +111,13 @@
             <p v-if="myGrade.agentSeries == '白银'"><span>您距离升级“黄金”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者整个团队达到{{allLevel | minus(100)}}人！</span></p>
             <p v-if="myGrade.agentSeries == '黄金'"><span>您距离升级“钻石”VIP还差{{lackTdn}}土豆泥。</span><br> <span>或者整个团队达到{{allLevel | minus(300)}}人！</span></p>
         </div>
-        <div class="bottom_wrap" style="display: none;" v-show="myGrade.agentSeries == '白银' || myGrade.agentSeries == '会员'">
+        <div class="bottom_wrap" style="display: none;" v-show="myGrade.agentSeries != '钻石'">
             <div class="bottom" >
                 <div class="fl" @click="payOpen">土豆泥兑换等级</div>
                 <div class="fr" @click="goInvite">邀请朋友提升等级</div>
             </div>
         </div>
-        <div class="bottom_wrap" style="display: none;" v-show="myGrade.agentSeries == '钻石' || myGrade.agentSeries == '黄金'">
+        <div class="bottom_wrap" style="display: none;" v-show="myGrade.agentSeries == '钻石'">
             <div class="bottom">
                 <div class="bottom_invite" @click="goInvite" v-if="myGrade.agentSeries == '黄金'">邀请朋友提升等级</div>
                 <div class="bottom_invite" @click="goInvite" v-if="myGrade.agentSeries == '钻石'">邀请朋友一起来玩</div>
@@ -149,6 +165,9 @@
                 <div class="pay_content_s" v-if="sameType">
                     <p>当前等级已经达到或超过升级等级</p>
                 </div>
+                <div class="pay_content_s" v-if="!isSelect">
+                    <p>请选择需要升级的等级</p>
+                </div>
                 <div class="pay_confirm" @click="payFail">完成</div>
             </div>
         </div>
@@ -190,15 +209,9 @@
                 isApp: isApp,
                 isPay: false, //支付开关
                 payOk: false, //支付成功
-                payNo: false, //未选择支付等级
                 pFail: false, //支付失败
                 sameType: false,  //假如支付时当前等级已达到目标等级
                 payTips: false, //支付余额不足提示
-                gradeType: {
-                    a: '白银',
-                    b: '黄金',
-                    c: '钻石'
-                },
                 myGrade: { //头像, 性别, 昵称, id, 商城等级, 土豆泥余额
                     photo: '',
                     sex: '',
@@ -216,59 +229,56 @@
                 // domain: 'https://wap.tudouni.doubozhibo.com',
                 token: getUrlParam('token') || '6d96fff45abbeacf55f9aa2ab06c5109',
                 uid: getUrlParam('uid') || 1601,
-                gradeTips: {
-                    a: '',
-                    b: '',
-                    c: ''
-                },
                 needTdn: 0,
                 lackTdn: 0,
                 firstLevel: '', //直属豆粉
                 secondLevel: '', //推荐豆粉
                 allLevel: '', //直属加推荐人数
-                baiy: '',
-                headAgent: false  //是否为大A
+                headAgent: false,  //是否为大A
+                imgUrl: {
+                    imga: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a@2x.png',
+                    imga_selct: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a_2@2x.png',
+                    imgb: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b@2x.png',
+                    imgb_selct: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b_2@2x.png',
+                    imgc: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_c@2x.png',
+                    imgc_selct: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_c_2@2x.png'
+                },
+                bayimg: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a@2x.png',
+                huanimg: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b@2x.png',
+                zuanimg: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_c@2x.png',
+                isSelect: true
             },
             mounted: function() {
                 this.getInfo();
             },
             methods: {
                 choose: function(x) {
-                    switch (x) {
-                        case 1 :
-                            this.select2 = '';
-                            this.select1 = !this.select1;
-                            if (this.select1) {
-                                this.payInfo.series = 3;
-                                this.payNum = 1000;
-                                this.myGrade.agentSeries == this.gradeType.a ? this.payType = false : this.payType = true;
-                            } else {
-                                this.payInfo.series = '';
-                                this.payNum = '';
-                                this.payType = true;
-                            }
+                    var self = this;
+                    self.payInfo.series = x;
+                    switch(x) {
+                        case 3:
+                            self.huanimg = self.imgUrl.imgb;
+                            self.zuanimg = self.imgUrl.imgc;
+                            self.needTdn = 1000;
+                            self.bayimg == self.imgUrl.imga ? self.bayimg = self.imgUrl.imga_selct : self.bayimg = self.imgUrl.imga;
+                            self.bayimg == self.imgUrl.imga_selct ? self.isSelect = true : self.isSelect = false;
                             break;
-                        case 2:
-                            this.select1 = '';
-                            this.select2 = !this.select2;
-                            if (this.select2) {
-                                this.payInfo.series = 4;
-                                this.payNum = '10万';
-                                //判断当前等级和选中等级一致时升级按钮变灰
-                                this.myGrade.agentSeries == this.gradeType.b ? this.payType = false : this.payType = true;
-                                //选中时支付按钮上面的提示
-                                //this.payTips = true;
-                            } else {
-                                this.payInfo.series = '';
-                                this.payNum = '';
-                                this.payType = true;
-                                //this.payTips = false;
-                            }
+                        case 4:
+                            self.bayimg = self.imgUrl.imga;
+                            self.zuanimg = self.imgUrl.imgc;
+                            self.needTdn = 3000;
+                            self.huanimg == self.imgUrl.imgb ? self.huanimg = self.imgUrl.imgb_selct : self.huanimg = self.imgUrl.imgb;
+                            self.huanimg == self.imgUrl.imgb_selct ? self.isSelect = true : self.isSelect = false;
                             break;
-                        default: 
-                            this.select1 = '';
-                            this.select2 = '';
-                            return;
+                        case 5:
+                            self.bayimg = self.imgUrl.imga;
+                            self.huanimg = self.imgUrl.imgb;
+                            self.needTdn = 10000;
+                            self.zuanimg == self.imgUrl.imgc ? self.zuanimg = self.imgUrl.imgc_selct : self.zuanimg = self.imgUrl.imgc;
+                            self.zuanimg == self.imgUrl.imgc_selct ? self.isSelect = true : self.isSelect = false;
+                            break;
+                        default :
+                            break;
                     }
                 },
                 pay: function(x) {
@@ -278,6 +288,8 @@
                     var a = Number(this.myGrade.experience);
                     var b = Number(this.needTdn);
                     _czc.push(["_trackEvent", "我的等级", "土豆泥兑换等级", "点击次数"]);
+                    //判断是否选择等级
+                    if (!this.isSelect) {this.payTips = true; return;}
                     //判断当前用户土豆泥余额是否够支付所选等级
                     if (a < b) {
                         this.lackTdn = b - a;
@@ -287,7 +299,6 @@
                     } else {
                         this.isPay = true;
                     }
-                    //this.isPay = true;
                 },
                 payNow: function() {
                     //点击立即升级时关闭支付弹层, 还原默认提示语
@@ -310,8 +321,8 @@
                             if (res.code == 0) {
                                 if (self.payInfo.series == 3) self.myGrade.agentSeries = '白银';
                                 if (self.payInfo.series == 4) self.myGrade.agentSeries = '黄金';                
+                                if (self.payInfo.series == 5) self.myGrade.agentSeries = '钻石';                
                                 self.payOk = true;
-                                //self.myGrade.experience -= self.needTdn;
                                 self.getInfo();
                             } 
 
@@ -382,18 +393,15 @@
                     switch (x) {
                         case 2 :
                             self.myGrade.agentSeries = '会员';
-                            self.payInfo.series = 3;
-                            self.needTdn = 1000;
+                            self.bayimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a_2@2x.png';
                             break;
                         case 3:
                             self.myGrade.agentSeries = '白银';
-                            self.payInfo.series = 4;
-                            self.needTdn = 3000;
+                            self.huanimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b_2@2x.png';
                             break;
                         case 4 :
                             self.myGrade.agentSeries = '黄金';
-                            self.payInfo.series = 5;
-                            self.needTdn = 10000;
+                            self.zuanimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_c_2@2x.png';
                             break;
                         case 5:
                             self.myGrade.agentSeries = '钻石';
@@ -402,10 +410,11 @@
                             self.myGrade.agentSeries = '会员';
                             return;
                     }
-                    self.myGrade.agentSeries = '会员';
+                    self.myGrade.agentSeries = '黄金';
+                    self.zuanimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_c_2@2x.png';
                     // self.payInfo.series = 3;
                     // self.needTdn = 1000;
-                    self.headAgent = true;
+                    // self.headAgent = true;
                 },
                 goInvite: function() {
                     _czc.push(["_trackEvent", "我的等级", "邀请朋友提升等级", "点击次数"]);
@@ -419,15 +428,15 @@
                     var result = '';
                     if (!c) {
                         if (b) {
-                            a == "钻石" ? result = "（登封造极）" : '';
-                            a == "黄金" ? result = "（超爆棚）" : '';
-                            a == "白银" ? result = "（很爆棚）" : '';
-                            a == "会员" ? result = "（爆棚）" : '';
+                            a == "钻石" ? result = "登封造极" : '';
+                            a == "黄金" ? result = "超爆棚" : '';
+                            a == "白银" ? result = "很爆棚" : '';
+                            a == "会员" ? result = "爆棚" : '';
                         } else {
-                            a == "钻石" ? result = "（强）" : '';
-                            a == "黄金" ? result = "（中）" : '';
-                            a == "白银" ? result = "（弱）" : '';
-                            a == "会员" ? result = "（无）" : '';
+                            a == "钻石" ? result = "强" : '';
+                            a == "黄金" ? result = "中" : '';
+                            a == "白银" ? result = "弱" : '';
+                            a == "会员" ? result = "无" : '';
                         }
                     } else if(c == 1) {
                         if (b) {
