@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no" />
+    <title>我的等级</title>
+    <link rel="stylesheet" href="../css/mallgrade.css">
+    <script src="../libs/whyInvistor.js"></script>
+    <script>
+        var _czc = _czc || [];
+        _czc.push(["_setAccount", "1273328506"]);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div 
+                class="card"
+                :class="{
+                    'isHuiy': myGrade.agentSeries == '会员', 
+                    'isBaiy': myGrade.agentSeries == '白银', 
+                    'isHuan': myGrade.agentSeries == '黄金', 
+                    'isZuan': myGrade.agentSeries == '统帅',
+                    'isHead': headAgent
+                }"
+            >
+                <div class="card_info" style="display: none;" v-show="myGrade.sex">
+                    <div class="info_img" :class="{'isHead': headAgent}">
+                        <img :src="myGrade.photo ? imgSize(myGrade.photo)  : 'https://h5.tudouni.doubozhibo.com/m/img/userHeader.png'">
+                    </div>
+                    <p class="info_name" v-text="myGrade.nickName"></p>
+                    <p class="info_id" v-text="'ID ' + myGrade.unumber"></p>
+                </div>
+                <p class="info_grade"><em v-text="myGrade.agentSeries"></em></p>
+            </div>
+
+            <!-- 等级内容 -->  
+            <div class="grade">
+                <p class="grade_tips">赚钱能力<span v-text="'（' + ability(myGrade.agentSeries, headAgent, 0) + '）'" :class="{'isHuiy': myGrade.agentSeries == '会员'}"></span></p>
+                <p class="grade_tips_xx"  v-html="ability(myGrade.agentSeries, headAgent, 1)"></p>
+                <div class="grade_tips_zhuanb_wrap">
+                    <p class="grade_tips_zhuanb" :class="{'isZuan': myGrade.agentSeries == '统帅'}" v-text="ability(myGrade.agentSeries, headAgent, 2)"></p>
+                </div>
+                <div class="grade_type" style="display:none" v-show="myGrade.agentSeries == '会员'">
+                    <div class="grade_item" @click="choose(3)">
+                        <img :src="bayimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('白银', headAgent, 0) + ')'"></p>
+                    </div>
+                    <div class="grade_item" @click="choose(4)">
+                        <img :src="huanimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('黄金', headAgent, 0) + ')'"></p>
+                    </div>
+                    <div class="grade_item" @click="choose(5)">
+                        <img :src="zuanimg" alt="">
+                        <p class="niub" v-text="'赚钱能力(' + ability('统帅啊', headAgent, 0) + ')'"></p>
+                    </div>
+                </div>
+                <div class="grade_type" style="display:none" v-show="myGrade.agentSeries == '白银'">
+                    <div class="grade_item" @click="choose(4)">
+                        <img :src="huanimg" alt="">
+                        <p v-text="'赚钱能力(' + ability('黄金', headAgent, 0) + ')'"></p>
+                    </div>
+                    <div class="grade_item" @click="choose(5)">
+                        <img :src="zuanimg" alt="">
+                        <p class="niub" v-text="'赚钱能力(' + ability('统帅啊', headAgent, 0) + ')'"></p>
+                    </div>
+                </div>
+                <div class="grade_type" style="display:none" v-show="myGrade.agentSeries == '黄金'">
+                    <div class="grade_item" @click="choose(5)">
+                        <img :src="zuanimg" alt="">
+                        <p class="niub" v-text="'赚钱能力(' + ability('统帅啊', headAgent, 0) + ')'"></p>
+                    </div>
+                </div>
+                <div class="grade_item_rule">
+                    <h3>规则说明</h3>
+                    <div class="grade_item_rule_box">
+                        <p class="pd">一.赚赚商城注册用户共分为4 个等级：会员、白银、黄金、钻石；白银、黄金、钻石统称为VIP 会员。</p>
+                        <p class="pd">二.商城等级升级规则</p>
+                        <p>1.钻石：直属粉丝300人、推荐粉丝1500人；</p>
+                        <p>2.黄金：直属粉丝100人、推荐粉丝200人；</p>
+                        <p>3.白银：直属粉丝3人；</p>
+                        <p>4.会员：注册赚赚账号；</p> 
+                        <p class="pd">三.佣金：包括消费佣金和平台奖励（按照商城等级不同分为白银奖励、黄金奖励、钻石奖励）两部分。</p>
+                        <p>
+                            1.VIP 会员在赚赚商城领取优惠券下单并确定收货后，获得消费佣金，与此同时，邀请其加入土豆泥的VIP 会员可获得10%~30%消费佣金的平台奖励；
+                            钻石奖励为消费佣金的30%、黄金奖励为消费佣金的20%、白银奖励为消费佣金的10%；
+                        </p>  
+                        <p>2.普通会员可以在赚赚商城浏览商品、领取优惠券、下单购物、邀请他人注册土豆泥会员，普通会员升级为VIP 会员前无法获得任何消费佣金和平台奖励；</p>    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 升级提示 -->
+        <div class="bottom_tips" style="display: none;" v-show="payTips && myGrade.agentSeries != '统帅'">
+            <p><span>您距离升级“{{nextLevel}}”VIP需要邀请{{nextLevel | canor}}</span></p>
+        </div>
+        <div class="bottom_wrap" >
+            <div class="bottom" >
+                <div class="fr" style="display: none;" v-show="myGrade.agentSeries == '会员' || myGrade.agentSeries == '白银' || myGrade.agentSeries == '黄金'" @click="goInvite">邀请朋友提升等级</div>
+                <div class="fr" style="display: none;" v-show="myGrade.agentSeries == '统帅'" @click="goInvite">邀请朋友一起来玩</div>
+            </div>
+        </div>
+
+        <!-- 免费升级 -->
+        <div class="upgrade_free" style="display: none" v-show="isActivity">
+            <div class="pay_box_f">
+                <div class="pay_title_s">
+                    <h1>提示</h1>
+                </div>
+                <div class="pay_content_s" style="text-align: center" >
+                    <p>活动期间免费升级</p>
+                </div>
+                <div class="pay_confirm" @click="upfree">升级</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://s22.cnzz.com/z_stat.php?id=1273328506&web_id=1273328506" language="JavaScript"></script>
+</body>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/jquery.js"></script>
+    <script src="https://h5.tudouni.doubozhibo.com/tudouni/js/vue.min.js"></script>
+    <script>
+        function setupWebViewJavascriptBridge(callback) {
+                if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+                if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+                window.WVJBCallbacks = [callback];
+                var WVJBIframe = document.createElement('iframe');
+                WVJBIframe.style.display = 'none';
+                WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+                document.documentElement.appendChild(WVJBIframe);
+                setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+        }
+        setupWebViewJavascriptBridge(function(bridge) {
+            window.bridge = bridge;
+            bridge.registerHandler('JS Echo', function(data, responseCallback) {
+                console.log("JS Echo called with:", data)
+                responseCallback(data)
+            })
+            bridge.callHandler('ObjC Echo', {'key':'value'}, function responseCallback(responseData) {
+                console.log("JS received response:", responseData)
+            })
+        });
+        
+        var domain = location.hostname != 'h5.tudouni.doubozhibo.com' ? 'https://wap.tudouni.doubozhibo.com' : 'https://waptest.tudouni.doubozhibo.com';
+
+        new Vue({
+            el: '.container',
+            data: {
+                payTips: true, //提示
+                myGrade: { //头像, 性别, 昵称, id, 商城等级, 土豆泥余额
+                    photo: '',
+                    sex: '',
+                    nickName: '',
+                    unumber: '',
+                    agentSeries: '',
+                    experience: ''
+                }, 
+                domain: domain,
+                token: this.getUrlParam('token') || 'd9a2d488ef3626742cab3b70a2729305',
+                uid: this.getUrlParam('uid') || '203890251144065024',
+                firstLevel: '', //直属粉丝
+                secondLevel: '', //推荐粉丝
+                allLevel: '', //直属加推荐人数
+                headAgent: false,  //是否为大A
+                imgUrl: {
+                    imga: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a@2x.png',
+                    imga_selct: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a_2@2x.png',
+                    imgb: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b@2x.png',
+                    imgb_selct: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b_2@2x.png',
+                    imgc: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_ts@2x.png',
+                    imgc_selct: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_ts_2@2x.png'
+                },
+                bayimg: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a@2x.png',
+                huanimg: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b@2x.png',
+                zuanimg: 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_ts@2x.png',
+                nextLevel: '',
+                isActivity: false
+            },
+            mounted: function() {
+                this.getInfo();
+            },
+            methods: {
+                getUrlParam: function() {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) return r[2];
+                    return null;
+                },
+                choose: function(x) {
+                    var self = this;
+                    switch(x) {
+                        case 3:
+                            self.huanimg = self.imgUrl.imgb;
+                            self.zuanimg = self.imgUrl.imgc;
+                            self.bayimg = self.imgUrl.imga_selct;
+                            self.nextLevel = '白银';
+                            break;
+                        case 4:
+                            self.bayimg = self.imgUrl.imga;
+                            self.zuanimg = self.imgUrl.imgc;
+                            self.huanimg = self.imgUrl.imgb_selct;
+                            self.nextLevel = '黄金';
+                            break;
+                        case 5:
+                            self.bayimg = self.imgUrl.imga;
+                            self.huanimg = self.imgUrl.imgb;
+                            self.zuanimg = self.imgUrl.imgc_selct;
+                            self.nextLevel = '统帅';
+                            break;
+                        default :
+                            break;
+                    }
+                },
+                getInfo: function() {
+                    var self = this;
+                    $.ajax({
+                        type: 'get',
+                        url: self.domain + '/auth/h5/user/info',
+                        // url: '../data/meinfo.json',
+                        data: {
+                            token: self.token,
+                            uid: self.uid
+                        },
+                        success: function(res) {
+                            if (res.code == 0) {
+                                var data = res.data;
+                                if (data.agentSeries == 2) {
+                                    self.isactive();
+                                }
+                                self.headAgent = data.headAgent;
+                                for (var key in self.myGrade) {
+                                    self.myGrade[key] = data[key];   
+                                }
+                                self.exchanges(self.myGrade.agentSeries);
+                            }
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'get',
+                        url: self.domain + '/auth/h5/invite/aggCount',
+                        // url: '../data/mecount.json',
+                        data: {
+                            token: self.token,
+                            uid: self.uid
+                        },
+                        success: function(res) {
+                            var res = JSON.parse(res);
+                            console.log(res)
+                            if (res.code == 0) {
+                                self.firstLevel = res.data.firstLevel;
+                                self.secondLevel = res.data.secondLevel;
+                                self.allLevel = Number(self.firstLevel) + Number(self.secondLevel);
+                            }
+                        }
+                    });
+                },
+                exchanges: function(x) {
+                    var self = this;
+                    switch (x) {
+                        case 2 :
+                            self.myGrade.agentSeries = '会员'; 
+                            self.nextLevel = '白银';
+                            self.bayimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_a_2@2x.png';
+                            break;
+                        case 3:
+                            self.myGrade.agentSeries = '白银';
+                            self.nextLevel = '黄金';
+                            self.huanimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_b_2@2x.png';
+                            break;
+                        case 4 :
+                            self.myGrade.agentSeries = '黄金';
+                            self.nextLevel = '统帅';
+                            self.zuanimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_ts_2@2x.png';
+                            break;
+                        case 5:
+                            self.myGrade.agentSeries = '统帅';
+                            break;
+                        default: 
+                            self.myGrade.agentSeries = '会员';
+                            return;
+                    }
+                    self.headAgent = true;
+                    self.myGrade.agentSeries = '黄金';
+                    self.nextLevel = '统帅';
+                    self.zuanimg = 'https://image.tudouni.doubozhibo.com/common/h5/carnival/0420_sj_ts_2@2x.png';
+                },
+                goInvite: function() {
+                    _czc.push(["_trackEvent", "我的等级", "邀请朋友提升等级", "点击次数"]);
+                    // window.location.href = "tudouni://tudouni/invisitPoster";
+                   if (window.WebViewJavascriptBridge) {
+                      WebViewJavascriptBridge.callHandler('jumpPage', {url: "tudouni://tudouni/invisitPoster"}, function(response){});
+                   }
+                },
+                imgSize: function(imgurl) {
+                    return imgurl += '?x-oss-process=image/resize,m_fixed,w_100,image/crop,w_100,h_100,g_center';
+                },
+                ability: function(a, b, c) {
+                    //b代表是否大A
+                    var result = '';
+                    if (!c) {
+                        if (b) {
+                            a == "统帅" ? result = "登封造极" : '';
+                            a == "统帅啊" ? result = "顶峰" : '';
+                            a == "黄金" ? result = "超爆棚" : '';
+                            a == "白银" ? result = "很爆棚" : '';
+                            a == "会员" ? result = "爆棚" : '';
+                        } else {
+                            a == "统帅" ? result = "强" : '';
+                            a == "统帅啊" ? result = "顶峰" : '';
+                            a == "黄金" ? result = "中" : '';
+                            a == "白银" ? result = "弱" : '';
+                            a == "会员" ? result = "无" : '';
+                        }
+                    } else if(c == 1) {
+                        if (b) {
+                            a == "统帅" ? result = '<span class="zs"></span><span class="xx"></span><span class="xx"></span><span class="xx"></span><span class="xx"></span><span class="xx"></span>' : '';
+                            a == "黄金" ? result = '<span class="zs"></span><span class="xx"></span><span class="xx"></span><span class="xx"></span><span class="hxx"></span><span class="hxx"></span>' : '';
+                            a == "白银" ? result = '<span class="zs"></span><span class="xx"></span><span class="xx"></span><span class="hxx"></span><span class="hxx"></span><span class="hxx"></span>' : '';
+                            a == "会员" ? result = '<span class="zs"></span><span class="hxx"></span><span class="hxx"></span><span class="hxx"></span><span class="hxx"></span><span class="hxx"></span>' : '';
+                        } else {
+                            a == "统帅" ? result = '<span class="zxx"></span><span class="zxx"></span><span class="zxx"></span><span class="zxx"></span></span><span class="zxx"></span>' : '';
+                            a == "黄金" ? result = '<span class="jxx"></span><span class="jxx"></span><span class="jxx"></span><span class="hxx"></span></span><span class="hxx"></span>' : '';
+                            a == "白银" ? result = '<span class="bxx"></span><span class="bxx"></span><span class="hxx"></span><span class="hxx"></span></span><span class="hxx"></span>' : '';
+                            a == "会员" ? result = '<span class="hxx"></span><span class="hxx"></span><span class="hxx"></span><span class="hxx"></span><span class="hxx"></span>' : '';
+                        }
+                    } else {
+                        if (b) {
+                            a == "统帅" ? result = "赚钱能力已经达到顶峰，躺着都赚！" : result = '提升等级，赚钱再加倍，目标—躺着赚！';
+                        } else {
+                            a == "统帅" ? result = "您已是最高等级啦！" : a == "会员" ? result = "升级VIP不只是更省钱、还能赚钱！" : result = '升级获取更多收益';
+                        }
+                    }
+                    return result;
+                },
+                isactive: function() {
+                    var self = this;
+                    $.ajax({
+                        type: 'get',
+                        url: self.domain + '/auth/h5/user/sivlerUpgradeVaild',
+                        data: {
+                            token: self.token,
+                            uid: self.uid
+                        },
+                        success: function(res) {
+                            if (res.code == 0) {
+                                self.isActivity = true;
+                            }
+                        }
+                    });
+                },
+                upfree : function() {
+                    var self = this;
+                    $.ajax({
+                        type: 'get',
+                        url: self.domain + '/auth/h5/user/upgradeToSivler',
+                        data: {
+                            token: self.token,
+                            uid: self.uid
+                        },
+                        success: function(res) {
+                            if (res.code == 0) {
+                                self.isActivity = false;
+                                self.getInfo();
+                            }
+                        }
+                    });
+                },
+                minus: function(a, b) {
+                    var c;
+                    b == '会员' ? c = 3 : x == '白银' ? c = 100 :  c = 300;
+                    console.log(a, b)
+                    // var result = b - a;
+                    // return result;
+                }
+            },
+            filters: {
+                canor: function(x) {
+                    var result = '';
+                    x == '白银' ? result = '3个好友！' : x == '黄金' ? result = '100个好友！' : result = '300个好友！';
+                    return result;
+                }
+            }
+        });
+    </script>
+</html>
